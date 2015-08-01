@@ -1,2 +1,2 @@
-IWAD = "doom2.wad"
+IWAD = "freedoom2.wad"
 STARTUPTITLE = "Nikki Shore"

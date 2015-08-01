@@ -1,0 +1,60 @@
+type = "Doom Builder Map Settings Configuration";
+gameconfig = "Boom_DoomDoom.cfg";
+strictpatches = 0;
+
+maps
+{
+	
+	E1M1
+	{
+		defaultfloortexture = "NUKAGE3";
+		overrideceilheight = false;
+		
+		resources
+		{
+			
+			resource0
+			{
+				type = 0;
+				location = "C:\\Applications\\zdoom\\doom1.wad";
+				option1 = 0;
+				option2 = 0;
+				notfortesting = 0;
+			}
+			
+		}
+		
+		defaulttoptexture = "DOOR3";
+		overridemiddletexture = false;
+		viewpositionx = 2114.279f;
+		viewpositiony = -3485.235f;
+		viewscale = 0.1661424f;
+		overridefloortexture = false;
+		customceilheight = 128;
+		customfloorheight = 0;
+		
+		grid
+		{
+			background = "";
+			backoffsetx = 0;
+			backoffsety = 0;
+			backscalex = 100;
+			backscaley = 100;
+			backsource = 0;
+			gridsize = 32;
+		}
+		
+		defaultceiltexture = "F_SKY1";
+		overridebrightness = false;
+		uselongtexturenames = false;
+		overridebottomtexture = false;
+		overridefloorheight = false;
+		overridetoptexture = false;
+		custombrightness = 196;
+		overrideceiltexture = false;
+		defaultwalltexture = "DOOR3";
+		defaultbottomtexture = "DOOR3";
+	}
+	
+}
+

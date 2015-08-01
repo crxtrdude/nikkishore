@@ -1,3 +1,5 @@
+//Powerups (secrets)
+
 ACTOR NikkiStrength : PowerStrength
 {
   Powerup.Color BlueMap, 0.75

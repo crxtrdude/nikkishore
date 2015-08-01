@@ -62,7 +62,7 @@ skill nightmare
 }
 
 clearepisodes
-episode ne1m1
+episode map01
 {
 	picname = "M_EPI1"
 	name = "The Beginning"
@@ -74,16 +74,26 @@ defaultmap
 	sucktime = 1
 }
 
+map MAP01 lookup "QHUSTR_MAP01"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	next = "NE1M1"
+	sky1 = "SKY1"
+	cluster = 1
+	par = 30
+	music = "D_MAP01"
+}
+
 map NE1M1 lookup "QHUSTR_NE1M1"
 {
 	levelnum = 1
 	titlepatch = "WILV00"
 	next = "NE1M2"
-	secretnext = "NE1M9"
 	sky1 = "SKY1"
 	cluster = 1
 	par = 30
-	music = "$MUSIC_E1M1"
+	music = "D_NE1M1"
 }
 
 // Clusters (correspond with same-numbered episode)
