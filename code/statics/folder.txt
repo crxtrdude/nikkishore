@@ -1,0 +1,11 @@
+Actor Folder 14501
+{ 
+  height 2
+  radius 5
+  States
+  {
+  Spawn:
+    FLDR A 10
+    Loop
+  }
+}

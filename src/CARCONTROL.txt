@@ -1,0 +1,44 @@
+//==========================================================
+// Nikki Shore
+// CAR CONTROL CODE
+//
+// Code is an approximation of the original code that was
+// used for the vehicles in Doom Center. Now with script 997
+// which was actually to fix the pitch of the player.
+//
+// Code by CRxTRDude.
+// Original concept from Doom Center
+//==========================================================
+
+#library "carcontrol"
+#include "zcommon.acs"
+
+#define SCRIPT_CARPITCH 997
+#define SCRIPT_CAREXIT 998
+
+script SCRIPT_CARPITCH (void)
+{
+		int player = ActivatorTID();
+		
+		SetActorPitch(player, 0);
+}
+
+script SCRIPT_CAREXIT (void)
+{
+    int player = ActivatorTID();
+    int x = GetActorX(player) + 50.0;
+    int y = GetActorY(player) + 50.0;
+    int z = GetActorZ(player);
+    int angle = GetActorAngle(0) >> 8;
+    str name = GetActorClass(player);
+    
+    //print(s: "Activator ", d: player, s: " name is ", s: name);
+    
+    //Respawn another vehicle.
+    if(CheckActorClass(player, "MotorcyclePlayer")){
+    	Spawn("Motorcycle", x, y, z, 0, angle);
+    }
+    
+    //Return back to NikkiPlayer
+    UnMorphActor(player);
+}

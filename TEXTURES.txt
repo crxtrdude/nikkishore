@@ -1,0 +1,2 @@
+walltexture GLASSON1, 64, 64
+walltexture GLASSOFF, 64, 64

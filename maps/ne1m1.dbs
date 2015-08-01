@@ -1,0 +1,98 @@
+type = "Doom Builder Map Settings Configuration";
+gameconfig = "ZDoom_DoomUDMF.cfg";
+strictpatches = 0;
+
+maps
+{
+	
+	NE1M1
+	{
+		
+		resources
+		{
+			
+			resource0
+			{
+				type = 1;
+				location = "C:\\Applications\\GZDoom\\Projects\\nikki";
+				option1 = 0;
+				option2 = 0;
+				notfortesting = 0;
+			}
+			
+			
+			resource1
+			{
+				type = 0;
+				location = "C:\\Applications\\GZDoom\\Projects\\FemaleScientist.wad";
+				option1 = 0;
+				option2 = 0;
+				notfortesting = 0;
+			}
+			
+		}
+		
+		defaultfloortexture = "FLAT1";
+		defaultceiltexture = "F_SKY1";
+		defaulttoptexture = "STARTAN1";
+		defaultwalltexture = "STARTAN1";
+		defaultbottomtexture = "STARTAN1";
+		custombrightness = 196;
+		customfloorheight = 0;
+		customceilheight = 128;
+		overridefloortexture = false;
+		overrideceiltexture = false;
+		overridetoptexture = false;
+		overridemiddletexture = false;
+		overridebottomtexture = false;
+		overridefloorheight = false;
+		overrideceilheight = false;
+		overridebrightness = false;
+		uselongtexturenames = false;
+		viewpositionx = -168.9554f;
+		viewpositiony = -1162.846f;
+		viewscale = 0.8449976f;
+		scriptcompiler = "zdoom_acs.cfg";
+		
+		grid
+		{
+			background = "";
+			backsource = 0;
+			backoffsetx = 0;
+			backoffsety = 0;
+			backscalex = 100;
+			backscaley = 100;
+			gridsize = 32;
+		}
+		
+		
+		fieldtypes
+		{
+			
+			linedef
+			{
+				alpha = 1;
+			}
+			
+			
+			sidedef
+			{
+				offsetx_mid = 1;
+				offsety_mid = 1;
+				offsetx_bottom = 1;
+				offsetx_top = 1;
+			}
+			
+			
+			sector
+			{
+				rotationfloor = 1;
+				xpanningfloor = 1;
+			}
+			
+		}
+		
+	}
+	
+}
+

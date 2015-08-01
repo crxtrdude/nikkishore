@@ -1,0 +1,25 @@
+ACTOR Stunner : Weapon 15000 
+{
+	Weapon.SelectionOrder 450
+	Inventory.PickupMessage "You got a stun gun."
+	Weapon.AmmoType "Cell"
+	Weapon.AmmoGive 12
+	Weapon.AmmoUse 2	
+	+Weapon.NoAlert
+	Weapon.SlotNumber 1
+	States
+	{
+		Ready:
+		TAZR A 1 A_WeaponReady
+		Loop
+		Select:
+		TAZR A 1 A_Raise
+		Loop
+		Deselect:
+		TAZR A 1 A_Lower
+		Loop
+		Fire:
+		TAZR B 18 A_Saw
+		Goto Ready
+	}
+}

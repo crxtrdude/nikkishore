@@ -1,0 +1,96 @@
+// MAPINFO for Nikki Shore (GZDoom)
+include "mapinfo/common.txt"
+
+gameinfo
+{
+	creditpage = "CREDIT", "HELP2"
+	titlemusic = "$MUSIC_INTRO"
+	titletime = 5
+	finalemusic = "$MUSIC_VICTOR"
+	finaleflat = "FLOOR4_8"
+	finalepage = "HELP2", "VICTORY2", "ENDPIC"
+	infopage = "HELP1", "HELP2"
+	quitsound = "menu/quit1"
+	borderflat = "FLOOR7_2"
+	drawreadthis = true
+	intermissionmusic = "$MUSIC_INTER"
+	quitmessages = "$QUITMSG", "$QUITMSG1", "$QUITMSG2", "$QUITMSG3", "$QUITMSG4", "$QUITMSG5", "$QUITMSG6", "$QUITMSG7"
+	playerclasses = "NikkiPlayer"
+	lightmode = 2
+}
+
+skill baby
+{
+	AutoUseHealth
+	AmmoFactor = 1.5
+	DoubleAmmoFactor = 1.5
+	DamageFactor = 0.5
+	EasyBossBrain
+	SpawnFilter = Baby
+	Name = "$MNU_QBABY"
+}
+
+skill easy
+{
+	DoubleAmmoFactor = 1.5
+	SpawnFilter = Easy
+	Name = "$MNU_QEASY"
+}
+
+skill normal
+{
+	DoubleAmmoFactor = 1.5
+	SpawnFilter = Normal
+	Name = "$MNU_QNORMAL"
+}
+
+skill hard
+{
+	DoubleAmmoFactor = 1.5
+	SpawnFilter = Hard
+	Name = "$MNU_QHARD"
+}
+
+skill nightmare
+{
+	AmmoFactor = 1.5
+	DoubleAmmoFactor = 1.5
+	FastMonsters
+	DisableCheats
+	SpawnFilter = Nightmare
+	Name = "$MNU_QNIGHTMARE"
+}
+
+clearepisodes
+episode ne1m1
+{
+	picname = "M_EPI1"
+	name = "The Beginning"
+	key = "b"
+}
+
+defaultmap
+{
+	sucktime = 1
+}
+
+map NE1M1 lookup "QHUSTR_NE1M1"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	next = "NE1M2"
+	secretnext = "NE1M9"
+	sky1 = "SKY1"
+	cluster = 1
+	par = 30
+	music = "$MUSIC_E1M1"
+}
+
+// Clusters (correspond with same-numbered episode)
+
+cluster 1
+{
+	flat = "$bgflatE1"
+	music = "$MUSIC_VICTOR"
+	exittext = lookup, "QE1TEXT"
+}

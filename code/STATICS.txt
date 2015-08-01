@@ -1,0 +1,3 @@
+#include "code/statics/puppetgirl.txt"
+#include "code/statics/folder.txt"
+#include "code/statics/powerups.txt"

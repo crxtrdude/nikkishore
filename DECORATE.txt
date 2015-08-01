@@ -1,0 +1,9 @@
+//DECORATE file for Nikki Shore (GZDoom)
+
+#include "code/actors/nikkiplayer.txt" //Edited PlayerPawn
+#include "code/actors/carplayers.txt" 
+
+#include "code/weapons.txt"
+#include "code/statics.txt"
+
+#include "code/effects.txt"

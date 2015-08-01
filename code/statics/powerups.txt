@@ -1,0 +1,18 @@
+ACTOR NikkiStrength : PowerStrength
+{
+  Powerup.Color BlueMap, 0.75
+}
+
+ACTOR NikkiBeserk : Berserk 14600
+{
+  Inventory.PickupMessage "You're perked up!" 
+  Inventory.PickupSound "misc/p_pkup"
+  States
+  {
+  Pickup:
+     TNT1 A 0 A_GiveInventory("NikkiStrength") 
+     TNT1 A 0 HealThing(100)
+     TNT1 A 0 A_SelectWeapon("Stunner")
+     stop
+  } 
+}

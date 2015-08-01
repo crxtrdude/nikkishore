@@ -1,0 +1,14 @@
+//Sprite based on the Suzaku puppet from Haramasete Seiryuu-kun
+Actor PuppetGirl 14500
+{ 
+  height 20
+  radius 5
+  States
+  {
+  Spawn:
+    PUPT A 35
+	PUPT B 8 Bright
+	PUPT A 10
+    Loop
+  }
+}

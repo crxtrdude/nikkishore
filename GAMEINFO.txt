@@ -1,0 +1,2 @@
+IWAD = "doom2.wad"
+STARTUPTITLE = "Nikki Shore"

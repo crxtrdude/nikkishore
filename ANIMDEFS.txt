@@ -1,0 +1,2 @@
+switch GLASSON1 on sound Switch1 pic GLASSOFF tics 0
+switch GLASSOFF off sound Switch2 pic GLASSON1 tics 0

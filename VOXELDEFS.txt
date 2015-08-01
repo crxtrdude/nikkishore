@@ -1,0 +1,5 @@
+BIKBA = "BIKBA0"
+{
+   Scale = 1.0
+   Spin = 0
+}

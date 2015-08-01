@@ -1,0 +1,30 @@
+ACTOR SuperAutoShotgun : Weapon 15001
+{
+	Weapon.SelectionOrder 350
+	Inventory.PickupMessage "You got the super auto shotgun! BANG!"
+	Weapon.AmmoType "Shell"
+	Weapon.AmmoGive 12
+	Weapon.AmmoUse 1	
+	+Weapon.NoAlert
+	Weapon.SlotNumber 3
+	States
+	{
+		Ready:
+		TSTG A 1 A_WeaponReady
+		Loop
+		Select:
+		TSTG A 1 A_Raise
+		Loop
+		Deselect:
+		TSTG A 1 A_Lower
+		Loop
+		Fire:
+		TSTG A 7 A_FireBullets(5.5, 3, 6, 8, "BulletPuff", 1)
+		Goto Ready
+		Flash:
+		SHTF A 2 BRIGHT A_Light2
+		SHTF B 2 BRIGHT A_Light1
+		TNT1 A 1 A_Light0
+		Goto LightDone
+	}
+}
