@@ -1,4 +1,4 @@
-// MAPINFO for Nikki Shore (GZDoom)
+// MAPINFO for Nikki Shore (ZDoom)
 include "mapinfo/common.txt"
 
 gameinfo

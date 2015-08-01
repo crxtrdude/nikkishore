@@ -14,7 +14,7 @@ maps
 			resource0
 			{
 				type = 1;
-				location = "C:\\Games\\Doom Stuff\\Projects\\nikki";
+				location = "D:\\Project\\ZDoom\\nikkishore\\trunk";
 				option1 = 0;
 				option2 = 0;
 				notfortesting = 0;
@@ -34,6 +34,27 @@ maps
 			gridsize = 8;
 		}
 		
+		defaultfloortexture = "FLOOR0_1";
+		defaultceiltexture = "CEIL1_1";
+		defaulttoptexture = "APTWALL1";
+		defaultwalltexture = "APTWALL1";
+		defaultbottomtexture = "APTWALL1";
+		custombrightness = 196;
+		customfloorheight = 0;
+		customceilheight = 128;
+		overridefloortexture = false;
+		overrideceiltexture = false;
+		overridetoptexture = false;
+		overridemiddletexture = false;
+		overridebottomtexture = false;
+		overridefloorheight = false;
+		overrideceilheight = false;
+		overridebrightness = false;
+		uselongtexturenames = false;
+		viewpositionx = 68.69f;
+		viewpositiony = 226.5483f;
+		viewscale = 0.7680333f;
+		scriptcompiler = "zdoom_acs.cfg";
 	}
 	
 }

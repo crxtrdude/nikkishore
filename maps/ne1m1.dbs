@@ -14,7 +14,7 @@ maps
 			resource0
 			{
 				type = 1;
-				location = "C:\\Applications\\GZDoom\\Projects\\nikki";
+				location = "D:\\Project\\ZDoom\\nikkishore\\trunk";
 				option1 = 0;
 				option2 = 0;
 				notfortesting = 0;
@@ -49,9 +49,9 @@ maps
 		overrideceilheight = false;
 		overridebrightness = false;
 		uselongtexturenames = false;
-		viewpositionx = -168.9554f;
-		viewpositiony = -1162.846f;
-		viewscale = 0.8449976f;
+		viewpositionx = 5896.419f;
+		viewpositiony = -156.0183f;
+		viewscale = 0.1346637f;
 		scriptcompiler = "zdoom_acs.cfg";
 		
 		grid
@@ -62,7 +62,7 @@ maps
 			backoffsety = 0;
 			backscalex = 100;
 			backscaley = 100;
-			gridsize = 32;
+			gridsize = 16;
 		}
 		
 		
@@ -80,7 +80,9 @@ maps
 				offsetx_mid = 1;
 				offsety_mid = 1;
 				offsetx_bottom = 1;
+				light = 0;
 				offsetx_top = 1;
+				offsety_bottom = 1;
 			}
 			
 			

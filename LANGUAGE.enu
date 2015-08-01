@@ -13,7 +13,7 @@ QUITMSG = "are you sure you want to\nquit?";
 TXT_YES = "Yes";
 TXT_NO = "No";
 
-// Quit Doom 1 messages
+// Quit messages
 QUITMSG1 = "leave now and shelley will attempt\nto find you.";
 QUITMSG2 = "let's beat it -- this is turning\ninto a bloodbath!";
 QUITMSG3 = "i wouldn't leave if i were you.\ndos is much worse.";
@@ -21,8 +21,6 @@ QUITMSG4 = "you're trying to say you like dos\nbetter than me, right?";
 QUITMSG5 = "don't leave yet -- there's a\ndemon around that corner!";
 QUITMSG6 = "you can quit...\nbut you can't hide...";
 QUITMSG7 = "go ahead and leave. see if i care.";
-
-// Quit Doom II messages
 QUITMSG8 = "you want to quit?\nthen, thou hast lost an eighth!";
 QUITMSG9 = "don't go now, there's a \ndimensional shambler waiting\nat the dos prompt!";
 QUITMSG10 = "get outta here and go back\nto your boring programs.";
@@ -30,25 +28,6 @@ QUITMSG11 = "if i were your boss, i'd \n deathmatch ya in a minute!";
 QUITMSG12 = "look, bud. you leave now\nand you forfeit your body count!";
 QUITMSG13 = "just leave. when you come\nback, i'll be waiting with a bat.";
 QUITMSG14 = "you're lucky i don't smack\nyou for thinking about leaving.";
-
-// Quit Strife messages
-QUITMSG15 = "where are you going?!\nwhat about the rebellion?";
-QUITMSG16 = "carnage interruptus...\nwhat a tease!";
-QUITMSG17 = "but you're the hope\n-- my only chance!!";
-QUITMSG18 = "nobody walks out on blackbird.";
-QUITMSG19 = "i thought you were different...";
-QUITMSG20 = "fine! just kill and run!";
-QUITMSG21 = 
-QUITMSG22 = "whaaa, what's the matter?\nmommy says dinnertime?";
-
-// Quit Chex messages
-QUITMSG23 = "Don't quit now, there are still\nflemoids on the loose!";
-QUITMSG24 = "Don't give up -- the flemoids will\nget the upper hand!";
-QUITMSG25 = "Don't leave now.\nWe need your help!";
-QUITMSG26 = "I hope you're just taking a\nbreak for Chex(R) party mix.";
-QUITMSG27 = "Don't quit now!\nWe need your help!";
-QUITMSG28 = "Don't abandon the\nIntergalactic Federation of Cereals!";
-QUITMSG29 = "The real Chex(R) Warrior\nwouldn't give up so fast!";
 
 LOADNET = "you can't do load while in a net game!\n\npress a key.";
 QLOADNET = "you can't quickload during a netgame!\n\npress a key.";
@@ -123,47 +102,10 @@ BETA_BONUS2 = "You pick up a skullchest.";
 BETA_BONUS3 = "You pick up an evil sceptre.";
 BETA_BONUS4 = "You pick up an unholy bible.";
 
-// Level names
-HUSTR_E1M1 = "E1M1: Hangar";
-HUSTR_E1M2 = "E1M2: Nuclear Plant";
-HUSTR_E1M3 = "E1M3: Toxin Refinery";
-HUSTR_E1M4 = "E1M4: Command Control";
-HUSTR_E1M5 = "E1M5: Phobos Lab";
-HUSTR_E1M6 = "E1M6: Central Processing";
-HUSTR_E1M7 = "E1M7: Computer Station";
-HUSTR_E1M8 = "E1M8: Phobos Anomaly";
-HUSTR_E1M9 = "E1M9: Military Base";
-HUSTR_E2M1 = "E2M1: Deimos Anomaly";
-HUSTR_E2M2 = "E2M2: Containment Area";
-HUSTR_E2M3 = "E2M3: Refinery";
-HUSTR_E2M4 = "E2M4: Deimos Lab";
-HUSTR_E2M5 = "E2M5: Command Center";
-HUSTR_E2M6 = "E2M6: Halls of the Damned";
-HUSTR_E2M7 = "E2M7: Spawning Vats";
-HUSTR_E2M8 = "E2M8: Tower of Babel";
-HUSTR_E2M9 = "E2M9: Fortress of Mystery";
-HUSTR_E3M1 = "E3M1: Hell Keep";
-HUSTR_E3M2 = "E3M2: Slough of Despair";
-HUSTR_E3M3 = "E3M3: Pandemonium";
-HUSTR_E3M4 = "E3M4: House of Pain";
-HUSTR_E3M5 = "E3M5: Unholy Cathedral";
-HUSTR_E3M6 = "E3M6: Mt. Erebus";
-HUSTR_E3M7 = "E3M7: Limbo";
-HUSTR_E3M8 = "E3M8: Dis";
-HUSTR_E3M9 = "E3M9: Warrens";
-HUSTR_E4M1 = "E4M1: Hell Beneath";
-HUSTR_E4M2 = "E4M2: Perfect Hatred";
-HUSTR_E4M3 = "E4M3: Sever The Wicked";
-HUSTR_E4M4 = "E4M4: Unruly Evil";
-HUSTR_E4M5 = "E4M5: They Will Repent";
-HUSTR_E4M6 = "E4M6: Against Thee Wickedly";
-HUSTR_E4M7 = "E4M7: And Hell Followed";
-HUSTR_E4M8 = "E4M8: Unto The Cruel";
-HUSTR_E4M9 = "E4M9: Fear";
-
 //NIKKI SHORE MAP NAMES:
 
-QHUSTR_NE1M1 = "The Subway";
+QHUSTR_MAP01 = "Nikki's Apartment";
+QHUSTR_NE1M1 = "The Alleyway at King Street";
 
 HUSTR_TALKTOSELF1 = "You mumble to yourself";
 HUSTR_TALKTOSELF2 = "Who's there?";
