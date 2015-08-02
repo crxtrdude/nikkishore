@@ -20,23 +20,13 @@ maps
 				notfortesting = 0;
 			}
 			
-			
-			resource1
-			{
-				type = 0;
-				location = "C:\\Applications\\GZDoom\\Projects\\FemaleScientist.wad";
-				option1 = 0;
-				option2 = 0;
-				notfortesting = 0;
-			}
-			
 		}
 		
-		defaultfloortexture = "FLAT1";
+		defaultfloortexture = "FLOOR0_1";
 		defaultceiltexture = "F_SKY1";
-		defaulttoptexture = "STARTAN1";
-		defaultwalltexture = "STARTAN1";
-		defaultbottomtexture = "STARTAN1";
+		defaulttoptexture = "A-GRATE";
+		defaultwalltexture = "A-GRATE";
+		defaultbottomtexture = "A-GRATE";
 		custombrightness = 196;
 		customfloorheight = 0;
 		customceilheight = 128;
@@ -49,9 +39,9 @@ maps
 		overrideceilheight = false;
 		overridebrightness = false;
 		uselongtexturenames = false;
-		viewpositionx = 5896.419f;
-		viewpositiony = -156.0183f;
-		viewscale = 0.1346637f;
+		viewpositionx = 49.85597f;
+		viewpositiony = -717.9111f;
+		viewscale = 0.3846145f;
 		scriptcompiler = "zdoom_acs.cfg";
 		
 		grid
@@ -62,7 +52,7 @@ maps
 			backoffsety = 0;
 			backscalex = 100;
 			backscaley = 100;
-			gridsize = 16;
+			gridsize = 8;
 		}
 		
 		
@@ -78,18 +68,25 @@ maps
 			sidedef
 			{
 				offsetx_mid = 1;
-				offsety_mid = 1;
 				offsetx_bottom = 1;
-				light = 0;
-				offsetx_top = 1;
+				offsety_mid = 1;
 				offsety_bottom = 1;
+				offsetx_top = 1;
 			}
 			
 			
 			sector
 			{
-				rotationfloor = 1;
 				xpanningfloor = 1;
+				ypanningfloor = 1;
+				rotationceiling = 1;
+				rotationfloor = 1;
+				xpanningceiling = 1;
+				xscaleceiling = 1;
+				xscalefloor = 1;
+				ypanningceiling = 1;
+				yscaleceiling = 1;
+				yscalefloor = 1;
 			}
 			
 		}

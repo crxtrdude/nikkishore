@@ -2,7 +2,7 @@
  
 [enu default]
 
-SECRETMESSAGE = "A secret is revealed!";
+SECRETMESSAGE = "You stumbled upon a secret!";
 
 D_DEVSTR = "Useless mode ON.\n";
 D_CDROM = "CD-ROM Version: zdoom.ini from c:\\zdoomdat\n";
@@ -106,6 +106,7 @@ BETA_BONUS4 = "You pick up an unholy bible.";
 
 QHUSTR_MAP01 = "Nikki's Apartment";
 QHUSTR_NE1M1 = "The Alleyway at King Street";
+QHUSTR_NE1M2 = "Garage";
 
 HUSTR_TALKTOSELF1 = "You mumble to yourself";
 HUSTR_TALKTOSELF2 = "Who's there?";

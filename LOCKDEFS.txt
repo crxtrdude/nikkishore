@@ -1,0 +1,4 @@
+Lock 7
+{
+	Any { BlueCard BlueSkull KeyBlue }
+}

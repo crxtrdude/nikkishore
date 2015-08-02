@@ -62,7 +62,7 @@ skill nightmare
 }
 
 clearepisodes
-episode map01
+episode MAP01
 {
 	picname = "M_EPI1"
 	name = "The Beginning"
@@ -94,6 +94,17 @@ map NE1M1 lookup "QHUSTR_NE1M1"
 	cluster = 1
 	par = 30
 	music = "D_NE1M1"
+}
+
+map NE1M2 lookup "QHUSTR_NE1M2"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	next = "NE1M3"
+	sky1 = "SKY1"
+	cluster = 1
+	par = 30
+	music = "D_NE1M2"
 }
 
 // Clusters (correspond with same-numbered episode)

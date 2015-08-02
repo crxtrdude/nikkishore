@@ -5,7 +5,7 @@ strictpatches = 0;
 maps
 {
 	
-	NE1M1
+	MIRRTEST
 	{
 		
 		resources
@@ -23,10 +23,10 @@ maps
 		}
 		
 		defaultfloortexture = "FLOOR0_1";
-		defaultceiltexture = "F_SKY1";
-		defaulttoptexture = "GLASSON1";
-		defaultwalltexture = "GLASSON1";
-		defaultbottomtexture = "GLASSON1";
+		defaultceiltexture = "CEIL1_1";
+		defaulttoptexture = "STARTAN1";
+		defaultwalltexture = "STARTAN1";
+		defaultbottomtexture = "STARTAN1";
 		custombrightness = 196;
 		customfloorheight = 0;
 		customceilheight = 128;
@@ -39,9 +39,9 @@ maps
 		overrideceilheight = false;
 		overridebrightness = false;
 		uselongtexturenames = false;
-		viewpositionx = 1045.718f;
-		viewpositiony = -1309.768f;
-		viewscale = 0.844998f;
+		viewpositionx = -212.3262f;
+		viewpositiony = -57.64137f;
+		viewscale = 1.428049f;
 		scriptcompiler = "zdoom_acs.cfg";
 		
 		grid
@@ -52,41 +52,16 @@ maps
 			backoffsety = 0;
 			backscalex = 100;
 			backscaley = 100;
-			gridsize = 8;
+			gridsize = 32;
 		}
 		
 		
 		fieldtypes
 		{
 			
-			linedef
-			{
-				alpha = 1;
-			}
-			
-			
 			sidedef
 			{
 				offsetx_mid = 1;
-				offsetx_bottom = 1;
-				offsety_mid = 1;
-				offsety_bottom = 1;
-				offsetx_top = 1;
-			}
-			
-			
-			sector
-			{
-				xpanningfloor = 1;
-				ypanningfloor = 1;
-				rotationceiling = 17;
-				rotationfloor = 17;
-				xpanningceiling = 1;
-				xscaleceiling = 1;
-				xscalefloor = 1;
-				ypanningceiling = 1;
-				yscaleceiling = 1;
-				yscalefloor = 1;
 			}
 			
 		}
