@@ -14,7 +14,7 @@ maps
 			resource0
 			{
 				type = 1;
-				location = "D:\\Project\\ZDoom\\nikkishore\\trunk";
+				location = "C:\\Projects\\nikkishore\\trunk";
 				option1 = 0;
 				option2 = 0;
 				notfortesting = 0;
@@ -53,36 +53,6 @@ maps
 			backscalex = 100;
 			backscaley = 100;
 			gridsize = 8;
-		}
-		
-		
-		fieldtypes
-		{
-			
-			sidedef
-			{
-				offsetx_mid = 1;
-				offsetx_bottom = 1;
-				light = 0;
-				offsetx_top = 1;
-			}
-			
-			
-			sector
-			{
-				rotationceiling = 1;
-				rotationfloor = 1;
-				xpanningceiling = 1;
-				xpanningfloor = 1;
-				xscaleceiling = 1;
-				xscalefloor = 1;
-				ypanningceiling = 1;
-				ypanningfloor = 1;
-				yscaleceiling = 1;
-				yscalefloor = 1;
-				lightceiling = 0;
-			}
-			
 		}
 		
 	}
