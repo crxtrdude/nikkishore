@@ -5,7 +5,7 @@ strictpatches = 0;
 maps
 {
 	
-	NE1M1
+	NE1M3
 	{
 		
 		resources
@@ -23,10 +23,10 @@ maps
 		}
 		
 		defaultfloortexture = "FLOOR0_1";
-		defaultceiltexture = "F_SKY1";
-		defaulttoptexture = "A-GRATE";
-		defaultwalltexture = "A-GRATE";
-		defaultbottomtexture = "A-GRATE";
+		defaultceiltexture = "CEIL1_1";
+		defaulttoptexture = "STARTAN1";
+		defaultwalltexture = "STARTAN1";
+		defaultbottomtexture = "STARTAN1";
 		custombrightness = 196;
 		customfloorheight = 0;
 		customceilheight = 128;
@@ -39,9 +39,9 @@ maps
 		overrideceilheight = false;
 		overridebrightness = false;
 		uselongtexturenames = false;
-		viewpositionx = -343.895f;
-		viewpositiony = -796.1204f;
-		viewscale = 0.8449972f;
+		viewpositionx = -1361.646f;
+		viewpositiony = 165.6842f;
+		viewscale = 0.4999988f;
 		scriptcompiler = "zdoom_acs.cfg";
 		
 		grid
@@ -68,23 +68,23 @@ maps
 			sidedef
 			{
 				offsetx_mid = 1;
-				offsetx_bottom = 1;
-				offsety_bottom = 1;
-				offsety_mid = 1;
 				offsetx_top = 1;
+				offsetx_bottom = 1;
+				offsety_mid = 1;
+				offsety_top = 1;
 			}
 			
 			
 			sector
 			{
 				xpanningfloor = 1;
-				ypanningfloor = 1;
-				rotationceiling = 1;
-				rotationfloor = 1;
+				rotationceiling = 17;
+				rotationfloor = 17;
 				xpanningceiling = 1;
 				xscaleceiling = 1;
 				xscalefloor = 1;
 				ypanningceiling = 1;
+				ypanningfloor = 1;
 				yscaleceiling = 1;
 				yscalefloor = 1;
 			}

@@ -1,4 +1,7 @@
 walltexture APTWALL1, 64, 128 
 
+walltexture BRIKWAL1,	64, 224
+
+
 walltexture GLASSON1, 64, 64
 walltexture GLASSOFF, 64, 64
