@@ -1,4 +1,5 @@
-walltexture APTWALL1, 64, 128 
+walltexture APTWALL1, 64, 128
+texture APTPIC1, 18, 10 
 
 walltexture BRIKWAL1,	64, 224
 

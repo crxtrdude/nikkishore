@@ -12,6 +12,7 @@ ACTOR NikkiPlayer : PlayerPawn
 	Mass 100
 	PainChance 255
 	Player.DisplayName "Nikki"
+	Player.ViewHeight 42
 	Player.CrouchSprite "PLYC"
 	Player.StartItem "Fist"
 	Player.StartItem "Stunner"

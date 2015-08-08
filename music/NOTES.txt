@@ -3,5 +3,6 @@ Music by Kevin McLeod (incompetech.com)
 Music:
 D_INTRO - Undaunted
 D_INTER - Semi-Funk
+D_MAP01 - Fast Talkin
 D_NE1M1 - On the Ground
 D_NE1M2 - Dirt Rhodes

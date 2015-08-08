@@ -5,40 +5,18 @@ strictpatches = 0;
 maps
 {
 	
-	MAP01
+	BLDTST01
 	{
 		
 		resources
 		{
-			
-			resource0
-			{
-				type = 1;
-				location = "D:\\Project\\ZDoom\\nikkishore\\trunk";
-				option1 = 0;
-				option2 = 0;
-				notfortesting = 0;
-			}
-			
-		}
-		
-		
-		grid
-		{
-			background = "";
-			backsource = 0;
-			backoffsetx = 0;
-			backoffsety = 0;
-			backscalex = 100;
-			backscaley = 100;
-			gridsize = 4;
 		}
 		
 		defaultfloortexture = "FLOOR0_1";
 		defaultceiltexture = "CEIL1_1";
-		defaulttoptexture = "APTWALL1";
-		defaultwalltexture = "APTWALL1";
-		defaultbottomtexture = "APTWALL1";
+		defaulttoptexture = "STARTAN1";
+		defaultwalltexture = "STARTAN1";
+		defaultbottomtexture = "STARTAN1";
 		custombrightness = 196;
 		customfloorheight = 0;
 		customceilheight = 128;
@@ -51,18 +29,38 @@ maps
 		overrideceilheight = false;
 		overridebrightness = false;
 		uselongtexturenames = false;
-		viewpositionx = 162.3717f;
-		viewpositiony = -65.67079f;
-		viewscale = 2.193579f;
+		viewpositionx = -261.389f;
+		viewpositiony = 1243.243f;
+		viewscale = 0.2275829f;
 		scriptcompiler = "zdoom_acs.cfg";
+		
+		grid
+		{
+			background = "";
+			backsource = 0;
+			backoffsetx = 0;
+			backoffsety = 0;
+			backscalex = 100;
+			backscaley = 100;
+			gridsize = 32;
+		}
+		
 		
 		fieldtypes
 		{
 			
-			sidedef
+			sector
 			{
-				offsetx_mid = 1;
-				offsety_mid = 1;
+				rotationceiling = 17;
+				rotationfloor = 17;
+				xpanningceiling = 1;
+				xpanningfloor = 1;
+				xscaleceiling = 1;
+				xscalefloor = 1;
+				ypanningceiling = 1;
+				ypanningfloor = 1;
+				yscaleceiling = 1;
+				yscalefloor = 1;
 			}
 			
 		}
