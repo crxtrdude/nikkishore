@@ -11,22 +11,19 @@ cd ..\src
 @ECHO Initializing scripts
 @ECHO.
 xcopy /s carcontrol.txt ..\acs\
+xcopy /s qcommon.txt ..\acs\
 cd ..\acs
 del /S *.acs
 ren carcontrol.txt carcontrol.acs
-cd ..\..\..\doomtools\acc
+ren qcommon.txt qcommon.acs
+cd ..\src\acc
 cls
 
 @ECHO.
 @ECHO Compiling scripts.
 @ECHO.
-acc.exe -i ".." ..\..\Projects\Nikki\acs\carcontrol.acs
-cd ..\..\Projects\Nikki\acs
+acc.exe -i ".." ..\..\acs\carcontrol.acs
+acc.exe -i ".." ..\..\acs\qcommon.acs
+cd ..\..\acs
 
-@ECHO.
-@ECHO Now clearing ACS files.
-@ECHO.
-del /S *.acs
 pause
-cd ..\src\zkvn-master
-make_pk3.bat
