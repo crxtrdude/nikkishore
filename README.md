@@ -12,6 +12,9 @@ The game requires Freedoom: Phase 2 to play. Get the most recent commit at [the 
 
 This is laid out in the PK3 manner, see [the article] (http://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement) on ZDoom Wiki for details.
 
+Recommended editor used is GZDoom Builder. There is a GZDoom builder config file included that you can add to the editor and set up.
+See included readme file in 'builder_files' folder for details. 
+
 ## Copyright / Permissions
 
 Nikki Shore characters and concept are copyright (c) 2013-2015 Clinton Cañalita & Audryk Vasquez, All rights reserved.
@@ -39,4 +42,5 @@ Uses code by the following:
 * Doom Center - motorcycle code
 * DaZombieKiller - ZKVN
 
-Uses music by Kevin McLeod (incompetech.com) 
+Uses music by Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0
