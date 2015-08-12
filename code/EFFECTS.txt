@@ -7,3 +7,9 @@ ACTOR NoFlash
  +NOTELEPORT
  +NOGRAVITY
 }
+
+ACTOR Explosion : Rocket
+{
+    Spawn Parent Death
+    SpawnID 200
+}
