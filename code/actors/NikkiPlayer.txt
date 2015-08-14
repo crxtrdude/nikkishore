@@ -15,8 +15,6 @@ ACTOR NikkiPlayer : PlayerPawn
 	Player.ViewHeight 42
 	Player.CrouchSprite "PLYC"
 	Player.StartItem "Fist"
-	Player.StartItem "Stunner"
-	Player.StartItem "Cell", 20
 	Player.WeaponSlot 1, Fist, Stunner
 	Player.WeaponSlot 2, Pistol
 	Player.WeaponSlot 3, Shotgun, SuperShotgun

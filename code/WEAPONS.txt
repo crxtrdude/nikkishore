@@ -1,3 +1,2 @@
-#Include "code/weapons/testgun.txt"
 #Include "code/weapons/stunner.txt"
 // #Include "code/weapons/wrench.txt" //wrench by Wildweasel 

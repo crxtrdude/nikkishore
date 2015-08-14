@@ -11,12 +11,9 @@
 DEFAULTLISTMENU
 {
 	Font "BigFont", "Untranslated"
-	IfGame(Doom, Chex)
-	{
-		Selector "M_SKULL1", -32, -5
-		Linespacing 16
-		Font "BIGFONT"
-	}
+	Selector "M_SKULL1", -32, -5
+	Linespacing 24
+	Font "BIGFONT"
 }
 
 //-------------------------------------------------------------------------------------------
@@ -35,29 +32,6 @@ LISTMENU "MainMenu"
 		{
 			Position 97, 64
 		}
-	}
-	IfGame(Strife)
-	{
-		StaticPatch 84, 2, "M_STRIFE"
-		Position 97, 45
-	}
-	IfGame(Heretic)
-	{
-		StaticPatch 88, 0, "M_HTIC"
-		StaticPatch 40, 10, "M_SKL01"
-		StaticPatch 232, 10, "M_SKL00"
-		Position 110, 56
-	}
-	IfGame(Hexen)
-	{
-		StaticPatch 88, 0, "M_HTIC"
-		StaticPatch 37, 80, "FBULB0"
-		StaticPatch 278, 80, "FBULA0"
-		Position 110, 56
-	}
-	
-	IfGame(Doom, Strife, Chex)
-	{
 		PatchItem "M_NGAME", "n", "PlayerclassMenu"
 		ifOption(SwapMenu)
 		{
@@ -76,15 +50,6 @@ LISTMENU "MainMenu"
 			PatchItem "M_RDTHIS","r", "ReadThisMenu"
 		}
 		PatchItem "M_QUITG", "q", "QuitMenu"
-	}
-	
-	IfGame(Heretic, Hexen)
-	{
-		TextItem "$MNU_NEWGAME", "n", "PlayerclassMenu"
-		TextItem "$MNU_OPTIONS", "o", "OptionsMenu"
-		TextItem "$MNU_GAMEFILES", "g", "GameFilesMenu"
-		TextItem "$MNU_INFO", "i", "ReadThisMenu"
-		TextItem "$MNU_QUITGAME", "q", "QuitMenu"
 	}
 }
 
@@ -109,10 +74,6 @@ ListMenu "PlayerclassMenu"
 	{
 		NetgameMessage "$NEWGAME"
 	}
-	IfGame(Chex)
-	{
-		NetgameMessage "$CNEWGAME"
-	}
 
 	IfGame(Doom, Strife, Chex)
 	{
@@ -120,20 +81,6 @@ ListMenu "PlayerclassMenu"
 		Position 48, 63
 		PlayerDisplay 220, 63, "20 00 00", "80 00 40"
 		MouseWindow 0, 220
-	}
-	IfGame(Heretic)
-	{
-		StaticTextCentered 160, 15, "$MNU_CHOOSECLASS"
-		Position 80, 50
-		PlayerDisplay 220, 50, "20 00 00", "80 00 40"
-		MouseWindow 0, 220
-	}
-	IfGame(Hexen)
-	{
-		StaticText 34, 24, "$MNU_CHOOSECLASS"
-		Position 66, 58
-		PlayerDisplay 174, 8, "00 07 00", "40 53 40"
-		MouseWindow 0, 174
 	}
 	// The rest of this menu will be set up based on the actual player definitions.
 }
@@ -151,24 +98,11 @@ ListMenu "EpisodeMenu"
 	{
 		NetgameMessage "$NEWGAME"
 	}
-	IfGame(Chex)
-	{
-		NetgameMessage "$CNEWGAME"
-	}
 
 	IfGame(Doom, Chex)
 	{
 		Position 48, 63
 		StaticPatch 54, 38, "M_EPISOD"
-	}
-	IfGame(Strife)
-	{
-		Position 48, 63
-		StaticText 54, 38, "$MNU_EPISODE"
-	}
-	IfGame(Heretic, Hexen)
-	{
-		Position 80, 50
 	}
 	// items will be filled in by MAPINFO
 }
@@ -183,28 +117,11 @@ ListMenu "EpisodeMenu"
 ListMenu "SkillMenu"
 {
 
-	IfGame(Doom, Chex)
+	IfGame(Doom)
 	{
 		StaticPatch 96, 14, "M_NEWG"
-	}
-	IfGame(Strife)
-	{
-		StaticPatch 96, 14, "M_NGAME"
-	}
-	IfGame(Doom, Strife, Chex)
-	{
 		StaticPatch 54, 38, "M_SKILL"
 		Position 48, 63
-	}
-	IfGame (Heretic)
-	{
-		Position 38, 30
-	}
-	IfGame (Hexen)
-	{
-		StaticText 74, 16, "$MNU_CHOOSESKILL"
-		Position 160, 44
-		centermenu
 	}
 }
 
@@ -219,54 +136,6 @@ ListMenu "GameFilesMenu"
 	Position 110, 60
 	TextItem "$MNU_LOADGAME", "l", "LoadGameMenu"
 	TextItem "$MNU_SAVEGAME", "s", "SaveGameMenu"
-}
-
-//-------------------------------------------------------------------------------------------
-//
-// Base definition for load game menu. Only the configurable part is done here
-//
-//-------------------------------------------------------------------------------------------
-
-ListMenu "LoadGameMenu"
-{
-	IfGame(Doom, Heretic, Hexen, Strife)
-	{
-		NetgameMessage "$LOADNET"
-	}
-	IfGame(Chex)
-	{
-		NetgameMessage "$CLOADNET"
-	}
-	IfGame(Doom, Strife, Chex)
-	{
-		StaticPatchCentered 160, -20, "M_LOADG"
-	}
-	IfGame(Heretic, Hexen)
-	{
-		StaticTextCentered 160, -10, "$MNU_LOADGAME"
-	}
-	Position 80,54
-	Class "LoadMenu"	// uses its own implementation
-}
-
-//-------------------------------------------------------------------------------------------
-//
-// Base definition for save game menu. Only the configurable part is done here
-//
-//-------------------------------------------------------------------------------------------
-
-ListMenu "SaveGameMenu"
-{
-	IfGame(Doom, Strife, Chex)
-	{
-		StaticPatchCentered 160, -20, "M_SAVEG"
-	}
-	IfGame(Heretic, Hexen)
-	{
-		StaticTextCentered 160, -10, "$MNU_SAVEGAME"
-	}
-	Position 80,54
-	Class "SaveMenu"	// uses its own implementation
 }
 
 //-------------------------------------------------------------------------------------------
@@ -302,7 +171,7 @@ OptionValue "OffOn"
 OptionMenuSettings
 {
 	// These can be overridden if a different menu fonts requires it.
-	Linespacing 15
+	Linespacing 12
 }
 
 DefaultOptionMenu
@@ -362,37 +231,23 @@ ListMenu "PlayerMenu"
 {
 	StaticTextCentered 160, 6, "$MNU_PLAYERSETUP"
 	Font "SmallFont"
-	Linespacing 14
+	Linespacing 18
 	Position 48, 36
 
-	IfGame (Doom, Strife, Chex)
-	{
-		PlayerNameBox "Name", 0, "Playerbox"
-		Selector "-", -16, -1
-	}
-	IfGame(Heretic, Hexen)
-	{
-		PlayerNameBox "Name", 5, "Playerbox"
-		Selector "-", -16, 1
-	}
-	IfGame(Doom, Heretic, Strife, Chex)
-	{
-		MouseWindow 0, 220
-		PlayerDisplay 220, 80, "20 00 00", "80 00 40", 1, "PlayerDisplay"
-	}
-	IfGame(Hexen)
-	{
-		MouseWindow 0, 220
-		PlayerDisplay 220, 80, "00 07 00", "40 53 40", 1, "PlayerDisplay"
-	}
+	PlayerNameBox "Name", 0, "Playerbox"
+	Selector "-", -16, -1
+	MouseWindow 0, 220
+	PlayerDisplay 220, 80, "20 00 00", "80 00 40", 1, "PlayerDisplay"
 	
 	ValueText "Team", "Team"
 	ValueText "Color", "Color"
-	Linespacing 10
+	
+	Linespacing 12
 	Slider "Red", "Red", 0, 255, 16
 	Slider "Green", "Green", 0, 255, 16
-	Linespacing 14
 	Slider "Blue", "Blue", 0, 255, 16
+	
+	Linespacing 14
 	ValueText "Class", "Class"
 	ValueText "Skin", "Skin"
 	ValueText "Gender", "Gender", "Gender"
@@ -475,11 +330,6 @@ OptionMenu "CustomizeControls"
 	Control 	"Coop spy",				"spynext"
 	Control 	"Screenshot",			"screenshot"
 	Control  	"Open console",			"toggleconsole"
-	StaticText 	""
-	StaticText 	"Strife Popup Screens", 1
-	Control 	"Mission objectives",	"showpop 1"
-	Control 	"Keys list",			"showpop 2"
-	Control 	"Weapons/ammo/stats",	"showpop 3"
 }
 
 //-------------------------------------------------------------------------------------------

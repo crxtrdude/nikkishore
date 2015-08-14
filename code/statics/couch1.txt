@@ -1,0 +1,11 @@
+Actor Couch1 14503
+{
+  height 32
+  radius 30
+  States
+  {
+  Spawn:
+    COUA A 10
+    Loop
+  }
+}

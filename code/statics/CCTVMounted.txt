@@ -1,0 +1,13 @@
+Actor CCTVMounted 14504
+{
+	+NOGRAVITY
+	+SPAWNCEILING
+  height 20
+  radius 20
+  States
+  {
+  Spawn:
+    CCMO A 10
+    Loop
+  }
+}

@@ -3,3 +3,18 @@ BIKBA = "BIKBA0"
    Scale = 1.0
    Spin = 0
 }
+LBLBA = "LBLBA0"
+{
+   Scale = 1.0
+   Spin = 0
+}
+CCMOA = "CCMOA0"
+{
+   Scale = 1.0
+   Spin = 0
+}
+COUAA = "COUAA0"
+{
+   Scale = 1.0
+   Spin = 0
+}

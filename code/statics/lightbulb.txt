@@ -1,0 +1,13 @@
+Actor Lightbulb 14502
+{
+	+NOGRAVITY
+	+SPAWNCEILING
+  height 30
+  radius 20
+  States
+  {
+  Spawn:
+    LBLB A 10
+    Loop
+  }
+}
