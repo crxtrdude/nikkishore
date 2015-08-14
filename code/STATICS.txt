@@ -4,3 +4,4 @@
 #include "code/statics/lightbulb.txt"
 #include "code/statics/CCTVMounted.txt"
 #include "code/statics/couch1.txt"
+#include "code/statics/beanbag.txt"

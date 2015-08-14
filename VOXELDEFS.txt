@@ -18,3 +18,8 @@ COUAA = "COUAA0"
    Scale = 1.0
    Spin = 0
 }
+BBAGA = "BBAGA0"
+{
+   Scale = 1.0
+   Spin = 0
+}

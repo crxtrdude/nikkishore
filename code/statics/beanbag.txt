@@ -1,0 +1,11 @@
+Actor BeanBagChair 14505
+{
+  height 30
+  radius 30
+  States
+  {
+  Spawn:
+    BBAG A 10
+    Loop
+  }
+}
