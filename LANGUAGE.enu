@@ -14,17 +14,16 @@ TXT_YES = "Yes";
 TXT_NO = "No";
 
 // Quit messages
-QUITMSG1 = "SHELLEY: Leave now and I will attempt\nto find you.";
-QUITMSG2 = "SHELLEY: Let's beat it -- this is turning into a bloodbath!\nOh wait, wrong game";
-QUITMSG3 = "SHELLEY: I wouldn't leave if I were\n you. The real world is much worse.";
-QUITMSG4 = "SHELLEY: You're trying to say you like\n Windows better than me, right?";
-QUITMSG5 = "SHELLEY: Don't leave yet -- There's a\nbonus around that corner!";
-QUITMSG6 = "SHELLEY: You can quit...\nbut you can't hide...";
-QUITMSG7 = "SHELLEY: Go ahead and leave. See if i care.";
-QUITMSG8 = "SHELLEY: Get outta here and go back\nto your boring programs.";
-QUITMSG9 = "SHELLEY: If i were your boss, I'd \n deathmatch ya in a minute!";
-QUITMSG10 = "SHELLEY: Just leave. when you come\nback, I'll be waiting with a bat.";
-QUITMSG11 = "SHELLEY: You're lucky I don't smack\nyou for thinking about leaving.";
+QUITMSG1 = "FITA: Leave now and I will attempt\nto find you.";
+QUITMSG2 = "FITA: Let's beat it -- this is turning into a bloodbath!\nOh wait, wrong game";
+QUITMSG3 = "FITA: I wouldn't leave if I were\n you. The real world is much worse.";
+QUITMSG4 = "FITA: You're trying to say you like\n Windows better than me, right?";
+QUITMSG5 = "FITA: Don't leave yet -- There's a\nbonus around that corner!";
+QUITMSG6 = "FITA: You can quit...\nbut you can't hide...";
+QUITMSG7 = "FITA: Go ahead and leave. See if I care.";
+QUITMSG8 = "FITA: Get outta here and go back\nto your boring programs.";
+QUITMSG9 = "FITA: Just leave. When you come\nback, I'll be waiting with a surprise.";
+QUITMSG10 = "FITA: You're lucky I don't smack\nyou for thinking about leaving.";
 
 LOADNET = "You can't do load while in a net game!\n\nPress a key.";
 QLOADNET = "You can't quickload during a netgame!\n\nPress a key.";
