@@ -29,7 +29,7 @@ mapinfo.txt
 menudef.txt
 sndinfo.txt
 textures.txt
-voxeldefs.txt
+voxeldef.txt
 language.enu
 *.acs
 *.lmp

@@ -1,4 +1,6 @@
-# nikkishore
+# NIKKI SHORE
+
+ZDoom based game
 
 ## Notes
 
