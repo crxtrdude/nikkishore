@@ -1,0 +1,12 @@
+ACTOR Girl1 18100
+{
+	height 58
+	radius 24
+	scale 0.5
+	States
+	{
+	Spawn:
+		GRLA A 10
+		Loop
+	}
+}

@@ -7,3 +7,5 @@
 #include "code/statics.txt"
 
 #include "code/effects.txt"
+
+#include "code/actors/pedes.txt"
