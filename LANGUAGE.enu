@@ -39,10 +39,10 @@ NETEND = "You can't end a netgame!\n\nPress a key.";
 ENDGAME = "Are you sure you want to end the game?\n\nPress Y or N.";
 DOSY = "(Press Y to quit)";
 EMPTYSTRING = "empty slot";
-GOTARMOR = "Picked up the armor.";
-GOTMEGA = "Picked up the MegaArmor!";
-GOTHTHBONUS = "Picked up a health bonus.";
-GOTARMBONUS = "Picked up an armor bonus.";
+GOTKEVLAR = "Picked up a ordinary kevlar body armor.";
+GOTDSKIN = "Picked up a dragon-skin body armor!";
+GOTPATCHKIT = "Picked up a patch up kit.";
+GOTARMPANEL = "Picked up an armor panel.";
 GOTSTIM = "Picked up a stimpack.";
 GOTMEDINEED = "Picked up a medikit that you REALLY need!";
 GOTMEDIKIT = "Picked up a medikit.";
@@ -1233,98 +1233,6 @@ BBA_SCROTUM = "%o suffered scrotum separation";
 BBA_POPULATION = "%o volunteered for population control";
 BBA_SUICIDE = "%o has suicided";
 BBA_DARWIN = "%o received the Darwin Award";
-
-// Chex Quest Strings
-CHUSTR_E1M1 = "E1M1: Landing Zone";
-CHUSTR_E1M2 = "E1M2: Storage Facility";
-CHUSTR_E1M3 = "E1M3: Experimental Lab";
-CHUSTR_E1M4 = "E1M4: Arboretum";
-CHUSTR_E1M5 = "E1M5: Caverns of Bazoik";
-
-CE1TEXT =
-		"Mission accomplished.\n"
-		"\n"
-		"Are you prepared for the next mission?\n"
-		"\n"
-		"\n"
-		"\n"
-		"\n"
-		"\n"
-		"\n"
-		"Press the escape key to continue...";
-
-CE2TEXT = "You've done it!";
-CE3TEXT = "Wonderful Job!";
-CE4TEXT = "Fantastic";
-
-CLOADNET = "you can't do load while in a net quest!\n\npress a key.";
-$ifgame(chex) QSPROMPT = "quicksave over your quest named\n\n'%s'?\n\npress y or n.";
-$ifgame(chex) QLOADNET = "you can't quickload during a netquest!\n\npress a key.";
-$ifgame(chex) QLPROMPT = "do you want to quickload the quest named\n\n'%s'?\n\npress y or n.";
-CNEWGAME = "you can't start a new quest\nwhile in a network quest.\n\npress a key.";
-
-CNIGHTMARE = "Careful, this will be tough.\nDo you wish to continue?\n\npress y or n.";
-
-CSWSTRING = "this is Chex(R) Quest. look for\n\nfuture levels at www.chexquest.com.\n\npress a key.";
-
-$ifgame(chex) NETEND = "you can't end a netquest!\n\npress a key.";
-$ifgame(chex) ENDGAME = "are you sure you want to end the quest?\n\npress y or n.";
-
-GOTCHEXARMOR = "Picked up the Chex(R) Armor.";
-GOTSUPERCHEXARMOR = "Picked up the Super Chex(R) Armor!";
-GOTWATER = "Picked up a glass of water.";
-GOTREPELLENT = "Picked up slime repellent.";
-GOTBREAKFAST = "Supercharge Breakfast!";
-GOTCBLUEKEY = "Picked up a blue key.";
-GOTCYELLOWKEY = "Picked up a yellow key.";
-GOTCREDKEY = "Picked up a red key.";
-GOTFRUIT = "Picked up a bowl of fruit.";
-GOTVEGETABLESNEED = "Vegetables are REALLY good for you!";
-GOTVEGETABLES = "Picked up a bowl of vegetables.";
-GOTSLIMESUIT = "Found a Slime-Proof Suit";
-GOTCHEXMAP = "Found a Computer Area Map";
-
-GOTZORCHRECHARGE = "Picked up a mini zorch recharge.";
-GOTMINIZORCHPACK = "Picked up a mini zorch pack.";
-GOTPROPULSORRECHARGE = "Picked up a zorch propulsor recharge.";
-GOTPROPULSORPACK = "Picked up a zorch propulsor pack.";
-GOTPHASINGZORCHERRECHARGE = "Picked up a phasing zorcher recharge";
-GOTPHASINGZORCHERPACK = "Picked up a phasing zorcher pack.";
-GOTLARGEZORCHERRECHARGE = "Picked up a large zorcher recharge.";
-GOTLARGEZORCHERPACK = "Picked up a large zorcher pack.";
-GOTZORCHPACK = "Picked up a Zorchpak!";
-
-GOTLAZDEVICE = "You got the LAZ Device! Woot!";
-GOTRAPIDZORCHER = "You got the Rapid Zorcher!";
-GOTSUPERBOOTSPORK = "You got the Super Bootspork!";
-GOTZORCHPROPULSOR = "You got the Zorch Propulsor!";
-GOTPHASINGZORCHER = "You got the Phasing Zorcher!";
-GOTLARGEZORCHER = "You got the Large Zorcher!";
-GOTSUPERLARGEZORCHER = "You got the Mega Zorcher!";
-GOTMINIZORCHER = "Picked up a Mini Zorcher.";
-
-$ifgame(chex) STSTR_DQDON = "Invincible Mode ON";
-$ifgame(chex) STSTR_DQDOFF = "Invincible Mode OFF";
-$ifgame(chex) STSTR_FAADDED = "Zorch Added";
-$ifgame(chex) STSTR_KFAADDED = "Super Zorch Added";
-$ifgame(chex) STSTR_CHOPPERS = "... Eat Chex(R)!";
-
-OB_COMMONUS = "%o was slimed by a flemoid.";
-OB_BIPEDICUS = "%o was slimed by a bipedicus.";
-OB_BIPEDICUS2 = "%o was slimed by an armored bipedicus.";
-OB_CYCLOPTIS = "%o was slimed by a cycloptis.";
-OB_FLEMBRANE = "%o was defeated by the Flembrane.";
-
-OB_MPSPOON = "%o was spoon fed by %k.";
-OB_MPBOOTSPORK = "%o was thouroughly mixed with %k's bootspork.";
-OB_MPZORCH = "%o was zorched by %k.";
-OB_MPMEGAZORCH = "%o was hit by %k's mega-zorcher.";
-OB_MPRAPIDZORCH = "%o was rapid zorched by %k.";
-OB_MPPROPULSOR = "%o was zorched by %k's propulsor.";
-OB_MPP_SPLASH = "%o was hit by %k's propulsor.";
-OB_MPPHASEZORCH = "%o was phase zorched by %k.";
-OB_MPLAZ_BOOM = "%o fell prey to %k's LAZ device.";
-OB_MPLAZ_SPLASH = "%o was lazzed by %k.";
 
 // Nikki Dialogs
 

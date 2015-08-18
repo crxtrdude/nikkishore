@@ -3,10 +3,8 @@ code\*.*
 code\actors\*.*
 code\statics\*.*
 code\weapons\*.*
-colormaps\*.*
 flats\*.*
 graphics\*.png
-graphics\*.lmp
 hires\*.*
 maps\*.wad
 music\*.*
@@ -28,6 +26,7 @@ lockdefs.txt
 mapinfo.txt
 menudef.txt
 sndinfo.txt
+sbarinfo.txt
 textures.txt
 voxeldef.txt
 language.enu

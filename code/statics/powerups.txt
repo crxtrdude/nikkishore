@@ -18,3 +18,23 @@ ACTOR NikkiBeserk : Berserk 14600
      stop
   } 
 }
+
+ACTOR KevlarVest : GreenArmor 14601
+{
+	Inventory.PickupMessage "$GOTKEVLAR" 
+}
+
+ACTOR DragonSkinVest : BlueArmor 14602
+{
+	Inventory.PickupMessage "$GOTDSKIN" 
+}
+
+ACTOR PatchKit : HealthBonus 14603
+{
+	Inventory.PickupMessage "$GOTPATCHKIT"
+}
+
+ACTOR ArmorPlate : ArmorBonus 14604
+{
+	Inventory.PickupMessage "$GOTARMPANEL"
+}

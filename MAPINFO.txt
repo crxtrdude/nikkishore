@@ -74,6 +74,11 @@ defaultmap
 	sucktime = 1
 }
 
+map TITLEMAP "Title"
+{
+	music = "D_INTRO"	
+}
+
 map MAP01 lookup "QHUSTR_MAP01"
 {
 	levelnum = 1
