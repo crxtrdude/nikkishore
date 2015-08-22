@@ -21,23 +21,31 @@ ACTOR Stunner : Weapon
 {
 	Weapon.SelectionOrder 450
 	Weapon.AmmoType "Cell"
-	Weapon.AmmoGive 12
+	Weapon.AmmoGive 50
 	Weapon.AmmoUse 2	
 	+Weapon.NoAlert
+	+NoAutoFire
 	Weapon.SlotNumber 1
 	States
 	{
 		Ready:
-		TAZR A 1 A_WeaponReady
-		Loop
+			TAZR A 1 A_WeaponReady
+			Loop
 		Select:
-		TAZR A 1 A_Raise
-		Loop
+			TAZR A 1 A_Raise
+			Loop
 		Deselect:
-		TAZR A 1 A_Lower
-		Loop
-		Fire:
-		TAZR B 18 A_Saw
-		Goto Ready
+			TAZR A 1 A_Lower
+			Loop
+		Fire: //Stun
+			TAZR B 1 A_WeaponReady
+			TAZR B 18 A_Saw("","weapons/sawhit", 3, "StunnerDummy")
+			TAZR B 0 A_Refire
+			Goto Ready
+		AltFire: //Melee
+			TAZR B 18 A_CustomPunch(3)
+			TAZR A 8
+			Goto Ready
+		
 	}
 }

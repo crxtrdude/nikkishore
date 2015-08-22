@@ -1,0 +1,58 @@
+//Common stuff for weapons
+
+//SledgehammerDummy from Action Doom 2
+ACTOR SledgeHammerDummy
+{
+	Health	1000
+	Radius	20
+	Height	60
+	Mass		100
+	Speed		0
+	Painchance	0
+	Scale		0.4
+	
+	+MISSILE
+	+DONTSPLASH
+	+SOLID
+	+FLOORCLIP
+	-NOGRAVITY
+
+	SeeSound	""
+
+	States
+	{
+		Spawn:
+			TNT1 A 1
+			Stop
+		Death:
+			TNT1 A 0
+			Stop
+	}
+}
+
+DamageType NMelee
+{
+	NoArmor
+}
+
+DamageType NStunner
+{
+	NoArmor
+}
+
+ACTOR MeleeDummy : BulletPuff
+{
+	DamageType NMelee
+}
+
+ACTOR StunnerDummy : BulletPuff
+{
+	DamageType NStunner
+}
+
+ACTOR NewFist : Fist Replaces Fist
+{
+	+CHEATNOTWEAPON
+	+NOAUTOFIRE
+	DamageType NMelee
+}

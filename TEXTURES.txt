@@ -3,16 +3,15 @@ texture APTPIC1, 18, 10
 
 walltexture BRIKWAL1,	64, 224
 
-
 walltexture GLASSON1, 64, 64
 walltexture GLASSOFF, 64, 64
 
-flat FLOOR0_1, 64,64
+texture FLOOR0_1, 64,64
 {
 	patch DEVBASE1, 0, 0
 }
 
-flat CEIL1_1, 64,64
+texture CEIL1_1, 64,64
 {
 	patch DEVBASE1, 0, 0
 }
@@ -41,5 +40,8 @@ sprite HUHQB0, 30, 30
 	}
 }
 
-
+sprite VIGNA0, 320,	240
+{
+	patch P_TNLVSN, 0, 0 { Style Translucent }
+}
 

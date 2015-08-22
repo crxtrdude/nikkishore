@@ -16,12 +16,6 @@ ACTOR NikkiPlayer : PlayerPawn
 	Player.CrouchSprite "PLYC"
 	Player.StartItem "Fist"
 	Player.WeaponSlot 1, Fist, Stunner
-	Player.WeaponSlot 2, Pistol
-	Player.WeaponSlot 3, Shotgun, SuperShotgun
-	Player.WeaponSlot 4, Chaingun
-	Player.WeaponSlot 5, RocketLauncher
-	Player.WeaponSlot 6, PlasmaRifle
-	Player.WeaponSlot 7, BFG9000
 	
 	Player.ColorRange 112, 127
 	Player.Colorset 0, "Green",			0x70, 0x7F,  0x72

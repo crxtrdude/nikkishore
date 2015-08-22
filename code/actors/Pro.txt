@@ -1,0 +1,48 @@
+//===========================================================================
+//
+// Pros - Balanced on attack, health and speed
+//
+//===========================================================================
+ACTOR Pro : BasicEnemy 19001
+{
+	Health 25
+	Speed 9
+	scale 0.4
+	Obituary "%o got whipped by a pro."
+	States
+  {
+  Spawn:
+    BTCH A 10  A_LookEx (LOF_NOSOUNDCHECK, 32, 0, 0, 32, "See")
+    Loop
+  See:
+    BTCH A 4 A_Chase
+    Loop
+  Melee:
+    BTCH A 10 A_FaceTarget
+    BTCH A 8 A_CustomMeleeAttack (random(1, 10) * 3, "", "", "Melee", false)
+    BTCH A 8
+    Goto See
+  Pain:
+    BTCH A 3
+    BTCH A 3 A_Pain
+    Goto See
+  Death:
+    BTCH A 5
+    BTCH A 5 A_Scream
+    BTCH B 5 A_NoBlocking
+    BTCH B 5
+    BTCH B -1
+    Stop
+  XDeath:
+    BTCH A 5
+    BTCH A 5 A_XScream
+    BTCH B 5 A_NoBlocking
+    BTCH B 5
+    BTCH B -1
+    Stop
+  Raise:
+    BTCH B 5
+    BTCH A 5
+    Goto See
+  }
+}

@@ -1,0 +1,54 @@
+//===========================================================================
+//
+//BasicEnemy
+//  Common progenitor for any enemy for Nikki Shore.
+//
+//===========================================================================
+ACTOR BasicEnemy
+{
+  Health 20
+  Radius 20
+  Height 56
+  Speed 8
+  PainChance 200
+  Monster
+  +FLOORCLIP
+  +STANDSTILL
+  SeeSound ""
+  AttackSound ""
+  PainSound ""
+  DeathSound ""
+  ActiveSound ""
+  Obituary "%o was killed by BasicEnemy."
+  States
+  {
+  Spawn:
+    QUUU A 10 A_Look
+    Loop
+  See:
+    QUUU A 4 A_Chase
+    Loop
+  Pain:
+    QUUU A 3
+    QUUU A 3 A_Pain
+    Goto See
+  Death:
+    QUUU A 5
+    QUUU A 5 A_Scream
+    QUUU B 5 A_NoBlocking
+    QUUU B 5
+    QUUU B -1
+    Stop
+  XDeath:
+    QUUU A 5
+    QUUU A 5 A_XScream
+    QUUU B 5 A_NoBlocking
+    QUUU B 5
+    QUUU B -1
+    Stop
+  Raise:
+    QUUU B 5
+    QUUU A 5
+    Goto See
+  }
+}

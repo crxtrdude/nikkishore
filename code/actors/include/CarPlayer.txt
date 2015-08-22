@@ -1,0 +1,137 @@
+//===========================================================================
+//
+// CarPlayer
+//   Progenitor for all usable cars in-game.
+//
+//===========================================================================
+ACTOR CarPlayer : PlayerPawn
+{
+  player.forwardmove 0
+  player.sidemove 0
+  player.viewheight 32
+  player.jumpz 0
+  ReactionTime 0
+  Health 500
+  Radius 32
+  Height 52
+  Mass 100
+  PainChance 0
+  Player.ColorRange 112, 127
+  Deathsound "weapons/rocklx"
+  Player.CrouchSprite ""
+  Player.DisplayName "Car"
+  Player.SpawnClass "Car"
+  Player.SoundClass "Car"
+  Player.MorphWeapon "CarGo"
+  ActiveSound "DSCARGO"
+  +NOPAIN
+  +NOBLOOD
+  -PICKUP
+  +PUSHABLE
+  +NOSKIN
+  States
+  {
+  Pain:
+  Melee:
+  Missile:
+		GCAR A 0
+		Goto See
+  See:
+  Spawn:
+		GCAR A 0 A_JumpIfHealthLower(100,"Smoke")
+		GCAR A 5 bright
+		Loop
+  Smoke:
+   	goto Spawn+1
+  AltSkinDeath:
+  AltSkinXDeath:
+  Death:
+  XDeath:
+    TNT1 A 0 A_Scream
+    TNT1 A 0 A_StopSound (6)
+    TNT1 A 0 A_StopSound (7)
+    TNT1 A 0 A_Fall
+  Remove:
+    TNT1 A 10 A_CheckPlayerDone
+    Wait
+  }
+}
+
+ACTOR PowerCarPlayer : PowerMorph
+{
+ PowerMorph.PlayerClass "CarPlayer"
+ PowerMorph.MorphStyle (MRF_FULLHEALTH|MRF_WHENINVULNERABLE)
+ //PowerMorph.MorphStyle (MRF_ADDSTAMINA|MRF_FULLHEALTH|MRF_WHENINVULNERABLE)
+ PowerMorph.MorphFlash "NoFlash"
+ PowerMorph.UnMorphFlash "NoFlash"
+}
+
+ACTOR Car : PowerupGiver
+{
+ Powerup.Type PowerCarPlayer
+ Powerup.Duration 0x7FFFFFFF
+ Inventory.MaxAmount 0
+ +INVENTORY.AUTOACTIVATE
+ Radius 32
+ Height 52
+ Inventory.PickupSound "Car/Start"
+ Inventory.PickupMessage "You got a Car!"
+ States
+ {
+  Spawn:
+   	GCAR A -1
+   	Stop
+ }
+}
+
+ACTOR CarPuff : BulletPuff
+{
+  +PAINLESS
+  +FORCEXYBILLBOARD
+  DamageType Car
+  SeeSound "DSAUTOCR"
+}
+
+actor CarGo : Weapon
+{
+  Weapon.SelectionOrder 2000
+  +WEAPON.DONTBOB
+  +WEAPON.MELEEWEAPON
+  +WEAPON.NOALERT
+  DamageType Car
+  States
+  {
+  Ready:
+    TNT1 A 0 A_StopSound
+    TNT1 A 0 A_PlaySound ("Car/Idle", 7, 1.0)
+    TNT1 A 0 ACS_ExecuteAlways(997,0)
+    CARH A 1 A_WeaponReady
+    goto Ready+2
+  Fire:
+    TNT1 A 0 A_LoopActiveSound
+  Hold:
+    TNT1 A 0 ACS_ExecuteAlways(997,0)
+    TNT1 A 0 A_StopSound (7)
+    TNT1 A 0 A_Recoil (-3)
+    CARH A 1 A_CustomPunch (3,0,0,"CarPuff")
+    TNT1 A 0 A_ReFire
+    goto Ready
+  Deselect:
+    TNT1 A 0 A_StopSound (7)
+    TNT1 A 0 A_StopSound
+    TNT1 AAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1 A_Lower
+    loop
+  Select:
+    TNT1 A 0 A_StopSound (7)
+    TNT1 A 0 A_StopSound
+    TNT1 AAAAAAAAAAAAAAAA 0 A_Raise
+    TNT1 A 1 A_Raise
+    Loop
+  AltFire:
+		TNT1 A 10 A_PlaySound ("CARENTR", 7)
+		TNT1 A 10 A_PlaySound ("CAREXIT", 7)
+		TNT1 A 10 ACS_ExecuteAlways(998,0)
+    Loop
+  }
+}

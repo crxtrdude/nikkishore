@@ -3,18 +3,26 @@ monospacefonts true, "0";
 
 statusbar fullscreen, fullscreenoffsets // ZDoom HUD
 {
+	alpha 0.6
+    drawimage "SB_PANEL", 65, -18, centerbottom;
     //health
-	drawbar "HUHQR0", "HUHQB0", health, vertical, interpolate(3), 20,-2;
-	drawbar "HUHQA0", "HUHQT0", health, vertical, 20,-2;
-	drawnumber 3, HUDFONT_DOOM, untranslated, health, drawshadow, 82, -20;
+    drawbar "HUHQR0", "HUHQB0", health, vertical, interpolate(3), 41,-19;
+    drawbar "HUHQA0", "HUHQT0", health, vertical, 41,-19;
+    drawnumber 3, HUDFONT_DOOM, untranslated, health, drawshadow, 101, -36;
 
     //armor
-    drawimage armoricon, 100, -2, centerbottom;
-    drawnumber 3, HUDFONT_DOOM, untranslated, armor, drawshadow, whennotzero, 162, -20;
+    alpha 0.6 
+    drawswitchableimage armortype KevlarVest && DragonSkinVest, "", "SB_PANEL", "SB_PANEL", "SB_PANEL", 147, -18, centerbottom;
+    drawimage armoricon, 123, -19, centerbottom;
+    drawnumber 3, HUDFONT_DOOM, untranslated, armor, drawshadow, whennotzero, 185, -36;
 
     //ammo
-    drawimage ammoicon1, -14, -4, centerbottom;
-    drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, drawshadow, -25, -20;
+    usesammo{
+        alpha 0.6
+        drawimage "SB_PANEL", -70, -18, centerbottom;
+    }
+    drawimage ammoicon1, -45, -19, centerbottom, 30, 30, alticonfirst;
+    drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, drawshadow, -65, -36;
 
     usesammo
     {

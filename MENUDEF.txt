@@ -188,11 +188,10 @@ OptionMenu "OptionsMenu"
 	StaticText " "
 	Submenu "Player Setup",				"PlayerMenu"
 	Submenu "Gameplay Options",			"GameplayOptions"
-	Submenu "Compatibility Options",	"CompatibilityOptions"
 	Submenu "Automap Options",			"AutomapOptions"
-	Submenu "HUD Options",				"HUDOptions"
 	Submenu "Miscellaneous Options",	"MiscOptions"
 	Submenu "Network Options",			"NetworkOptions"
+	Submenu "Multiplayer Options",	"MultiplayerOptions"
 	Submenu "Sound Options",			"SoundOptions"
 	Submenu "Display Options",			"VideoOptions"
 	Submenu "Set video mode",			"VideoModeMenu"
@@ -493,6 +492,7 @@ OptionMenu "VideoOptions"
 	Title "DISPLAY OPTIONS"
 	
 	Submenu "Scoreboard Options", 		"ScoreboardOptions"
+	Submenu "HUD Options",  "AltHUDOptions"
 	StaticText " "
 	Slider "Screen size",				"screenblocks", 3.0, 12.0, 1.0, 0
 	Slider "Brightness",				"Gamma", 0.75, 3.0, 0.05, 2
@@ -502,17 +502,9 @@ OptionMenu "VideoOptions"
 
 	StaticText " "
 	Option "Screen wipe style",			"wipetype", "Wipes"
-
-	IfOption(Windows)
-	{
-		Option	"Show ENDOOM screen",	"showendoom", "Endoom"
-		//Option "DirectDraw palette hack", "vid_palettehack", "OnOff"
-		//Option "Use attached surfaces", "vid_attachedsurfaces", "OnOff"
-	}
 	
 	Option "Stretch short skies",		"r_stretchsky", "OnOff"
 	Option "Use fuzz effect",			"r_drawfuzz", "Fuzziness"
-	Slider "Lost Soul translucency",	"transsouls", 0.25, 1.0, 0.05, 2
 	Option "Use fake contrast",			"r_fakecontrast", "Contrast"
 	Option "Rocket Trails",				"cl_rockettrails", "RocketTrailTypes"
 	Option "Blood Type",				"cl_bloodtype", "BloodTypes"
@@ -520,94 +512,11 @@ OptionMenu "VideoOptions"
 	Slider "Number of particles",		"r_maxparticles", 100, 10000, 100, 0
 	Slider "Number of decals",			"cl_maxdecals", 0, 10000, 100, 0
 	Option "Show player sprites",		"r_drawplayersprites", "OnOff"
-	Option "Death camera",				"r_deathcamera", "OnOff"
 	Option "Teleporter zoom",			"telezoom", "OnOff"
 	Slider "Earthquake shake intensity",	"r_quakeintensity", 0.0, 1.0, 0.05, 2
 	Option "Interpolate monster movement",	"nomonsterinterpolation", "NoYes"
-}
-
-//-------------------------------------------------------------------------------------------
-//
-// HUD menu
-//
-//-------------------------------------------------------------------------------------------
-
-OptionValue DisplayTagsTypes 
-{
-	0.0, "None"
-	1.0, "Items"
-	2.0, "Weapons"
-	3.0, "Both"
-}
-
-OptionValue TextColors
-{
-	0.0, "\cabrick"
-	1.0, "\cbtan"
-	2.0, "\ccgray"
-	3.0, "\cdgreen"
-	4.0, "\cebrown"
-	5.0, "\cfgold"
-	6.0, "\cgred"
-	7.0, "\chblue"
-	8.0, "\ciorange"
-	9.0, "\cjwhite"
-	10.0, "\ckyellow"
-	11.0, "\cldefault"
-	12.0, "\cmblack"
-	13.0, "\cnlight blue"
-	14.0, "\cocream"
-	15.0, "\cpolive"
-	16.0, "\cqdark green"
-	17.0, "\crdark red"
-	18.0, "\csdark brown"
-	19.0, "\ctpurple"
-	20.0, "\cudark gray"
-	21.0, "\cvcyan"
-}
-
-OptionValue Crosshairs
-{
-	// will be filled in from the XHAIRS lump
-}
-
-OptionValue ZDoomHexen
-{
-	0.0, "ZDoom"
-	1.0, "Hexen"
-}
-
-OptionValue ZDoomStrife
-{
-	0.0, "ZDoom"
-	1.0, "Strife"
-}
-
-OptionMenu "HUDOptions"
-{
-	Title "HUD Options"
-	Submenu "Alternative HUD",			"AltHudOptions"
-	Submenu "Message Options", 			"MessageOptions"
-	StaticText " "
-	Option "Default Crosshair",			"crosshair", "Crosshairs"
-	Option "Force default crosshair",	"crosshairforce", "OnOff"
-	Option "Grow crosshair when picking up items",	"crosshairgrow", "OnOff"
-	ColorPicker "Crosshair color", 		"crosshaircolor"
-	Option "Crosshair shows health",	"crosshairhealth", "OnOff"
-	Option "Scale crosshair",			"crosshairscale", "OnOff"
-	StaticText " "
-	Option "Display nametags",			"displaynametags", "DisplayTagsTypes"
-	Option "Nametag color",				"nametagcolor", "TextColors", "displaynametags"
-	Option "Stretch status bar",		"st_scale", "OnOff"
-	Option "Stretch Fullscreen HUD",	"hud_scale", "OnOff"
-	Option "Use old ouch mug shot formula",	"st_oldouch", "OnOff"
-	StaticText " "
-	Option "Hexen weapon flashes",		"pf_hexenweaps",	"ZDoomHexen"
-	Option "Poison damage flashes",		"pf_poison",		"ZDoomHexen"
-	Option "Ice death flashes",			"pf_ice",			"ZDoomHexen"
-	Option "Poison Buildup flashes",	"pf_hazard",		"ZDoomStrife"
-}
 	
+}
 //-------------------------------------------------------------------------------------------
 //
 // Alternative HUD
@@ -657,9 +566,8 @@ OptionValue "AltHUDLag"
 
 OptionMenu "AltHUDOptions"
 {
-	Title "Alternative HUD"
+	Title "HUD Options"
 	//Indent 220
-	Option "Enable alternative HUD",				"hud_althud", "OnOff"
 	Option "Stretch alternative HUD",				"hud_althudscale", "AltHUDScale"
 	Option "Show secret count",						"hud_showsecrets", "OnOff"
 	Option "Show monster count",					"hud_showmonsters", "OnOff"
@@ -720,6 +628,8 @@ OptionMenu "MiscOptions"
 		Option "Merge left+right Alt/Ctrl/Shift", 		"k_mergekeys", "OnOff"
 		Option "Alt-Enter toggles fullscreen",			"k_allowfullscreentoggle", "OnOff"
 	}
+	StaticText " "	
+	StaticText "ZDoom Settings",1
 	Option "Show IWAD selection dialog",			"queryiwad", "OnOff"
 	StaticText " "
 	Option "Enable cheats from all games",			"allcheats", "OnOff"
@@ -1055,115 +965,17 @@ OptionMenu GameplayOptions
 	Option "Check ammo for weapon switch",	"sv_dontcheckammo", "NoYes"
 	Option "Icon's death kills its spawns",	"sv_killbossmonst", "YesNo"
 	Option "End sector counts for kill %",	"sv_nocountendmonst", "NoYes"
-
+	
 	StaticText " "
-	StaticText "Deathmatch Settings",1
-	Option "Weapons stay",			"sv_weaponstay", "YesNo"
-	Option "Allow powerups",		"sv_noitems", "NoYes"
-	Option "Allow health",			"sv_nohealth", "NoYes"
-	Option "Allow armor",			"sv_noarmor", "NoYes"
-	Option "Spawn farthest",		"sv_spawnfarthest", "YesNo"
-	Option "Same map",				"sv_samelevel", "YesNo"
-	Option "Force respawn",			"sv_forcerespawn", "YesNo"
-	Option "Allow exit",			"sv_noexit", "NoYes"
-	Option "Barrels respawn",		"sv_barrelrespawn", "YesNo"
-	Option "Respawn protection",	"sv_respawnprotect", "YesNo"
-	Option "Lose frag if fragged",	"sv_losefrag", "YesNo"
-	Option "Keep frags gained",		"sv_keepfrags", "YesNo"
-	Option "No team switching",		"sv_noteamswitch", "YesNo"
-
-	StaticText " "
-	StaticText "Cooperative Settings",1
-	Option "Spawn multi. weapons", 	"sv_noweaponspawn", "NoYes"
-	Option "Lose entire inventory",	"sv_cooploseinventory", "YesNo"
-	Option "Keep keys",				"sv_cooplosekeys", "NoYes"
-	Option "Keep weapons",			"sv_cooploseweapons", "NoYes"
-	Option "Keep armor",			"sv_cooplosearmor", "NoYes"
-	Option "Keep powerups",			"sv_cooplosepowerups", "NoYes"
-	Option "Keep ammo",				"sv_cooploseammo", "NoYes"
-	Option "Lose half ammo",		"sv_coophalveammo", "YesNo"
-	Option "Spawn where died",		"sv_samespawnspot", "YesNo"
+	StaticText "Crosshair Settings",1
+	Option "Default Crosshair",			"crosshair", "Crosshairs"
+	Option "Force default crosshair",	"crosshairforce", "OnOff"
+	Option "Grow crosshair when picking up items",	"crosshairgrow", "OnOff"
+	ColorPicker "Crosshair color", 		"crosshaircolor"
+	Option "Crosshair shows health",	"crosshairhealth", "OnOff"
+	Option "Scale crosshair",			"crosshairscale", "OnOff"
+	
 	Class "GameplayMenu"
-}
-
-/*=======================================
- *
- * Compatibility Options Menu
- *
- *=======================================*/
-
-
-OptionValue CompatModes
-{
-	0, "Default"
-	1, "Doom"
-	2, "Doom (strict)"
-	3, "Boom"
-	6, "Boom (strict)"
-	5, "MBF"
-	4, "ZDoom 2.0.63"
-}
-
-OptionMenu "CompatibilityOptions"
-{
-	Title "COMPATIBILITY OPTIONS"
-	Option "Compatibility mode",						"compatmode", "CompatModes", "", 1
-	
-	StaticText " "
-	StaticText "Actor Behavior",1
-	Option "Crushed monsters can be resurrected",		"compat_CORPSEGIBS", "YesNo"	
-	Option "Friendly monsters aren't blocked",			"compat_NOBLOCKFRIENDS", "YesNo"
-	Option "Limit Pain Elementals' Lost Souls",			"compat_LIMITPAIN", "YesNo"
-	Option "Monster movement is affected by effects",	"compat_MBFMONSTERMOVE", "YesNo"
-	Option "Monsters cannot cross dropoffs",			"compat_CROSSDROPOFF", "YesNo"
-	Option "Monsters get stuck over dropoffs",			"compat_DROPOFF", "YesNo"
-	Option "Monsters see invisible players",			"compat_INVISIBILITY", "YesNo"
-	Option "No Minotaur floor flames in water",			"compat_MINOTAUR", "YesNo"
-	Option "Spawn item drops on the floor",				"compat_NOTOSSDROPS", "YesNo"
-	
-	StaticText " "
-	StaticText "DehackEd Behavior",1
-	Option "DEH health settings like Doom2.exe",		"compat_DEHHEALTH", "YesNo"
-	Option "Original A_Mushroom speed in DEH mods",		"compat_MUSHROOM", "YesNo"
-	
-	StaticText " "
-	StaticText "Map/Action Behavior",1
-	Option "All special lines can block <use>",			"compat_USEBLOCKING", "YesNo"
-	Option "Allow any bossdeath for level special",		"compat_ANYBOSSDEATH", "YesNo"
-	Option "Disable BOOM door light effect",			"compat_NODOORLIGHT", "YesNo"
-	Option "Find neighboring light like Doom",			"compat_LIGHT", "YesNo"
-	Option "Find shortest textures like Doom",			"compat_SHORTTEX", "YesNo"
-	Option "Use buggier stair building",				"compat_stairs", "YesNo"
-	Option "Use Doom's floor motion behavior",			"compat_floormove", "YesNo"
-	
-	StaticText " "
-	StaticText "Physics Behavior",1
-	Option "Actors are infinitely tall",				"compat_nopassover", "YesNo"
-	Option "Boom scrollers are additive",				"compat_BOOMSCROLL", "YesNo"
-	Option "Cannot travel straight NSEW",				"compat_badangles", "YesNo"
-	Option "Enable wall running",						"compat_WALLRUN", "YesNo"
-	Option "Raven scrollers use original speed",		"compat_RAVENSCROLL", "YesNo"
-	Option "Self ref. sectors don't block shots",		"compat_TRACE", "YesNo"
-	Option "Use Doom code for hitscan checks",			"compat_HITSCAN", "YesNo"
-	Option "Use Doom heights for missile clipping",		"compat_MISSILECLIP", "YesNo"
-
-	
-	StaticText " "
-	StaticText "Rendering Behavior",1
-	Option "Draw polyobjects like Hexen",				"compat_POLYOBJ", "YesNo"
-	Option "Ignore Y offsets on masked midtextures",	"compat_MASKEDMIDTEX", "YesNo"
-	Option "Invert sprite sorting",						"compat_SPRITESORT", "YesNo"
-	
-	StaticText " "
-	StaticText "Sound Behavior",1
-	Option "Cripple sound for silent BFG trick",		"compat_soundslots", "YesNo"
-	Option "Don't let others hear your pickups",		"compat_SILENTPICKUP", "YesNo"
-	Option "Inst. moving floors are not silent",		"compat_silentinstantfloors", "YesNo"
-	Option "Sector sounds use center as source",		"compat_SECTORSOUNDS", "YesNo"
-	Option "Sounds stop when actor vanishes",			"compat_soundcutoff", "YesNo"
-	Option "Use original sound target handling",		"compat_SOUNDTARGET", "YesNo"
-	
-	Class "CompatibilityMenu"
 }
 
 /*=======================================
@@ -1563,4 +1375,35 @@ OptionValue ExtraTicMode
 	0, "None"
 	1, "1"
 	2, "All unacknowledged"
+}
+
+OptionMenu MultiplayerOptions
+{
+	Title "MULTIPLAYER OPTIONS"
+	StaticText "Multiplayer Play Settings",1
+	Option "Weapons stay",			"sv_weaponstay", "YesNo"
+	Option "Allow powerups",		"sv_noitems", "NoYes"
+	Option "Allow health",			"sv_nohealth", "NoYes"
+	Option "Allow armor",			"sv_noarmor", "NoYes"
+	Option "Spawn farthest",		"sv_spawnfarthest", "YesNo"
+	Option "Same map",				"sv_samelevel", "YesNo"
+	Option "Force respawn",			"sv_forcerespawn", "YesNo"
+	Option "Allow exit",			"sv_noexit", "NoYes"
+	Option "Barrels respawn",		"sv_barrelrespawn", "YesNo"
+	Option "Respawn protection",	"sv_respawnprotect", "YesNo"
+	Option "Lose frag if fragged",	"sv_losefrag", "YesNo"
+	Option "Keep frags gained",		"sv_keepfrags", "YesNo"
+	Option "No team switching",		"sv_noteamswitch", "YesNo"
+
+	StaticText " "
+	StaticText "Cooperative Settings",1
+	Option "Spawn multi. weapons", 	"sv_noweaponspawn", "NoYes"
+	Option "Lose entire inventory",	"sv_cooploseinventory", "YesNo"
+	Option "Keep keys",				"sv_cooplosekeys", "NoYes"
+	Option "Keep weapons",			"sv_cooploseweapons", "NoYes"
+	Option "Keep armor",			"sv_cooplosearmor", "NoYes"
+	Option "Keep powerups",			"sv_cooplosepowerups", "NoYes"
+	Option "Keep ammo",				"sv_cooploseammo", "NoYes"
+	Option "Lose half ammo",		"sv_coophalveammo", "YesNo"
+	Option "Spawn where died",		"sv_samespawnspot", "YesNo"
 }

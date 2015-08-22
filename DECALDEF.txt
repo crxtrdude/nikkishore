@@ -1,6 +1,6 @@
 decal CITYMSNG 4
 {
 	pic MISSING
-	x-scale 0.50
-  y-scale 0.50
+	x-scale 0.45
+  y-scale 0.45
 }

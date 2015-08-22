@@ -1,0 +1,13 @@
+#include "code/actors/actorcommon.txt"
+
+//Motorcycle (it's here, because it uses a Player)
+#include "code/actors/motorcycle.txt"
+
+//Enemies
+#include "code/actors/pro.txt"
+
+//Misc
+#include "code/actors/pedes.txt"
+
+//ZKVN Test
+#include "code/actors/mrnobody.txt"
