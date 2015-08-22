@@ -1,2 +1,3 @@
 IWAD = "freedoom2.wad"
 STARTUPTITLE = "Nikki Shore"
+STARTUPTYPE = "Hexen"
