@@ -51,13 +51,19 @@ ACTOR Stunner : Weapon
 			TNT1 A 1 A_Lower
 			Loop
 		Fire: //Stun
-			TAZR E 1 A_WeaponReady
-			TAZR E 18 A_Saw("","weapons/sawhit", 3, "StunnerDummy")
+			TAZR D 3 
+			TAZR E 3 A_WeaponReady
+			TAZR F 18 A_Saw("","weapons/sawhit", 3, "StunnerDummy")
+			TAZR E 3
 			TAZR E 0 A_Refire
 			Goto Bobbing
 		AltFire: //Melee
-			TAZR E 18 A_CustomPunch(3)
-			TAZR D 8
+			TAZR D 3
+			TAZR G 4
+			TAZR H 4
+			TAZR I 2
+			TAZR J 3 A_CustomPunch(3)
+			TAZR D 3
 			Goto Bobbing
 		
 	}

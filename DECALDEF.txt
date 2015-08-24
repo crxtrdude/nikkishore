@@ -4,3 +4,13 @@ decal CITYMSNG 4
 	x-scale 0.45
   y-scale 0.45
 }
+decal DUCT1 5
+{
+	pic DUCTDECL
+}
+decal DUCT2 6
+{
+	pic DUCT2DEC
+	x-scale 0.5
+  y-scale 0.5
+}
