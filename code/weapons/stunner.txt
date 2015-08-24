@@ -29,23 +29,36 @@ ACTOR Stunner : Weapon
 	States
 	{
 		Ready:
-			TAZR A 1 A_WeaponReady
+			TAZR A 2
+			TAZR B 3
+			TAZR C 3
+			TAZR D 4
+			Goto Bobbing
+		Bobbing: //The 'real' ready state
+			TAZR D 2 A_WeaponReady
 			Loop
 		Select:
+			TAZR A 0 A_Raise
 			TAZR A 1 A_Raise
 			Loop
 		Deselect:
-			TAZR A 1 A_Lower
+			TAZR D 5
+			TAZR C 3
+			TAZR B 3
+			TAZR A 2
+			Goto Returned
+		Returned:
+			TNT1 A 1 A_Lower
 			Loop
 		Fire: //Stun
-			TAZR B 1 A_WeaponReady
-			TAZR B 18 A_Saw("","weapons/sawhit", 3, "StunnerDummy")
-			TAZR B 0 A_Refire
-			Goto Ready
+			TAZR E 1 A_WeaponReady
+			TAZR E 18 A_Saw("","weapons/sawhit", 3, "StunnerDummy")
+			TAZR E 0 A_Refire
+			Goto Bobbing
 		AltFire: //Melee
-			TAZR B 18 A_CustomPunch(3)
-			TAZR A 8
-			Goto Ready
+			TAZR E 18 A_CustomPunch(3)
+			TAZR D 8
+			Goto Bobbing
 		
 	}
 }

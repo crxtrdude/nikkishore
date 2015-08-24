@@ -1,9 +1,6 @@
 // ZKVN Engine
 // Decorate
 
-// Constants
-const int VNC_MRNOBODY = 1;
-
 // Mr Nobody
 ACTOR MrNobody : SwitchingDecoration 1337
 {

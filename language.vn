@@ -73,8 +73,12 @@ VN_DIALOGUE_COL = "j";
 VNO_1 = "How easy is ZKVN?";
 VNO_2 = "What's left to do?";
 
+VNO_20 = "What do you know about Rachel?";
+VNO_50 = "Nevermind";
+
 // Character names
 VNC_1 = "Mr. Nobody";
+VNC_20 = "ClubGirl";
 
 // Graphics
 // Mr. Nobody
@@ -93,3 +97,10 @@ VND_1_2 = "If you examine the LANGUAGE and DECORATE lumps "
 VND_1_3 = "ZKVN is surprisingly close to completion, all "
 		"that's really left to do is add some additional "
 		"transition effects.";
+		
+VND_20_1 = "Say, what's a dorky bitch like you doing "
+		"in a place like this?";
+		
+VND_20_2 = "Huh? I don't know some Rachel.";
+
+VND_20_3 = "Whatever.";

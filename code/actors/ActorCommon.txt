@@ -1,4 +1,4 @@
-#include "code/actors/nikkiplayer.txt" //Edited PlayerPawn
-
-#include "code/actors/include/carplayer.txt"
+#include "code/actors/include/basicplayer.txt"
 #include "code/actors/include/basicenemy.txt"
+#include "code/actors/include/basicpede.txt"
+#include "code/actors/include/carplayer.txt"

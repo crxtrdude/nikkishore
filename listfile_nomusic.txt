@@ -4,7 +4,7 @@ code\actors\*.*
 code\actors\include\*.*
 code\statics\*.*
 code\weapons\*.*
-flats\*.*
+flats\*.png
 graphics\*.png
 maps\*.wad
 patches\*.*
@@ -16,6 +16,8 @@ playpal
 colormap
 endoom
 bagel
+startup
+notch
 althudcf.txt
 animdefs.txt
 decaldef.txt

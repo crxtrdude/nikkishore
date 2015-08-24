@@ -1,0 +1,3 @@
+// Constants
+const int VNC_MRNOBODY = 1;
+const int VNC_CLUBGIRL1 = 20;
