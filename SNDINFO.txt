@@ -10,3 +10,13 @@ CARSTART	CARSTART
 BIKEGO	BIKEGO
 BIKEIDLE	BIKEIDLE
 BIKESTRT	BIKESTRT
+
+pro/pain PROHIT 
+
+weapons/nfistmelee NFSTHIT
+weapons/stunnerhit STUNHIT
+
+door/latchopen	LTCHOPEN
+door/latchlocked	LTCHLOCK
+door/squeakopen DOORSQUK
+door/normalopen DOOROPEN

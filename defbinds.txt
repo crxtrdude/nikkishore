@@ -101,3 +101,14 @@ mapbind kp- +am_zoomout
 mapbind kp+ +am_zoomin
 mapbind mwheelup "am_zoom 1.2"
 mapbind mwheeldown "am_zoom -1.2"
+
+defaultbind kp1 "pukenamed "CodeKeyInput" 1"
+defaultbind kp2 "pukenamed "CodeKeyInput" 2"
+defaultbind kp3 "pukenamed "CodeKeyInput" 3"
+defaultbind kp4 "pukenamed "CodeKeyInput" 4"
+defaultbind kp5 "pukenamed "CodeKeyInput" 5"
+defaultbind kp6 "pukenamed "CodeKeyInput" 6"
+defaultbind kp7 "pukenamed "CodeKeyInput" 7"
+defaultbind kp8 "pukenamed "CodeKeyInput" 8"
+defaultbind kp9 "pukenamed "CodeKeyInput" 9"
+defaultbind kp0 "pukenamed "CodeKeyInput" 0"

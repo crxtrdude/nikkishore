@@ -1,0 +1,189 @@
+//==========================================================
+// Nikki Shore
+// QMsgs - Code keypad and console messages
+//
+// Common scripts
+//
+// Keypad by Isle (http://forum.zdoom.org/viewtopic.php?f=3&t=13200)    
+// Code by CRxTRDude.
+//==========================================================
+
+#library "qmsg"
+#include "zcommon.acs"
+
+int TOGGLE = 0;
+int CLICK = 0;
+int NUMPAD = -1;
+
+int numbers[4][3] = {{1, 2, 3},{4, 5, 6},{7, 8, 9},{10, 0, 10}};
+int cnum[7];
+
+function void clcnum (void)
+{
+	int x;
+	for(x = 0; x < 7; x++) cnum[x] = ' ';	
+}
+
+//----
+//CodeKeypad(codenum, scnum);
+//modified version of Isle's keypad as a library
+//code = 4 digit number
+//scnum = script to call if successful
+
+script "CodeKeypad" (int codenum, int scnum)
+{
+
+	//Code to split number into two sets using modulo.	
+	int lowcode = codenum%100;
+	int hicode = (codenum-lowcode)/100;
+	 
+	int cx, cy, cz;
+	int x, y, ang, pitch, nx, ny, num, incode, code, digit;
+	int mx, my;
+	
+	int wallcam = 500; //See SpawnWallCam. 
+	
+	int player = ActivatorTID();
+
+	if(!TOGGLE)
+	{
+		TOGGLE = 1;
+		//setup camera
+		cx = getactorx(player);
+		cy = getactory(player);
+		cz = getactorz(player);
+		ang = getactorangle(player);
+		setactorposition(1, cx, cy, cz+41.0, 0);
+		setactorangle(1, getactorangle(0));
+		setactorpitch(1, getactorpitch(0));
+		SetPlayerProperty (player, 1, PROP_FROZEN);
+		changecamera(1, 0, 0);
+		thing_stop(player);
+		
+		GiveInventory("KeypadMouseIn", 1);
+
+		SetHudSize(640, 480, 1);
+		setactorpitch(wallcam, 2184);
+		digit = 0;
+		incode = 0;
+		clcnum();
+		code = (hicode * 100) + lowcode;
+		pitch = getactorpitch(0);
+		while(TOGGLE)
+		{
+			SetWeapon("KeypadMouseIn");
+			//turn mouse look into a cursor
+			// z range = -8010 - 8010
+			// x range = -10680 - 10680
+			if(ang != getactorangle(0))
+			{
+				if(ang - getactorangle(0) > 0.5) mx += ang - (getactorangle(0) + 1.0);
+				else if(ang - getactorangle(0) < -0.5) mx += ang - (getactorangle(0) - 1.0);
+				else mx += ang - getactorangle(0);
+				if(mx > 10680)
+					mx = 10680;
+				if(mx < -10680)
+					mx = -10680;
+				setactorangle(0, ang);
+			}
+			if(pitch != getactorpitch(0))
+			{
+				if(getcvar("invertmouse")) my += pitch - getactorpitch(0);
+				else my -= pitch - getactorpitch(0);
+				if(my > 8010)
+					my = 8010;
+				if(my < -8010)
+					my = -8010;
+				setactorpitch(wallcam, pitch);
+			}
+			x = (mx/33) + 320;
+			y = (my/33) + 240;
+
+			setfont("numbers2");
+			hudmessage (s:"A"; 0, 3, -1, 392.0, 318.0, 1);
+			setfont("doomcurs");
+			hudmessage (s:"A"; 0, 1, -1, (x<<16)+11.0, (y<<16)+15.0, 1);
+			if(CLICK)
+			{
+				CLICK = 0;
+				x = x - 256;
+				y = y - 176;
+				if(x > 0 && x < 128 && y > 0 && y < 170)
+				{
+					nx = x/42;
+					ny = y/42;
+					num = numbers[ny][nx];
+					if(num != 10)
+					{
+						incode = (incode * 10) + num;
+						cnum[digit*2] = num + '0';
+						digit++;
+						setfont("BIGFONT");
+						hudmessage(a:cnum; 0, 2, CR_BLUE, 320.0, 152.0, 1);
+					}
+				}
+				if(!(x > -8 && x < 136 && y > -8 && y < 178)) TOGGLE = 0;
+
+			}
+			else if(NUMPAD != -1) // numpad input, needs "puke"ing though
+			{
+				incode = (incode * 10) + NUMPAD;
+				cnum[digit*2] = NUMPAD + '0';
+				digit++;
+				setfont("BIGFONT");
+				hudmessage (a:cnum; 0, 2, CR_BLUE, 320.0, 152.0, 1);
+				NUMPAD = -1;
+			}
+			if(digit == 4)
+			{
+				delay(17);
+				if(incode == code)
+				{
+					hudmessage (s:"GRANTED"; 0, 2, CR_GREEN, 320.0, 152.0, 1);
+					delay(17);
+					acs_execute(scnum, 0);
+					TOGGLE = 0;
+				}
+				else
+				{
+					hudmessage (s:"DENIED"; 0, 2, CR_RED, 320.0, 152.0, 1);
+					incode = 0;
+					digit = 0;
+					clcnum();
+					delay(17);
+					CLICK = 0;
+				}
+				hudmessage (s:" "; 0, 2, -1, 0, 0, 1);
+			}
+			delay(1);
+		}
+	}
+	if(!TOGGLE) // exit
+	{
+		TakeInventory("KeypadMouseIn", 1);
+		setactorangle(0, getactorangle(1));
+		setactorpitch(wallcam, getactorpitch(1));
+		SetPlayerProperty (0, 0, PROP_FROZEN);
+		changecamera(0, 0, 0);
+		hudmessage (s:" "; 0, 1, -1, 0, 0, 1);
+		hudmessage (s:" "; 0, 2, -1, 0, 0, 1);
+		hudmessage (s:" "; 0, 3, -1, 0, 0, 1);
+	}
+	TOGGLE = 0;
+}
+
+script "CodeKeyInput" (int num) // numpad ie "bind kp# pukenamed "CodeKeyInput" #"
+{
+	if(TOGGLE) NUMPAD = num;
+}
+
+script "CodeClicker" (void) //what "KeypadMouseIn" runs
+{
+	if(TOGGLE) CLICK = 1;
+}
+
+script "SpawnWallCam" ENTER
+{
+	spawn("wallcam", 0, 0, 0, 1);
+	thing_changetid(0, 500);
+}

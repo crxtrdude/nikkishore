@@ -1,3 +1,5 @@
+//EFFECTS
+
 ACTOR NoFlash
 {
  +NOINTERACTION
@@ -12,4 +14,35 @@ ACTOR Explosion : Rocket
 {
     Spawn Parent Death
     SpawnID 200
+}
+
+//FOR KEYPAD
+
+actor WallCam : SecurityCamera
+{
+	+noclip
+}
+
+actor KeypadMouseIn : Weapon
+{
+  weapon.selectionorder 3700
+  weapon.kickback 0
+  +WEAPON.NOAUTOFIRE
+  +WEAPON.NOALERT
+  +WEAPON.CHEATNOTWEAPON 
+  states
+  {
+  Ready:
+    TNT1 A 1 A_WeaponReady
+    loop
+  Deselect:
+    TNT1 A 1 A_lower
+    loop
+  Select: 
+    TNT1 A 1 A_Raise
+    loop
+  Fire:
+    TNT1 A 1 ACS_NAMEDEXECUTE("CodeClicker", 0)
+    goto Ready
+  }
 }

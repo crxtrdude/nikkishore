@@ -11,6 +11,24 @@ decal DUCT1 5
 decal DUCT2 6
 {
 	pic DUCT2DEC
+	x-scale 0.15
+  y-scale 0.15
+}
+decal NUMPAD 7
+{
+	pic NUMPADD
 	x-scale 0.5
-  y-scale 0.5
+	y-scale 0.5
+}
+decal DOORNEW1 20
+{
+	pic DDRNEW1
+}
+decal DOORNEW2 21
+{
+	pic DDRNEW2
+}
+decal DOORWD1 22
+{
+	pic DDRWOOD1
 }
