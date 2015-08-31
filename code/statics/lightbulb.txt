@@ -7,7 +7,7 @@ Actor Lightbulb 14502
   States
   {
   Spawn:
-    LBLB A 10
+    LBLB A 10 bright
     Loop
   }
 }

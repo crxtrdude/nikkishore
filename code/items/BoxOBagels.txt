@@ -1,0 +1,18 @@
+ACTOR BoxOBagels : Health 17008
+{
+  +COUNTITEM
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.FANCYPICKUPSOUND
+  Inventory.Amount 100
+  Inventory.MaxAmount 200
+  Inventory.PickupMessage "$GOTSUPER" // "Supercharge!"
+  Inventory.PickupSound "misc/p_pkup"
+  Scale 0.5
+  States
+  {
+  Spawn:
+    SOUL ABCDCB 6 Bright
+    Loop
+  }
+}

@@ -1,3 +1,4 @@
 IWAD = "freedoom2.wad"
+LOAD = "nikkimusic.pk3"
 STARTUPTITLE = "Nikki Shore"
 STARTUPTYPE = "Hexen"

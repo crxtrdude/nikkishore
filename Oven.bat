@@ -18,6 +18,7 @@ tools\7za\7za.exe a -tzip bin\nikkishore.pk3 @listfile.txt
 @ECHO Now baking NikkiShore.pk3
 @ECHO.
 tools\7za\7za.exe a -tzip bin\nikkishore.pk3 @listfile_nomusic.txt
+tools\7za\7za.exe a -tzip bin\nikkimusic.pk3 music\*.ogg
 
 @ECHO.
 @ECHO Finished baking NikkiShore.pk3

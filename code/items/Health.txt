@@ -1,0 +1,29 @@
+ACTOR PatchKit : Health 17000
+{
+  +COUNTITEM
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.Amount 5
+  Inventory.MaxAmount 200
+  Inventory.PickupMessage "Picked up a patch kit."
+  Scale 0.5
+  States
+  {
+  Spawn:
+    PTCH A -1
+    Loop
+  }
+}
+
+ACTOR GauzeKit : Health 17001
+{
+  Inventory.Amount 25
+  Inventory.PickupMessage "Picked up a gauze kit."
+  Health.LowMessage 25, "Picked up a gauze kit that you REALLY needed!"
+  Scale 0.5
+  States
+  {
+  Spawn:
+    FAID A -1
+    Stop
+  }
+}

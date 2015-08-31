@@ -1,0 +1,22 @@
+
+ACTOR KevlarVest : GreenArmor 17002
+{
+	Inventory.PickupMessage "$GOTKEVLAR" 
+}
+
+ACTOR DragonSkinVest : BlueArmor 17003
+{
+	Inventory.PickupMessage "$GOTDSKIN" 
+}
+
+ACTOR ArmorPlate : ArmorBonus 17004
+{
+	Scale 0.5
+	Inventory.PickupMessage "$GOTARMPANEL"
+	States
+	{
+	Spawn:
+		ARPL A -1
+		Loop
+	}
+}

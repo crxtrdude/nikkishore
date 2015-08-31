@@ -13,6 +13,7 @@ cd ..\tools\acc
 acc.exe -i ".." ..\..\carcontrol.acs ..\..\acs\carcontrol.o
 acc.exe -i ".." ..\..\qcommon.acs ..\..\acs\qcommon.o
 acc.exe -i ".." ..\..\qmsg.acs ..\..\acs\qmsg.o
+acc.exe -i ".." ..\..\qdialog.acs ..\..\acs\qdialog.o
 @ECHO.
 @ECHO Scripts Finished.
 pause

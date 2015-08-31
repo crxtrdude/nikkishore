@@ -1,4 +1,4 @@
-height 32;
+height 0;
 monospacefonts true, "0";
 
 statusbar fullscreen, fullscreenoffsets // ZDoom HUD

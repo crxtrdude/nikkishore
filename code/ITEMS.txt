@@ -1,0 +1,10 @@
+//Items
+#Include "code/items/BoxOBagels.txt"
+#Include "code/items/Health.txt"
+#Include "code/items/Armor.txt"
+
+//Powerups
+#Include "code/items/Coffee.txt"
+
+//Ammo
+#Include "code/items/Battery.txt"

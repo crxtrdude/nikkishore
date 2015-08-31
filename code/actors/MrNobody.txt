@@ -2,7 +2,7 @@
 // Decorate
 
 // Mr Nobody
-ACTOR MrNobody : SwitchingDecoration 1337
+ACTOR MrNobody : SwitchingDecoration
 {
 	//$Category ZK-VN Demo
 	//$Title "Mr. Nobody"

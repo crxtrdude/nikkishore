@@ -1,0 +1,35 @@
+//==========================================================
+// Nikki Shore
+// QDialog - Immediary for ZKVN
+//
+// Code by CRxTRDude.
+//==========================================================
+
+#library "qdialog"
+#include "zcommon.acs"
+
+function void DoDialog (int level, int dianum)
+{
+	ACS_NamedExecuteWithResult("SetHoldTime", -1);
+	switch(level)
+	{
+		case 1:
+			switch(dianum)
+			{
+				case 1:
+			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 1);
+			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 1);
+			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 2);
+			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 2);
+			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 3);
+			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 3);
+			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 4);
+			    break;
+				case 2:
+				  ACS_NamedExecuteWithResult("SetHoldTime", -1);
+    			ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 5);
+					break; 								
+			}
+			break;
+	}	
+}

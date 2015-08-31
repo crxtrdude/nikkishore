@@ -1,8 +1,9 @@
-//DECORATE file for Nikki Shore (GZDoom)
+//DECORATE file for Nikki Shore (ZDoom)
 
 #include "code/actors.txt"  
 
 #include "code/weapons.txt"
 #include "code/statics.txt"
+#include "code/items.txt"
 
 #include "code/effects.txt"

@@ -1,6 +1,5 @@
 #include "code/statics/puppetgirl.txt"
 #include "code/statics/folder.txt"
-#include "code/statics/powerups.txt"
 #include "code/statics/lightbulb.txt"
 #include "code/statics/CCTVMounted.txt"
 #include "code/statics/couch1.txt"

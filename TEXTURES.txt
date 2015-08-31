@@ -43,5 +43,4 @@ sprite HUHQB0, 30, 30
 sprite VIGNA0, 320,	240
 {
 	patch P_TNLVSN, 0, 0 { Style Translucent }
-}
-
+}     

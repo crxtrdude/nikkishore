@@ -102,8 +102,10 @@ BETA_BONUS4 = "You pick up an unholy bible.";
 //NIKKI SHORE MAP NAMES:
 
 QHUSTR_MAP01 = "Nikki's Apartment";
-QHUSTR_NE1M1 = "The Alleyway at King Street";
-QHUSTR_NE1M2 = "Garage";
+QHUSTR_NE1M1 = "The Alleyway at Gainsborough Street";
+QHUSTR_NE1M2 = "Downtown Gainsborough Street";
+QHUSTR_NE1M3 = "Garage";
+QHUSTR_NE1M4 = "The Entryway Superclub";
 
 HUSTR_TALKTOSELF1 = "You mumble to yourself";
 HUSTR_TALKTOSELF2 = "Who's there?";

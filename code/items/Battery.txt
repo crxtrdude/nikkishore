@@ -1,0 +1,23 @@
+ACTOR BatterySingle : Cell 17005
+{
+	Inventory.PickupMessage "Got a single alkaline battery."
+	Scale 0.5
+	States
+	{
+	Spawn:
+	    BATT A -1
+		Loop
+	}
+}
+ACTOR BatteryPack : Cell 17006
+{
+  Inventory.PickupMessage "Got a pack of batteries."
+  Inventory.Amount 60
+  Scale 0.5
+  States
+  {
+  Spawn:
+    BATR A -1
+    Stop
+  }
+}

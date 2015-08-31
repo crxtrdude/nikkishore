@@ -2,7 +2,7 @@
 // Decorate
 
 // Mr Nobody
-ACTOR WalkingMN : BasicPede 1338
+ACTOR WalkingMN : BasicPede
 {
 	//$Category ZK-VN Demo
 	//$Title "Mr. Nobody"

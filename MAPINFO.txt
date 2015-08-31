@@ -95,7 +95,7 @@ map NE1M1 lookup "QHUSTR_NE1M1"
 	levelnum = 1
 	titlepatch = "WILV00"
 	next = "NE1M2"
-	sky1 = "SKY1"
+	sky1 = "SKY2"
 	cluster = 1
 	par = 30
 	music = "D_NE1M1"
@@ -106,7 +106,7 @@ map NE1M2 lookup "QHUSTR_NE1M2"
 	levelnum = 1
 	titlepatch = "WILV00"
 	next = "NE1M3"
-	sky1 = "SKY1"
+	sky1 = "SKY2"
 	cluster = 1
 	par = 30
 	music = "D_NE1M2"
@@ -121,6 +121,17 @@ map NE1M3 lookup "QHUSTR_NE1M3"
 	cluster = 1
 	par = 30
 	music = "D_NE1M3"
+}
+
+map NE1M4 lookup "QHUSTR_NE1M4"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	next = "NE1M5"
+	sky1 = "SKY2"
+	cluster = 1
+	par = 30
+	music = "D_NE1M4"
 }
 
 // Clusters (correspond with same-numbered episode)

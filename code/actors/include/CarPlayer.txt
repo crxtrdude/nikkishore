@@ -3,6 +3,8 @@
 // CarPlayer
 //   Progenitor for all usable cars in-game.
 //
+// Modified from DOOM Center by Joseph Otey (Doorhenge) 
+//
 //===========================================================================
 ACTOR CarPlayer : PlayerPawn
 {

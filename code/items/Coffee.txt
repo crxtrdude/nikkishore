@@ -1,0 +1,22 @@
+ACTOR NikkiStrength : PowerStrength
+{
+  Powerup.Color 119,198,255, 0.5
+}
+
+ACTOR Coffee : Berserk 17007
+{
+  Inventory.PickupMessage "You're perked up!" 
+  Inventory.PickupSound "misc/p_pkup"
+  Scale 0.5
+  States
+  {
+  Spawn:
+	 COFF A -1
+	 Loop
+  Pickup:
+     TNT1 A 0 A_GiveInventory("NikkiStrength") 
+     TNT1 A 0 HealThing(100)
+     TNT1 A 0 A_SelectWeapon("Stunner")
+     Stop
+  } 
+}
