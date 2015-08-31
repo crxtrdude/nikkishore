@@ -94,18 +94,6 @@ NEWSAVE = "<New Save Game>";
 GGSAVED = "GAME SAVED.";
 HUSTR_MSGU = "[Message unsent]";
 PICKUP_PISTOL_DROPPED = "Picked up a pistol.";
-BETA_BONUS1 = "You pick up a demonic dagger.";
-BETA_BONUS2 = "You pick up a skullchest.";
-BETA_BONUS3 = "You pick up an evil sceptre.";
-BETA_BONUS4 = "You pick up an unholy bible.";
-
-//NIKKI SHORE MAP NAMES:
-
-QHUSTR_MAP01 = "Nikki's Apartment";
-QHUSTR_NE1M1 = "The Alleyway at Gainsborough Street";
-QHUSTR_NE1M2 = "Downtown Gainsborough Street";
-QHUSTR_NE1M3 = "Garage";
-QHUSTR_NE1M4 = "The Entryway Superclub";
 
 HUSTR_TALKTOSELF1 = "You mumble to yourself";
 HUSTR_TALKTOSELF2 = "Who's there?";
@@ -145,27 +133,32 @@ TXT_DEFAULTPICKUPMSG = "You got a pickup";
 	
 // NIKKI SHORE
 
+//NIKKI SHORE MAP NAMES:
+
+QHUSTR_MAP01 = "Nikki's Apartment";
+QHUSTR_NE1M1 = "The Alleyway at Gainsborough Street";
+QHUSTR_NE1M2 = "Downtown Gainsborough Street";
+QHUSTR_NE1M3 = "Garage";
+QHUSTR_NE1M4 = "The Entryway Superclub";
+
+//Nikki terminal messages
+QTERMINAL1 = "THE QUICK BROWN QUEUE JUMPED OVER THE TAFFY-WAFFY NEAR SAN JUANICO"; 
+
+// Nikki End
+
 QE1TEXT =
 	"test text in full size. see you next time!\n";
+  
+// Nikki Dialogs
 
-// Cast list (must appear in this order)
-CC_ZOMBIE = "ZOMBIEMAN";
-CC_SHOTGUN = "SHOTGUN GUY";
-CC_HEAVY = "HEAVY WEAPON DUDE";
-CC_IMP = "IMP";
-CC_DEMON = "DEMON";
-CC_LOST = "LOST SOUL";
-CC_CACO = "CACODEMON";
-CC_HELL = "HELL KNIGHT";
-CC_BARON = "BARON OF HELL";
-CC_ARACH = "ARACHNOTRON";
-CC_PAIN = "PAIN ELEMENTAL";
-CC_REVEN = "REVENANT";
-CC_MANCU = "MANCUBUS";
-CC_ARCH = "ARCH-VILE";
-CC_SPIDER = "THE SPIDER MASTERMIND";
-CC_CYBER = "THE CYBERDEMON";
-CC_HERO = "OUR HERO";
+MNU_QBABY = "Pillow head";
+MNU_QEASY = "Sleeping in bagels"; 
+MNU_QNORMAL = "Inspector";
+MNU_QHARD = "Detective"; 
+MNU_QNIGHTMARE = "Alpha bitch";
+
+//END OF NIKKI SHORE TEXT. I WILL NEED TO REMOVE SOME OF THESE
+//IN THE LATER TIMES.
 
 // New strings from BOOM
 PD_BLUEC = "You need a blue card to open this door";
@@ -181,19 +174,6 @@ PD_ALL3O = "You need all three keys to activate this object";
 PD_ALL6 = "You need all six keys to open this door";
 PD_ALL6O = "You need all six keys to activate this object";
 PD_ALLKEYS = "You need all the keys";
-
-// MBF (BOOM?) narration backgrounds
-bgflatE1 = "FLOOR4_8";
-bgflatE2 = "SFLR6_1";
-bgflatE3 = "MFLR8_4";
-bgflatE4 = "MFLR8_3";
-bgflat06 = "SLIME16";
-bgflat11 = "RROCK14";
-bgflat20 = "RROCK07";
-bgflat30 = "RROCK17";
-bgflat15 = "RROCK13";
-bgflat31 = "RROCK19";
-bgcastcall = "BOSSBACK";
 
 // Gameflow messages
 TXT_FRAGLIMIT = "Fraglimit hit.";
@@ -415,360 +395,6 @@ SCORE_DEATHS = "DEATHS";
 SCORE_MISSED = "MISSED";
 SCORE_TOTAL = "TOTAL";
 SCORE_LVLTIME = "LEVEL TIME";
-
-// Item tags: Doom weapons
-TAG_FIST = "Brass Knuckles";
-TAG_CHAINSAW = "Chainsaw";
-TAG_PISTOL = "Pistol";
-TAG_SHOTGUN = "Shotgun";
-TAG_SUPERSHOTGUN = "Super Shotgun";
-TAG_CHAINGUN = "Chaingun";
-TAG_ROCKETLAUNCHER = "Rocket Launcher";
-TAG_PLASMARIFLE = "Plasma Rifle";
-TAG_BFG9000 = "BFG 9000";
-
-// Item tags: Heretic weapons
-TAG_STAFF = "Staff";
-TAG_GAUNTLETS = "Gauntlets of the Necromancer";
-TAG_GOLDWAND = "Elven Wand";
-TAG_CROSSBOW = "Ethereal Crossbow";
-TAG_BLASTER = "Dragon Claw";
-TAG_SKULLROD = "Hellstaff";
-TAG_PHOENIXROD = "Phoenix Rod";
-TAG_MACE = "Firemace";
-
-// Item tags: Heretic artifacts
-TAG_ARTIEGG = "Morph Ovum";
-TAG_ARTIFIREBOMB = "Timebomb of the Ancients";
-TAG_ARTIFLY = "Wings of Wrath";
-TAG_ARTIHEALTH = "Quartz Flask";
-TAG_ARTIINVISIBILITY = "Shadowsphere";
-TAG_ARTIINVULNERABILITY = "Ring of Invincibility";
-TAG_ARTISUPERHEALTH = "Mystic Urn";
-TAG_ARTITELEPORT = "Chaos Device";
-TAG_ARTITOMEOFPOWER = "Tome of Power";
-TAG_ARTITORCH = "Torch";
-
-// Item tags: Hexen weapons
-TAG_CWEAPMACE = "Mace of Contrition";
-TAG_CWEAPSTAFF = "Serpent Staff";
-TAG_CWEAPFLAME = "Firestorm";
-TAG_CWEAPWRAITHVERGE = "Wraithverge";
-TAG_FWEAPFIST = "Spiked Gauntlets";
-TAG_FWEAPAXE = "Timon's Axe";
-TAG_FWEAPHAMMER = "Hammer of Retribution";
-TAG_FWEAPQUIETUS = "Quietus";
-TAG_MWEAPWAND = "Sapphire Wand";
-TAG_MWEAPFROST = "Frost Shards";
-TAG_MWEAPLIGHTNING = "Arcs of Death";
-TAG_MWEAPBLOODSCOURGE = "Bloodscourge";
-
-// Item tags: Hexen artifacts
-TAG_ARTIBLASTRADIUS = "Disc of Repulsion";
-TAG_ARTIBOOSTARMOR = "Dragonskin Bracers";
-TAG_ARTIBOOSTMANA = "Krater of Might";
-TAG_ARTIPOISONBAG = "Flechette";
-TAG_ARTIPOISONBAG1 = "Poison Cloud Flechette";
-TAG_ARTIPOISONBAG2 = "Timebomb Flechette";
-TAG_ARTIPOISONBAG3 = "Grenade Flechette";
-TAG_ARTIHEALINGRADIUS = "Mystic Ambit Incant";
-TAG_ARTIDEFENDER = "Icon of the Defender";
-TAG_ARTIPORK = "Porkelator";
-TAG_ARTISPEED = "Boots of Speed";
-TAG_ARTISUMMON = "Dark Servant";
-TAG_ARTITELEPORTOTHER = "Banishment Device";
-
-// Item tags: Hexen puzzle items
-TAG_ARTIPUZZSKULL = "Yorick's Skull";
-TAG_ARTIPUZZGEMBIG = "Heart of D'Sparil";
-TAG_ARTIPUZZGEMRED = "Ruby Planet";
-TAG_ARTIPUZZGEMGREEN1 = "Emerald Planet (1)";
-TAG_ARTIPUZZGEMGREEN2 = "Emerald Planet (2)";
-TAG_ARTIPUZZGEMBLUE1 = "Sapphire Planet (1)";
-TAG_ARTIPUZZGEMBLUE2 = "Sapphire Planet (2)";
-TAG_ARTIPUZZBOOK1 = "Daemon Codex";
-TAG_ARTIPUZZBOOK2 = "Liber Obscura";
-TAG_ARTIPUZZSKULL2 = "Flame Mask";
-TAG_ARTIPUZZFWEAPON = "Glaive Seal";
-TAG_ARTIPUZZCWEAPON = "Holy Relic";
-TAG_ARTIPUZZMWEAPON = "Sigil of the Magus";
-TAG_ARTIPUZZGEAR1 = "Iron gear";
-TAG_ARTIPUZZGEAR2 = "Brass gear";
-TAG_ARTIPUZZGEAR3 = "Brass and iron gear";
-TAG_ARTIPUZZGEAR4 = "Silver and brass gear";
-
-// Item tags: Strife weapons
-TAG_PUNCHDAGGER = "Dagger";
-TAG_STRIFECROSSBOW1 = "Crossbow";
-TAG_STRIFECROSSBOW2 = "Crossbow";
-TAG_ASSAULTGUN = "Assault Gun";
-TAG_MMLAUNCHER = "Mini Missile Launcher";
-TAG_FLAMER = "Flame Thrower";
-TAG_MAULER1 = "Mauler";
-TAG_MAULER2 = "Mauler";
-TAG_GLAUNCHER1 = "Grenade Launcher";
-TAG_GLAUNCHER2 = "Grenade Launcher";
-TAG_SIGIL = "SIGIL";
-
-// Item tags: Strife artifacts
-TAG_COIN = "coin";
-TAG_MEDPATCH = "Med patch";
-TAG_MEDICALKIT = "Medical kit";
-TAG_SURGERYKIT = "Surgery Kit";	// "full_health" in the Teaser
-TAG_BELDINSRING = "Ring";
-TAG_OFFERINGCHALICE = "Offering Chalice";
-TAG_EAR = "Ear";
-TAG_BROKENCOUPLING = "Broken Power Coupling";
-TAG_SHADOWARMOR = "Shadow Armor";
-TAG_ENVSUIT = "Environmental Suit";
-TAG_GUARDUNIFORM = "Guard Uniform";
-TAG_OFFICERSUNIFORM = "Officer's Uniform";
-TAG_FTHROWERPARTS = "Flame Thrower Parts";
-TAG_REPORT = "Report";
-TAG_INFO = "Info";
-TAG_TARGETER = "Targeter";
-TAG_COMMUNICATOR = "Communicator";
-TAG_DEGNINORE = "Degnin Ore";
-TAG_GUNTRAINING = "Accuracy";
-TAG_HEALTHTRAINING = "Toughness";
-TAG_SCANNER = "Scanner";
-TAG_PRISONPASS = "Prison Pass";
-TAG_ALARM = "Alarm";
-TAG_AMMOFILLUP = "Ammo";
-TAG_HEALTHFILLUP = "Health";
-TAG_TELEPORTERBEACON = "Teleporter Beacon";
-TAG_METALARMOR = "Metal Armor";
-TAG_LEATHER = "Leather Armor";
-TAG_HEGRENADES = "HE-Grenade Rounds";
-TAG_PHGRENADES = "Phoshorus-Grenade Rounds";	// "Fire-Grenade_Rounds" in the Teaser
-TAG_CLIPOFBULLETS = "Clip of Bullets";	// "bullets" in the Teaser
-TAG_BOXOFBULLETS = "Ammo";
-TAG_MINIMISSILES = "Mini Missiles";	//"rocket" in the Teaser
-TAG_CRATEOFMISSILES = "Crate of Missiles";	//"box_of_rockets" in the Teaser
-TAG_ENERGYPOD = "Energy Pod";
-TAG_ENERGYPACK = "Energy Pack";
-TAG_POISONBOLTS = "Poison Bolts";	// "poison_arrows" in the Teaser
-TAG_ELECTRICBOLTS = "Electric Bolts";	// "electric_arrows" in the Teaser
-TAG_AMMOSATCHEL = "Ammo Satchel";	// "Back_pack" in the Teaser
-
-// Item tags: Strife keys
-TAG_BASEKEY = "Base Key";
-TAG_GOVSKEY = "Govs Key";	// "Rebel_Key" in the Teaser
-TAG_PASSCARD = "Passcard";
-TAG_IDBADGE = "ID Badge";
-TAG_PRISONKEY = "Prison Key";
-TAG_SEVEREDHAND = "Severed Hand";
-TAG_POWER1KEY = "Power1 Key";
-TAG_POWER2KEY = "Power2 Key";
-TAG_POWER3KEY = "Power3 Key";
-TAG_GOLDKEY = "Gold Key";
-TAG_IDCARD = "ID Card";
-TAG_SILVERKEY = "Silver Key";
-TAG_ORACLEKEY = "Oracle Key";
-TAG_MILITARYID = "Military ID";
-TAG_ORDERKEY = "Order Key";
-TAG_WAREHOUSEKEY = "Warehouse Key";
-TAG_BRASSKEY = "Brass Key";
-TAG_REDCRYSTALKEY = "Red Crystal Key";
-TAG_BLUECRYSTALKEY = "Blue Crystal Key";
-TAG_CHAPELKEY = "Chapel Key";
-TAG_CATACOMBKEY = "Catacomb Key";	// "Tunnel_Key" in the Teaser
-TAG_SECURITYKEY = "Security Key";
-TAG_COREKEY = "Core Key";	// "New_Key1" in the Teaser
-TAG_MAULERKEY = "Mauler Key";	// "New_Key2" in the Teaser
-TAG_FACTORYKEY = "Factory Key";	// "New_Key3" in the Teaser
-TAG_MINEKEY = "Mine Key";	// "New_Key4" in the Teaser
-TAG_NEWKEY5 = "New Key5";
-TAG_ORACLEPASS = "Oracle Pass";
-
-// Item tags: misc Strife stuff
-TAG_10GOLD = "10 gold";
-TAG_25GOLD = "25 gold";
-TAG_50GOLD = "50 gold";
-TAG_300GOLD = "300 gold";
-TAG_QUEST4 = "quest4";
-TAG_QUEST5 = "quest5";
-TAG_QUEST6 = "quest4";
-
-// Item tags: Strife NPCs
-TAG_ACOLYTE = "ACOLYTE";
-TAG_ARMORER = "Armorer";
-TAG_BARKEEP = "Bar Keep";
-TAG_BEGGAR = "Beggar";
-TAG_MACIL1 = "MACIL";
-TAG_MACIL2 = "MACIL";
-TAG_MEDIC = "Medic";
-TAG_ORACLE = "Oracle";
-TAG_PRIEST = "PRIEST";
-TAG_RATBUDDY = "rat buddy";
-TAG_REBEL = "Rebel";
-TAG_TEMPLAR = "TEMPLAR";
-TAG_WEAPONSMITH = "Weapon Smith";
-
-// Item tags: Chex weapons
-TAG_SPOON = "Spoon";
-TAG_SPORK = "Super Bootspork";
-TAG_MINIZORCHER = "Mini Zorcher";
-TAG_LARGEZORCHER = "Large Zorcher";
-TAG_SUPERLARGEZORCHER = "Super-Large Zorcher";
-TAG_RAPIDZORCHER = "Rapid Zorcher";
-TAG_ZORCHPROPULSOR = "Zorch Propulsor";
-TAG_PHASINGZORCHER = "Phasing Zorcher";
-TAG_LAZDEVICE = "LAZ Device";
-
-// Heretic strings
-HE1TEXT =
-		"with the destruction of the iron\n"
-		"liches and their minions, the last\n"
-		"of the undead are cleared from this\n"
-		"plane of existence.\n\n"
-		"those creatures had to come from\n"
-		"somewhere, though, and you have the\n"
-		"sneaky suspicion that the fiery\n"
-		"portal of hell's maw opens onto\n"
-		"their home dimension.\n\n"
-		"to make sure that more undead\n"
-		"(or even worse things) don't come\n"
-		"through, you'll have to seal hell's\n"
-		"maw from the other side. of course\n"
-		"this means you may get stuck in a\n"
-		"very unfriendly world, but no one\n"
-		"ever said being a Heretic was easy!";
-HE2TEXT =
-		"the mighty maulotaurs have proved\n"
-		"to be no match for you, and as\n"
-		"their steaming corpses slide to the\n"
-		"ground you feel a sense of grim\n"
-		"satisfaction that they have been\n"
-		"destroyed.\n\n"
-		"the gateways which they guarded\n"
-		"have opened, revealing what you\n"
-		"hope is the way home. but as you\n"
-		"step through, mocking laughter\n"
-		"rings in your ears.\n\n"
-		"was some other force controlling\n"
-		"the maulotaurs? could there be even\n"
-		"more horrific beings through this\n"
-		"gate? the sweep of a crystal dome\n"
-		"overhead where the sky should be is\n"
-		"certainly not a good sign....";
-HE3TEXT =
-		"the death of d'sparil has loosed\n"
-		"the magical bonds holding his\n"
-		"creatures on this plane, their\n"
-		"dying screams overwhelming his own\n"
-		"cries of agony.\n\n"
-		"your oath of vengeance fulfilled,\n"
-		"you enter the portal to your own\n"
-		"world, mere moments before the dome\n"
-		"shatters into a million pieces.\n\n"
-		"but if d'sparil's power is broken\n"
-		"forever, why don't you feel safe?\n"
-		"was it that last shout just before\n"
-		"his death, the one that sounded\n"
-		"like a curse? or a summoning? you\n"
-		"can't really be sure, but it might\n"
-		"just have been a scream.\n\n"
-		"then again, what about the other\n"
-		"serpent riders?";
-HE4TEXT =
-		"you thought you would return to your\n"
-		"own world after d'sparil died, but\n"
-		"his final act banished you to his\n"
-		"own plane. here you entered the\n"
-		"shattered remnants of lands\n"
-		"conquered by d'sparil. you defeated\n"
-		"the last guardians of these lands,\n"
-		"but now you stand before the gates\n"
-		"to d'sparil's stronghold. until this\n"
-		"moment you had no doubts about your\n"
-		"ability to face anything you might\n"
-		"encounter, but beyond this portal\n"
-		"lies the very heart of the evil\n"
-		"which invaded your world. d'sparil\n"
-		"might be dead, but the pit where he\n"
-		"was spawned remains. now you must\n"
-		"enter that pit in the hopes of\n"
-		"finding a way out. and somewhere,\n"
-		"in the darkest corner of d'sparil's\n"
-		"demesne, his personal bodyguards\n"
-		"await your arrival ...";
-HE5TEXT =
-		"as the final maulotaur bellows his\n"
-		"death-agony, you realize that you\n"
-		"have never come so close to your own\n"
-		"destruction. not even the fight with\n"
-		"d'sparil and his disciples had been\n"
-		"this desperate. grimly you stare at\n"
-		"the gates which open before you,\n"
-		"wondering if they lead home, or if\n"
-		"they open onto some undreamed-of\n"
-		"horror. you find yourself wondering\n"
-		"if you have the strength to go on,\n"
-		"if nothing but death and pain await\n"
-		"you. but what else can you do, if\n"
-		"the will to fight is gone? can you\n"
-		"force yourself to continue in the\n"
-		"face of such despair? do you have\n"
-		"the courage? you find, in the end,\n"
-		"that it is not within you to\n"
-		"surrender without a fight. eyes\n"
-		"wide, you go to meet your fate.";
-
-// EPISODE 1 - THE CITY OF THE DAMNED
-HHUSTR_E1M1 = "THE DOCKS";
-HHUSTR_E1M2 = "THE DUNGEONS";
-HHUSTR_E1M3 = "THE GATEHOUSE";
-HHUSTR_E1M4 = "THE GUARD TOWER";
-HHUSTR_E1M5 = "THE CITADEL";
-HHUSTR_E1M6 = "THE CATHEDRAL";
-HHUSTR_E1M7 = "THE CRYPTS";
-HHUSTR_E1M8 = "HELL'S MAW";
-HHUSTR_E1M9 = "THE GRAVEYARD";
-
-// EPISODE 2 - HELL'S MAW
-HHUSTR_E2M1 = "THE CRATER";
-HHUSTR_E2M2 = "THE LAVA PITS";
-HHUSTR_E2M3 = "THE RIVER OF FIRE";
-HHUSTR_E2M4 = "THE ICE GROTTO";
-HHUSTR_E2M5 = "THE CATACOMBS";
-HHUSTR_E2M6 = "THE LABYRINTH";
-HHUSTR_E2M7 = "THE GREAT HALL";
-HHUSTR_E2M8 = "THE PORTALS OF CHAOS";
-HHUSTR_E2M9 = "THE GLACIER";
-
-// EPISODE 3 - THE DOME OF D'SPARIL
-HHUSTR_E3M1 = "THE STOREHOUSE";
-HHUSTR_E3M2 = "THE CESSPOOL";
-HHUSTR_E3M3 = "THE CONFLUENCE";
-HHUSTR_E3M4 = "THE AZURE FORTRESS";
-HHUSTR_E3M5 = "THE OPHIDIAN LAIR";
-HHUSTR_E3M6 = "THE HALLS OF FEAR";
-HHUSTR_E3M7 = "THE CHASM";
-HHUSTR_E3M8 = "D'SPARIL'S KEEP";
-HHUSTR_E3M9 = "THE AQUIFER";
-
-// EPISODE 4: THE OSSUARY
-HHUSTR_E4M1 = "CATAFALQUE";
-HHUSTR_E4M2 = "BLOCKHOUSE";
-HHUSTR_E4M3 = "AMBULATORY";
-HHUSTR_E4M4 = "SEPULCHER";
-HHUSTR_E4M5 = "GREAT STAIR";
-HHUSTR_E4M6 = "HALLS OF THE APOSTATE";
-HHUSTR_E4M7 = "RAMPARTS OF PERDITION";
-HHUSTR_E4M8 = "SHATTERED BRIDGE";
-HHUSTR_E4M9 = "MAUSOLEUM";
-
-// EPISODE 5: THE STAGNANT DEMESNE
-HHUSTR_E5M1 = "OCHRE CLIFFS";
-HHUSTR_E5M2 = "RAPIDS";
-HHUSTR_E5M3 = "QUAY";
-HHUSTR_E5M4 = "COURTYARD";
-HHUSTR_E5M5 = "HYDRATYR";
-HHUSTR_E5M6 = "COLONNADE";
-HHUSTR_E5M7 = "FOETID MANSE";
-HHUSTR_E5M8 = "FIELD OF JUDGEMENT";
-HHUSTR_E5M9 = "SKEIN OF D'SPARIL";
 
 // Keys
 
@@ -1237,14 +863,6 @@ BBA_SCROTUM = "%o suffered scrotum separation";
 BBA_POPULATION = "%o volunteered for population control";
 BBA_SUICIDE = "%o has suicided";
 BBA_DARWIN = "%o received the Darwin Award";
-
-// Nikki Dialogs
-
-MNU_QBABY = "Pillow head";
-MNU_QEASY = "Sleeping in bagels"; 
-MNU_QNORMAL = "Inspector";
-MNU_QHARD = "Detective"; 
-MNU_QNIGHTMARE = "Alpha bitch";
 
 // Music names for Doom. These are needed in the string table only so that they can
 // be replaced by Dehacked. 

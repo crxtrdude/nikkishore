@@ -10,6 +10,7 @@
 
 #library "qmsg"
 #include "zcommon.acs"
+#import "qcommon.acs"
 
 int TOGGLE = 0;
 int CLICK = 0;
@@ -29,6 +30,23 @@ function void clcnum (void)
 //modified version of Isle's keypad as a library
 //code = 4 digit number
 //scnum = script to call if successful
+//
+
+script "CodeKeyInput" (int num) // numpad ie "bind kp# pukenamed "CodeKeyInput" #"
+{
+	if(TOGGLE) NUMPAD = num;
+}
+
+script "CodeClicker" (void) //what "KeypadMouseIn" runs
+{
+	if(TOGGLE) CLICK = 1;
+}
+
+script "SpawnWallCam" ENTER
+{
+	spawn("wallcam", 0, 0, 0, 1);
+	thing_changetid(0, 500);
+}
 
 script "CodeKeypad" (int codenum, int scnum)
 {
@@ -54,9 +72,9 @@ script "CodeKeypad" (int codenum, int scnum)
 		cz = getactorz(player);
 		ang = getactorangle(player);
 		setactorposition(1, cx, cy, cz+41.0, 0);
-		setactorangle(1, getactorangle(0));
-		setactorpitch(1, getactorpitch(0));
-		SetPlayerProperty (player, 1, PROP_FROZEN);
+		setactorangle(1, getactorangle(player));
+		setactorpitch(1, getactorpitch(player));
+		FreezePlayer(player);
 		changecamera(1, 0, 0);
 		thing_stop(player);
 		
@@ -163,7 +181,7 @@ script "CodeKeypad" (int codenum, int scnum)
 		TakeInventory("KeypadMouseIn", 1);
 		setactorangle(0, getactorangle(1));
 		setactorpitch(wallcam, getactorpitch(1));
-		SetPlayerProperty (0, 0, PROP_FROZEN);
+		SetPlayerProperty (0, 0, PROP_TOTALLYFROZEN);
 		changecamera(0, 0, 0);
 		hudmessage (s:" "; 0, 1, -1, 0, 0, 1);
 		hudmessage (s:" "; 0, 2, -1, 0, 0, 1);
@@ -172,18 +190,47 @@ script "CodeKeypad" (int codenum, int scnum)
 	TOGGLE = 0;
 }
 
-script "CodeKeyInput" (int num) // numpad ie "bind kp# pukenamed "CodeKeyInput" #"
-{
-	if(TOGGLE) NUMPAD = num;
-}
+//End of CodeKeypad code
 
-script "CodeClicker" (void) //what "KeypadMouseIn" runs
-{
-	if(TOGGLE) CLICK = 1;
-}
+//----
+//DisplayableText(type,message,bgimage)
+// Displays some message
+// type:
+//  - 0 - Default
+//  - 1 - Console (mono font)
+//  - 2 - Newspaper
+//  - 3 - Handwritten
+// message - text defined from LANGUAGE.
+// bgimage - background image
+//
+// NOTE: The text will be fixed in 320x240
+// As such background image should be 320x240.
+// TEXT LIMIT 70
 
-script "SpawnWallCam" ENTER
+Script "DisplayableText" (int type, int message)
 {
-	spawn("wallcam", 0, 0, 0, 1);
-	thing_changetid(0, 500);
-}
+  int player = ActivatorTID();
+  
+  //Start freezing player
+  FreezePlayer(player);
+  
+  SetHudSize(320, 240, 1);
+  //Set displayable
+  Delay(3);
+  //Show the text overlay
+  
+    switch (type){
+      case 0:
+        SetFont("BIGFONT");
+        HudMessage(l:message; HUDMSG_PLAIN, 1, 0, 170.0, 96.0, 0);
+        break;
+      case 1:
+        SetFont("TERMINAL");
+        HudMessage(s:"A"; HUDMSG_PLAIN, 1, 0, 0.0, 0.0, 10.0, 0.5);
+        SetFont("TERMFONT");
+        HudMessage(l:message; HUDMSG_TYPEON, 0, CR_WHITE, 160.0, 120.0, 9.0, 0.01, 0.5);
+        break;
+    }
+    SetHudSize(0, 0, 0);
+  UnfreezePlayer(player);
+}   
