@@ -4,3 +4,4 @@ const int VNC_NIKKI = 2;
 const int VNC_ERIN = 3;
 const int VNC_SHELLEY = 4;
 const int VNC_CLUBGIRL1 = 20;
+const int VNC_DOMWHT1 = 21;

@@ -1,0 +1,52 @@
+//===========================================================================
+//
+// Gangster - Fast, but very weak in power, slightly high health than pro
+//
+//===========================================================================
+ACTOR Gangster : BasicEnemy 19002
+{
+  //$Category Nikki Enemies
+  //$Sprite GNSTA0
+  //$Title "Basic - Gangster"
+	Health 30
+	Speed 9
+	scale 0.4
+  PainSound "pro/pain"
+	Obituary "%o got whipped by a pro."
+	States
+  {
+  Spawn:
+    GNST A 10  A_LookEx (LOF_NOSOUNDCHECK, 32, 0, 0, 32, "See")
+    Loop
+  See:
+    GNST A 4 A_Chase
+    Loop
+  Melee:
+    GNST A 10 A_FaceTarget
+    GNST A 8 A_CustomMeleeAttack (random(1, 10) * 3.5, "", "", "Melee", false)
+    GNST A 8
+    Goto See
+  Pain:
+    GNST A 3
+    GNST A 3 A_Pain
+    Goto See
+  Death:
+    GNST A 5
+    GNST A 5 A_Scream
+    GNST B 5 A_NoBlocking
+    GNST B 5
+    GNST B -1
+    Stop
+  XDeath:
+    GNST A 5
+    GNST A 5 A_XScream
+    GNST B 5 A_NoBlocking
+    GNST B 5
+    GNST B -1
+    Stop
+  Raise:
+    GNST B 5
+    GNST A 5
+    Goto See
+  }
+}

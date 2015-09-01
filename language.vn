@@ -79,6 +79,7 @@ VNO_50 = "Nevermind";
 // Character names
 VNC_1 = "Mr. Nobody";
 VNC_20 = "Club Girl";
+VNC_21 = "Dominatrix";
 
 VNC_2 = "Nikki";
 VNC_3 = "Erin";
@@ -140,3 +141,8 @@ VND_20_1 = "Say, what's a dorky bitch like you doing "
 VND_20_2 = "Huh? I don't know some Rachel.";
 
 VND_20_3 = "Whatever.";
+
+//----
+
+VND_21_1 = "You looking for a kinky escapade, bitch?"
+         "Why don't you kiss my whip?";
