@@ -11,6 +11,7 @@ ACTOR BasicPede
   +NOSPLASHALERT
   +FLOORCLIP
   +JUSTHIT
+  +NOBLOOD
   MinMissileChance 150
   MaxStepHeight 16
   MaxDropoffHeight 32

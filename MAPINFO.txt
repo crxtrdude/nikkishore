@@ -79,7 +79,7 @@ map TITLEMAP "Title"
 	music = "D_INTRO"	
 }
 
-map MAP01 lookup "QHUSTR_MAP01"
+map MAP01 lookup "QSTR_MAP01"
 {
 	levelnum = 1
 	titlepatch = "WILV00"
@@ -90,7 +90,7 @@ map MAP01 lookup "QHUSTR_MAP01"
 	music = "D_MAP01"
 }
 
-map NE1M1 lookup "QHUSTR_NE1M1"
+map NE1M1 lookup "QSTR_NE1M1"
 {
 	levelnum = 1
 	titlepatch = "WILV00"
@@ -101,7 +101,7 @@ map NE1M1 lookup "QHUSTR_NE1M1"
 	music = "D_NE1M1"
 }
 
-map NE1M2 lookup "QHUSTR_NE1M2"
+map NE1M2 lookup "QSTR_NE1M2"
 {
 	levelnum = 1
 	titlepatch = "WILV00"
@@ -112,7 +112,7 @@ map NE1M2 lookup "QHUSTR_NE1M2"
 	music = "D_NE1M2"
 }
 
-map NE1M3 lookup "QHUSTR_NE1M3"
+map NE1M3 lookup "QSTR_NE1M3"
 {
 	levelnum = 1
 	titlepatch = "WILV00"
@@ -123,7 +123,7 @@ map NE1M3 lookup "QHUSTR_NE1M3"
 	music = "D_NE1M3"
 }
 
-map NE1M4 lookup "QHUSTR_NE1M4"
+map NE1M4 lookup "QSTR_NE1M4"
 {
 	levelnum = 1
 	titlepatch = "WILV00"

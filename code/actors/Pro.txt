@@ -5,6 +5,9 @@
 //===========================================================================
 ACTOR Pro : BasicEnemy 19001
 {
+  //$Category Nikki Enemies
+  //$Sprite BTCHA0
+  //$Title "Basic - Pro"
 	Health 25
 	Speed 9
 	scale 0.4

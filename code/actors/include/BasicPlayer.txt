@@ -12,6 +12,7 @@ ACTOR BasicPlayer : PlayerPawn
 	Mass 100
 	PainChance 255
 	Player.ViewHeight 42
+	+NOBLOOD
 	
 	Player.ColorRange 112, 127
 	Player.Colorset 0, "Green",			0x70, 0x7F,  0x72

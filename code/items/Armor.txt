@@ -1,16 +1,23 @@
 
 ACTOR KevlarVest : GreenArmor 17002
 {
+  //$Category Nikki Armor
+  //$Title "Kevlar Vest"
 	Inventory.PickupMessage "$GOTKEVLAR" 
 }
 
 ACTOR DragonSkinVest : BlueArmor 17003
 {
+  //$Category Nikki Armor
+  //$Title "DragonSkin Vest"
 	Inventory.PickupMessage "$GOTDSKIN" 
 }
 
 ACTOR ArmorPlate : ArmorBonus 17004
 {
+  //$Category Nikki Armor
+  //$Sprite ARPLA0
+  //$Title "Armor Plate"
 	Scale 0.5
 	Inventory.PickupMessage "$GOTARMPANEL"
 	States

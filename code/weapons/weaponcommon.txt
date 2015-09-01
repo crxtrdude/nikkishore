@@ -49,10 +49,3 @@ ACTOR StunnerDummy : BulletPuff
 {
 	DamageType NStunner
 }
-
-ACTOR NewFist : Fist Replaces Fist
-{
-	+CHEATNOTWEAPON
-	+NOAUTOFIRE
-	DamageType NMelee
-}

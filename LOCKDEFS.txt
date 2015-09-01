@@ -1,4 +1,7 @@
 Lock 7
 {
-	Any { BlueCard BlueSkull KeyBlue }
+	GoldKey
+	Message "I don't think I have the key for this one."
+	RemoteMessage "I don't have the keys to this thing."
+	Mapcolor 255 242 0
 }

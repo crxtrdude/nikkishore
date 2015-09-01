@@ -5,6 +5,9 @@ ACTOR NikkiStrength : PowerStrength
 
 ACTOR Coffee : Berserk 17007
 {
+  //$Category Nikki Items
+  //$Sprite COFFA0
+  //$Title "Cup of Coffee"
   Inventory.PickupMessage "You're perked up!" 
   Inventory.PickupSound "misc/p_pkup"
   Scale 0.5

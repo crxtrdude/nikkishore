@@ -135,14 +135,41 @@ TXT_DEFAULTPICKUPMSG = "You got a pickup";
 
 //NIKKI SHORE MAP NAMES:
 
-QHUSTR_MAP01 = "Nikki's Apartment";
-QHUSTR_NE1M1 = "The Alleyway at Gainsborough Street";
-QHUSTR_NE1M2 = "Downtown Gainsborough Street";
-QHUSTR_NE1M3 = "Garage";
-QHUSTR_NE1M4 = "The Entryway Superclub";
+QSTR_MAP01 = "Nikki's Apartment";
+QSTR_NE1M1 = "The Alleyway at Gainsborough Street";
+QSTR_NE1M2 = "Downtown Gainsborough Street";
+QSTR_NE1M3 = "Garage";
+QSTR_NE1M4 = "The Entryway Superclub";
 
 //Nikki terminal messages
-QTERMINAL1 = "THE QUICK BROWN QUEUE JUMPED OVER THE TAFFY-WAFFY NEAR SAN JUANICO"; 
+//NOTE: Works well with type 1
+//      Bounds are 19 letters high x 45 letters wide
+//
+  
+QTERMINAL1 = "A............................................\n" 
+						"STARTING BOOT ...\n"
+						"BOOT STARTED!\n"
+						"UNSPECIFIED ERROR!\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"\n"
+						"CRASH ... _\n";
+
+QPAPER1 = "Code number = 1500\n"
+					"\n"
+					"               - XOXO";																		
 
 // Nikki End
 

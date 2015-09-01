@@ -1,5 +1,8 @@
 Actor Couch1 14503
 {
+  //$Category Nikki Decor
+  //$Sprite COUAA0
+  //$Title "Leather Couch"
   height 32
   radius 30
   States

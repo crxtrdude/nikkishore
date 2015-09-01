@@ -1,5 +1,11 @@
 @ECHO OFF
 
+@ECHO.
+@ECHO NOTE: Compiling without music will result in two
+@ECHO types of files, nikkishore.pk3 (main file) and
+@ECHO nikkimusic.pk3 (music).
+@ECHO.
+
 :choice
 @ECHO Do you want to compile the pk3 with music?
 set /P c=[Y/N]?

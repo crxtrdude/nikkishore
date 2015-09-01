@@ -36,12 +36,3 @@ function void TunnelVision (int time)
 		}
     SetHudSize(0,0,FALSE);
 }
-function void FreezePlayer (int tid)
-{
-  	SetPlayerProperty (tid, 1, PROP_TOTALLYFROZEN);
-    SetActorVelocity (0,0,0,GetActorVelZ(tid),FALSE,TRUE);
-}
-function void UnfreezePlayer (int tid)
-{
-  	SetPlayerProperty (tid, 0, PROP_TOTALLYFROZEN);
-}

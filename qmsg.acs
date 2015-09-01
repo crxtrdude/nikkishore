@@ -10,7 +10,6 @@
 
 #library "qmsg"
 #include "zcommon.acs"
-#import "qcommon.acs"
 
 int TOGGLE = 0;
 int CLICK = 0;
@@ -32,20 +31,31 @@ function void clcnum (void)
 //scnum = script to call if successful
 //
 
-script "CodeKeyInput" (int num) // numpad ie "bind kp# pukenamed "CodeKeyInput" #"
+script "CodeKeyInput" (int num) // numpad ie "bind kp# pukename CodeKeyInput #"
 {
-	if(TOGGLE) NUMPAD = num;
+	if(TOGGLE){
+			NUMPAD = num;
+			Log(s:"QMSG - CodeKeyInput passed.");
+	 }
 }
 
 script "CodeClicker" (void) //what "KeypadMouseIn" runs
 {
-	if(TOGGLE) CLICK = 1;
+	if(TOGGLE){
+		CLICK = 1;
+		Log(s:"QMSG - CodeClicker passed.");
+	}
 }
 
 script "SpawnWallCam" ENTER
 {
 	spawn("wallcam", 0, 0, 0, 1);
 	thing_changetid(0, 500);
+}
+script "TypeInNumber" (void)
+{
+	setfont("BIGFONT");
+	hudmessage (a:cnum; 0, 3, CR_BLUE, 320.0, 152.0, 1);
 }
 
 script "CodeKeypad" (int codenum, int scnum)
@@ -74,7 +84,7 @@ script "CodeKeypad" (int codenum, int scnum)
 		setactorposition(1, cx, cy, cz+41.0, 0);
 		setactorangle(1, getactorangle(player));
 		setactorpitch(1, getactorpitch(player));
-		FreezePlayer(player);
+  	SetPlayerProperty (player, 1, PROP_FROZEN);
 		changecamera(1, 0, 0);
 		thing_stop(player);
 		
@@ -118,9 +128,9 @@ script "CodeKeypad" (int codenum, int scnum)
 			y = (my/33) + 240;
 
 			setfont("numbers2");
-			hudmessage (s:"A"; 0, 3, -1, 392.0, 318.0, 1);
+			hudmessage (s:"A"; 0, 5, -1, 392.0, 318.0, 1);
 			setfont("doomcurs");
-			hudmessage (s:"A"; 0, 1, -1, (x<<16)+11.0, (y<<16)+15.0, 1);
+			hudmessage (s:"A"; 0, 4, -1, (x<<16)+11.0, (y<<16)+15.0, 1);
 			if(CLICK)
 			{
 				CLICK = 0;
@@ -136,8 +146,7 @@ script "CodeKeypad" (int codenum, int scnum)
 						incode = (incode * 10) + num;
 						cnum[digit*2] = num + '0';
 						digit++;
-						setfont("BIGFONT");
-						hudmessage(a:cnum; 0, 2, CR_BLUE, 320.0, 152.0, 1);
+						acs_namedexecute("TypeInNumber", 0);
 					}
 				}
 				if(!(x > -8 && x < 136 && y > -8 && y < 178)) TOGGLE = 0;
@@ -148,8 +157,7 @@ script "CodeKeypad" (int codenum, int scnum)
 				incode = (incode * 10) + NUMPAD;
 				cnum[digit*2] = NUMPAD + '0';
 				digit++;
-				setfont("BIGFONT");
-				hudmessage (a:cnum; 0, 2, CR_BLUE, 320.0, 152.0, 1);
+				acs_namedexecute("TypeInNumber", 0);
 				NUMPAD = -1;
 			}
 			if(digit == 4)
@@ -157,21 +165,23 @@ script "CodeKeypad" (int codenum, int scnum)
 				delay(17);
 				if(incode == code)
 				{
-					hudmessage (s:"GRANTED"; 0, 2, CR_GREEN, 320.0, 152.0, 1);
+					setfont("BIGFONT");
+					hudmessage (s:"GRANTED"; 0, 3, CR_GREEN, 320.0, 152.0, 1);
 					delay(17);
 					acs_execute(scnum, 0);
 					TOGGLE = 0;
 				}
 				else
 				{
-					hudmessage (s:"DENIED"; 0, 2, CR_RED, 320.0, 152.0, 1);
+					setfont("BIGFONT");
+					hudmessage (s:"DENIED"; 0, 3, CR_RED, 320.0, 152.0, 1);
 					incode = 0;
 					digit = 0;
 					clcnum();
 					delay(17);
 					CLICK = 0;
 				}
-				hudmessage (s:" "; 0, 2, -1, 0, 0, 1);
+				hudmessage (s:" "; 0, 3, -1, 0, 0, 1);
 			}
 			delay(1);
 		}
@@ -181,10 +191,10 @@ script "CodeKeypad" (int codenum, int scnum)
 		TakeInventory("KeypadMouseIn", 1);
 		setactorangle(0, getactorangle(1));
 		setactorpitch(wallcam, getactorpitch(1));
-		SetPlayerProperty (0, 0, PROP_TOTALLYFROZEN);
+		SetPlayerProperty (player, 0, PROP_FROZEN);
 		changecamera(0, 0, 0);
-		hudmessage (s:" "; 0, 1, -1, 0, 0, 1);
-		hudmessage (s:" "; 0, 2, -1, 0, 0, 1);
+		hudmessage (s:" "; 0, 5, -1, 0, 0, 1);
+		hudmessage (s:" "; 0, 4, -1, 0, 0, 1);
 		hudmessage (s:" "; 0, 3, -1, 0, 0, 1);
 	}
 	TOGGLE = 0;
@@ -200,6 +210,7 @@ script "CodeKeypad" (int codenum, int scnum)
 //  - 1 - Console (mono font)
 //  - 2 - Newspaper
 //  - 3 - Handwritten
+//  - 10 - Default but for inventory
 // message - text defined from LANGUAGE.
 // bgimage - background image
 //
@@ -207,30 +218,67 @@ script "CodeKeypad" (int codenum, int scnum)
 // As such background image should be 320x240.
 // TEXT LIMIT 70
 
+int isDisplayed = 0;
+
 Script "DisplayableText" (int type, int message)
 {
   int player = ActivatorTID();
-  
-  //Start freezing player
-  FreezePlayer(player);
-  
-  SetHudSize(320, 240, 1);
-  //Set displayable
-  Delay(3);
-  //Show the text overlay
+
+	if (!isDisplayed && !TOGGLE)
+	{
+		isDisplayed = 1;  
+  	//Start freezing player
+  	SetPlayerProperty (player, 1, PROP_FROZEN);
+    SetActorVelocity (0,0,0,GetActorVelZ(player),FALSE,TRUE);
+
+	  //Set displayable
+	  Delay(3);
+	  //Show the text overlay
   
     switch (type){
       case 0:
+      	SetHudSize(640, 480, 1);
         SetFont("BIGFONT");
-        HudMessage(l:message; HUDMSG_PLAIN, 1, 0, 170.0, 96.0, 0);
+        HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
         break;
       case 1:
+        SetHudSize(512, 384, 1);
         SetFont("TERMINAL");
-        HudMessage(s:"A"; HUDMSG_PLAIN, 1, 0, 0.0, 0.0, 10.0, 0.5);
+        HudMessage(s:"A"; HUDMSG_PLAIN, 2, 0, 100.0, 70.0, 10.0, 0.5);
+        SetHudSize(640, 480, 1);
         SetFont("TERMFONT");
-        HudMessage(l:message; HUDMSG_TYPEON, 0, CR_WHITE, 160.0, 120.0, 9.0, 0.01, 0.5);
+        HudMessage(l:message; HUDMSG_TYPEON, 1, CR_GREEN, 326.0, 236.0, 8.0, 0.01, 0.5);
+        break;
+      case 10:
+      	SetHudSize(640, 480, 1);
+        SetFont("HAF2FONT");
+        HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
+        delay(30*5);
+				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
+        break;
+      case 11:
+      	SetHudSize(640, 480, 1);
+        SetFont("HANDFONT");
+        HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
+        delay(30*5);
+				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
         break;
     }
-    SetHudSize(0, 0, 0);
-  UnfreezePlayer(player);
+	}else{
+		ACS_NamedExecute("StopDisplayable",0,0,0,0);	
+	}    
+}
+Script "StopDisplayable" (void)
+{
+  	int player = ActivatorTID();
+
+		if (isDisplayed)
+		{
+			isDisplayed = 0;   	
+			
+			SetPlayerProperty (player, 0, PROP_FROZEN);
+			HudMessage(s:""; HUDMSG_PLAIN,2,0,0,0,0);
+			HudMessage(s:""; HUDMSG_PLAIN,1,0,0,0,0);
+			SetHudSize(0, 0, 0);
+		}
 }   

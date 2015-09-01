@@ -9,8 +9,8 @@ ACTOR NikkiPlayer : BasicPlayer
 	Health 100
 	Player.DisplayName "Nikki"
 	Player.CrouchSprite "PLYC"
-	Player.StartItem "Fist"
-	Player.WeaponSlot 1, Fist, Stunner
+	Player.StartItem "NikkiFist"
+	Player.WeaponSlot 1, NikkiFist, Stunner
 	
 	States
 	{

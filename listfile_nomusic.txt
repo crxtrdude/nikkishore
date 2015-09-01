@@ -2,13 +2,14 @@ acs\*.*
 code\*.*
 code\actors\*.*
 code\actors\include\*.*
+code\items\*.*
 code\statics\*.*
 code\weapons\*.*
 flats\*.png
 graphics\*.png
 maps\*.wad
 patches\*.*
-sounds\*.*
+sounds\*.wav
 sprites\*.png
 textures\*.png
 voxels\*.kvx
@@ -24,6 +25,7 @@ decaldef.txt
 decorate.txt
 defbinds.txt
 gameinfo.txt
+keyconf.txt
 loadacs.txt
 lockdefs.txt
 mapinfo.txt

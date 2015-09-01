@@ -1,5 +1,8 @@
 Actor BeanBagChair 14505
 {
+  //$Category Nikki Decor
+  //$Sprite BBAGA0
+  //$Title "Bean Bag Chair"
   height 30
   radius 30
   States

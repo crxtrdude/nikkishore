@@ -1,5 +1,8 @@
 Actor Folder 14501
 { 
+  //$Category Nikki Decor
+  //$Sprite FLDRA0
+  //$Title "Folder"
   height 2
   radius 5
   States

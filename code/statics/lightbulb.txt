@@ -1,5 +1,8 @@
 Actor Lightbulb 14502
 {
+  //$Category Nikki Decor
+  //$Sprite LBLBA0
+  //$Title "Light Bulb"
 	+NOGRAVITY
 	+SPAWNCEILING
   height 30

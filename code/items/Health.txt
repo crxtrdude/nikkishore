@@ -1,9 +1,30 @@
-ACTOR PatchKit : Health 17000
+ACTOR Antiseptic : Health 16999
 {
+  //$Category Nikki Health
+  //$Sprite BTDNA0
+  //$Title "Antiseptic Solution"
   +COUNTITEM
   +INVENTORY.ALWAYSPICKUP
   Inventory.Amount 5
   Inventory.MaxAmount 200
+  Inventory.PickupMessage "Picked up an antiseptic solution."
+  Scale 0.5
+  States
+  {
+  Spawn:
+    BTDN A -1
+    Loop
+  }
+}
+
+ACTOR PatchKit : Health 17000
+{
+  //$Category Nikki Health
+  //$Sprite PTCHA0
+  //$Title "Patch Kit"
+  +COUNTITEM
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.Amount 10
   Inventory.PickupMessage "Picked up a patch kit."
   Scale 0.5
   States
@@ -16,7 +37,10 @@ ACTOR PatchKit : Health 17000
 
 ACTOR GauzeKit : Health 17001
 {
-  Inventory.Amount 25
+  //$Category Nikki Health
+  //$Sprite FAIDA0
+  //$Title "Gauze Kit"
+  Inventory.Amount 28
   Inventory.PickupMessage "Picked up a gauze kit."
   Health.LowMessage 25, "Picked up a gauze kit that you REALLY needed!"
   Scale 0.5

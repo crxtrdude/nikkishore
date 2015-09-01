@@ -1,5 +1,8 @@
 ACTOR BatterySingle : Cell 17005
 {
+  //$Category Nikki Items
+  //$Sprite BATTA0
+  //$Title "Single Battery"
 	Inventory.PickupMessage "Got a single alkaline battery."
 	Scale 0.5
 	States
@@ -11,6 +14,9 @@ ACTOR BatterySingle : Cell 17005
 }
 ACTOR BatteryPack : Cell 17006
 {
+  //$Category Nikki Items
+  //$Sprite BATRA0
+  //$Title "Battery Pack"
   Inventory.PickupMessage "Got a pack of batteries."
   Inventory.Amount 60
   Scale 0.5

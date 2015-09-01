@@ -1,0 +1,23 @@
+ACTOR BasicDocument : CustomInventory
+{
+	height 5
+	radius 5
+}
+
+ACTOR Paper1 : BasicDocument 17500
+{
+  //$Category Nikki Documents
+  //$Sprite PAPRA0
+  //$Title "Paper 1"
+  scale 0.5
+  States
+  {
+	  Spawn:
+	    PAPR A 1
+	    Loop
+		Pickup:
+	    PAPR A 0
+			PAPR A 0 ACS_Execute(99,0,1)
+			Stop
+  }
+}

@@ -1,6 +1,7 @@
 //Sprite based on the Suzaku puppet from Haramasete Seiryuu-kun
 Actor PuppetGirl 14500
 { 
+
   height 20
   radius 5
   States

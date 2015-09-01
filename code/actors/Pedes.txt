@@ -1,5 +1,8 @@
 ACTOR Girl1 : SwitchingDecoration 18100
 {
+  //$Category Nikki Pedestrian
+  //$Sprite GRLAA0
+  //$Title "Club Girl 1"
 	height 58
 	radius 24
 	scale 0.5

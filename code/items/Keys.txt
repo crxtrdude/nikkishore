@@ -1,0 +1,15 @@
+Actor GoldKey : Key 17009
+{
+  //$Category Nikki Keys
+  //$Sprite KEYGA0
+  //$Title "Gold Key"
+  inventory.pickupmessage "Picked up the gold key."
+  inventory.icon "STKEYS0"
+  states
+  {
+  Spawn:
+    KEYG A 10
+    KEYG A 10 Bright
+    Loop
+  }
+}

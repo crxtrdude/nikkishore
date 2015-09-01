@@ -1,18 +1,21 @@
 ACTOR BoxOBagels : Health 17008
 {
+  //$Category Nikki Items
+  //$Sprite BGBXA0
+  //$Title "Box of Bagels"
   +COUNTITEM
   +INVENTORY.AUTOACTIVATE
   +INVENTORY.ALWAYSPICKUP
   +INVENTORY.FANCYPICKUPSOUND
   Inventory.Amount 100
   Inventory.MaxAmount 200
-  Inventory.PickupMessage "$GOTSUPER" // "Supercharge!"
+  Inventory.PickupMessage "Got a nice box of bagels!"
   Inventory.PickupSound "misc/p_pkup"
   Scale 0.5
   States
   {
   Spawn:
-    SOUL ABCDCB 6 Bright
+    BGBX A -1
     Loop
   }
 }

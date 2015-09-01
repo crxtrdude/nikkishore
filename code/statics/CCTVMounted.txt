@@ -1,5 +1,8 @@
 Actor CCTVMounted 14504
 {
+  //$Category Nikki Decor
+  //$Sprite CCMOA0
+  //$Title "Mounted CCTV Camera"
 	+NOGRAVITY
 	+SPAWNCEILING
   height 20
