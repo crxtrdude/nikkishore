@@ -274,11 +274,10 @@ Script "StopDisplayable" (void)
 
 		if (isDisplayed)
 		{
-			isDisplayed = 0;   	
-			
+			isDisplayed = 0;   		
 			SetPlayerProperty (player, 0, PROP_FROZEN);
+			SetHudSize(0, 0, 0);
 			HudMessage(s:""; HUDMSG_PLAIN,2,0,0,0,0);
 			HudMessage(s:""; HUDMSG_PLAIN,1,0,0,0,0);
-			SetHudSize(0, 0, 0);
 		}
-}   
+}

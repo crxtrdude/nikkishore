@@ -64,9 +64,14 @@ skill nightmare
 clearepisodes
 episode MAP01
 {
-	picname = "M_EPI1"
-	name = "The Beginning"
-	key = "b"
+	name = "Nikki Shore"
+	key = "t"
+}
+
+episode NE2M1
+{
+	name = "Bellvue Brawl"
+	key = "b"	 
 }
 
 defaultmap
@@ -79,9 +84,11 @@ map TITLEMAP "Title"
 	music = "D_INTRO"	
 }
 
+// Nikki Shore
+
 map MAP01 lookup "QSTR_MAP01"
 {
-	levelnum = 1
+	levelnum = 0
 	titlepatch = "WILV00"
 	next = "NE1M1"
 	sky1 = "SKY1"
@@ -101,37 +108,39 @@ map NE1M1 lookup "QSTR_NE1M1"
 	music = "D_NE1M1"
 }
 
-map NE1M2 lookup "QSTR_NE1M2"
+// Bellvue Brawl
+
+map NE2M1 lookup "QSTR_NE2M1"
 {
 	levelnum = 1
 	titlepatch = "WILV00"
-	next = "NE1M3"
+	next = "NE2M2"
+	sky1 = "SKY2"
+	cluster = 2
+	par = 30
+	music = "D_NE1M1"
+}
+
+map NE2M2 lookup "QSTR_NE2M2"
+{
+	levelnum = 3
+	titlepatch = "WILV00"
+	next = "NE2M3"
 	sky1 = "SKY2"
 	cluster = 1
 	par = 30
 	music = "D_NE1M2"
 }
 
-map NE1M3 lookup "QSTR_NE1M3"
+map NE2M3 lookup "QSTR_NE2M3"
 {
 	levelnum = 1
 	titlepatch = "WILV00"
-	next = "NE1M4"
+	next = "EndTitle"
 	sky1 = "SKY2"
 	cluster = 1
 	par = 30
 	music = "D_NE1M3"
-}
-
-map NE1M4 lookup "QSTR_NE1M4"
-{
-	levelnum = 1
-	titlepatch = "WILV00"
-	next = "NE1M5"
-	sky1 = "SKY2"
-	cluster = 1
-	par = 30
-	music = "D_NE1M4"
 }
 
 // Clusters (correspond with same-numbered episode)
@@ -141,4 +150,11 @@ cluster 1
 	flat = "$bgflatE1"
 	music = "$MUSIC_VICTOR"
 	exittext = lookup, "QE1TEXT"
+}
+
+cluster 2
+{
+	flat = "$bgflatE1"
+	music = "$MUSIC_VICTOR"
+	exittext = lookup, "QE2TEXT"
 }

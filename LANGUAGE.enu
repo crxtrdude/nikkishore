@@ -135,15 +135,21 @@ TXT_DEFAULTPICKUPMSG = "You got a pickup";
 
 //NIKKI SHORE MAP NAMES:
 
+//Nikki Shore
 QSTR_MAP01 = "Nikki's Apartment";
-QSTR_NE1M1 = "The Alleyway at Gainsborough Street";
-QSTR_NE1M2 = "Downtown Gainsborough Street";
-QSTR_NE1M3 = "Garage";
+QSTR_NE1M1 = "Rachel's Apartment";
+
+//Bellvue Brawl
+QSTR_NE2M1 = "The Alleyway at Gainsborough Street";
+QSTR_NE2M2 = "Downtown Gainsborough Street";
+QSTR_NE2M3 = "Garage";
+
+//Unused
 QSTR_NE1M4 = "The Entryway Superclub";
 
 //Nikki terminal messages
 //NOTE: Works well with type 1
-//      Bounds are 19 letters high x 45 letters wide
+//      Bounds are 20 letters high x 45 letters wide
 //
   
 QTERMINAL1 = "A............................................\n" 
@@ -171,10 +177,51 @@ QPAPER1 = "Code number = 1500\n"
 					"\n"
 					"               - XOXO";																		
 
-// Nikki End
+// Nikki Intermissions
+// Start
 
+INT01 = "It was a holiday today in Bellvue. I remembered it "
+				"was the death anniversary of a senator or something. "
+				"Dad used to covere him on his early days as a "
+				"reporter. To some, it was a day of respect. To most, "
+				"it was just a day to get lazy and staying at home. "
+				"I'm like most people. \n"
+				"Cases have been pretty bleak recently. The holiday "
+				"wasn't helping at all. Few cars and jeepneys on the "
+				"roads and not much people. It was a slow day for "
+				"private investigating.";
+				
+INT02 = "By this time, I would be calling friends to hang out "
+				"and watch some movie marathon like most women do. "
+				"That is until the phone rang."; 
+				
+INT03 = "The phone, which was Shelley Volks' little encrypted "
+				"emergency line.\n"
+				"\"Cut the crap, Shell ...\"\n"
+				"\"You're Nikki right?\"\n"
+				"\"Huh? You're not Shelley?\"\n"
+				"It was scrambled, nothing like Shelley's handiwork "
+				"though."; 
+				
+INT04 = "\"Yeah, the phone system was just textbook networking."
+				"Nothing spectacular. I want you to know something ...\"\n"
+				"\"Something, what?\"\n"
+				"I went over closer to the door, sensing someone watching "
+				"me ...\n"
+				"\"I know about your little stint at Persimmony last week. "
+				"Why were you hiding against the cops? I wonder ...\"";
+				
+INT05 = "She knew? That time when I worked with some old guy who "
+				"made a patsy out of me. It was still vivid in my mind "
+				"that I wish I would forget. I was knee deep into trouble. "
+				"But still, what happened did happen. "; 
+				
 QE1TEXT =
 	"test text in full size. see you next time!\n";
+
+QE2TEXT =
+	"I guess you bothered reading this. Out.\n";
+  
   
 // Nikki Dialogs
 

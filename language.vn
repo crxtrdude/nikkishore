@@ -93,10 +93,13 @@ VNG_1_1 = "IMP";
 // NOTE: Everything here would not be on her portrait, but the portrait of
 // people she's talking to.
 
-VNG_2_4 = "SHELIDLE";
+VNG_2_4 = "P_SHEL1";
 
+// SHELLEY
+VNG_4_1 = "P_SHEL1";
 
-VNG_4_1 = "SHELIDLE";
+// MISC
+VNG_21_1 = "P_DOMWHT";
 
 // Dialogue
 // Mr. Nobody
