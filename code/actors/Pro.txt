@@ -11,7 +11,9 @@ ACTOR Pro : BasicEnemy 19001
 	Health 25
 	Speed 9
 	scale 0.4
+	AttackSound "world/swing"
   PainSound "pro/pain"
+  DeathSound "pro/death"
 	Obituary "%o got whipped by a pro."
 	States
   {

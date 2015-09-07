@@ -24,8 +24,8 @@ VN_HUD_BOUNDARY_H = "68";
 VN_HUD_WRAP_W = "348";
 
 // Hud sizes
-VN_DEFAULT_HUD_SIZE_GRAPHIC_W = "1280";
-VN_DEFAULT_HUD_SIZE_GRAPHIC_H = "960";
+VN_DEFAULT_HUD_SIZE_GRAPHIC_W = "640";
+VN_DEFAULT_HUD_SIZE_GRAPHIC_H = "480";
 VN_HUD_SIZE_ALTCHOICE_W = "480";
 VN_HUD_SIZE_ALTCHOICE_H = "280";
 VN_HUD_SIZE_CHOICE_W = "480";
@@ -115,7 +115,7 @@ VND_1_3 = "ZKVN is surprisingly close to completion, all "
 		"that's really left to do is add some additional "
 		"transition effects.";
 
-//----
+//----Shelley 1-4; Nikki 1-3
 		
 VND_4_1 = "So, let me get this straight, someone just hacked "
     "my impenetrable system from a phone, eh?";
@@ -134,7 +134,25 @@ VND_2_3 = "Save your moping to yourself Shel, we got work to do.";
 
 VND_4_4 = "Fine. Okay then. Do what you must.";
 
-VND_4_5 = "Oh yeah, you got two on your left. Go kick some ass.";
+//----Shelley 5-7; Nikki 4-5;
+
+VND_4_5 = "Shelley here.";
+
+VND_2_4 = "Shell, got you a computer to hack over.";
+
+VND_4_6 = "Oh really? Lemme see what I could do. Is it connected to the net?";
+
+VND_2_5 = "I think so.";
+
+VND_4_7 = "I'll go ahead and check it out now. Make sure you stay put.";
+
+//----Shelley 8-9; Nikki 6
+
+VND_4_8 = "It's ready. Go ahead and check it out.";
+
+VND_2_6 = "What will I do without you?";
+
+VND_4_9 = "You'll be dead pressed by now.";
 
 //----
 		

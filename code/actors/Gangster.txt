@@ -11,8 +11,10 @@ ACTOR Gangster : BasicEnemy 19002
 	Health 30
 	Speed 9
 	scale 0.4
-  PainSound "pro/pain"
-	Obituary "%o got whipped by a pro."
+	AttackSound "weapons/whip"
+  PainSound "male/pain"
+  DeathSound "male/death"
+	Obituary "%o got whacked by a gangster."
 	States
   {
   Spawn:

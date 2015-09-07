@@ -11,12 +11,84 @@ BIKEGO	BIKEGO
 BIKEIDLE	BIKEIDLE
 BIKESTRT	BIKESTRT
 
-pro/pain PROHIT 
+pro/pain PROHIT
+pro/death PROKILD
+
+$random male/pain { m_pain m_pain2 }
+m_pain MALEHIT
+m_pain2 MALEHITG
+male/death MALEKILD 
 
 weapons/nfistmelee NFSTHIT
+weapons/nfistuppercut	NIKUP
+weapons/nikkiattack	NIKATK1
+weapons/nikkiattack2	NIKATK2
 weapons/stunnerhit STUNHIT
+weapons/whip WHIPN
 
 door/latchopen	LTCHOPEN
 door/latchlocked	LTCHLOCK
 door/squeakopen DOORSQUK
 door/normalopen DOOROPEN
+door/knock DOORKNK
+door/forcebreaklock LOCKBRK
+
+world/swing SWING
+world/dust DUST
+
+$playersound	player	female *death	NIKKILD
+$playersound	player	female	*xdeath	NIKKILX
+$playersounddup	player	female	*gibbed		*xdeath
+
+$playersound	player	female	*pain100	NIKHIT
+$playersounddup	player	female	*pain75		*pain100
+$playersound	player	female	*pain50		NIKHITG
+$playersound	player	female	*pain25		NIKKILX
+
+$playersound	player	female	*grunt		NIKGRUNT
+$playersound	player	female	*land		DUST
+$playersounddup	player	female	*jump		*land
+$playersound	player	female	*usefail	dsfnoway
+
+//===========================================================================
+//
+// MISCELLANEOUS SOUNDS
+//
+//===========================================================================
+
+misc/secret			dssecret
+misc/w_pkup			dswpnup		// Pickup weapon
+misc/p_pkup			dsgetpow	// Pickup powerup
+misc/i_pkup			dsitemup	// Pickup item
+misc/k_pkup			dsitemup	// Pickup key
+misc/spawn			dsitmbk		// Item respawn
+misc/chat			dsradio		// Doom 2 chat sound
+misc/chat2			dstink		// Chat sound for everything else
+
+$limit misc/i_pkup		1
+$limit misc/k_pkup		1
+$limit misc/w_pkup		1
+$limit misc/p_pkup		1
+$pitchshift misc/i_pkup		0
+$pitchshift misc/k_pkup		0
+$pitchshift misc/chat2		0
+
+switches/normbutn		dsswtchn
+switches/exitbutn		dsswtchx
+
+misc/teleport			dstelept
+
+menu/activate			dsswtchn	// Activate a new menu
+menu/backup			dsswtchn	// Backup to previous menu
+menu/prompt			dsswtchn	// Activate a prompt "menu"
+menu/cursor			dspstop		// Move cursor up/down
+menu/change			dsstnmov	// Select new value for option
+menu/invalid			dsoof		// Menu not available
+menu/dismiss			dsswtchx	// Dismiss a prompt message
+menu/choose			dspistol	// Choose a menu item
+menu/clear			dsswtchx	// Close top menu
+
+$random menu/quit1 { player/male/death1 demon/pain grunt/pain misc/gibbed misc/teleport grunt/sight1 grunt/sight3 demon/melee }
+$random menu/quit2 { vile/active misc/p_pkup brain/cube misc/gibbed skeleton/swing knight/death baby/active demon/melee  }
+
+	

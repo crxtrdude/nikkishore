@@ -10,7 +10,33 @@ ACTOR NoFlash
  +NOGRAVITY
 }
 
-ACTOR Explosion : Rocket
+ACTOR Explode
+{
+  Radius 11
+  Height 8
+  Speed 20
+  Damage 20
+  Scale 0.85
+  Projectile
+  +RANDOMIZE
+  +DEHEXPLOSION
+  DeathSound "weapons/rocklx"
+  Obituary "%o just died from an explosion."
+  States
+  {
+  Death:
+  	BOOM A 1 Bright
+    BOOM B 3 Bright A_Explode
+    BOOM C 4 Bright
+    BOOM D 3 Bright
+    BOOM E 3 Bright
+    BOOM F 2 Bright
+    BOOM G 2 Bright
+    Stop
+  }
+}
+
+ACTOR Explosion : Explode
 {
     Spawn Parent Death
     SpawnID 200

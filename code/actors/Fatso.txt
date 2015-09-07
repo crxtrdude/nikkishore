@@ -11,7 +11,8 @@ ACTOR Fatso : BasicEnemy 19003
 	Health 20
 	Speed 7
 	scale 0.4
-  PainSound "pro/pain"
+  PainSound "male/pain"
+  DeathSound "male/death"
 	Obituary "%o got whacked with a chain by a fatso."
 	States
   {

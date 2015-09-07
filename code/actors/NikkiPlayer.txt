@@ -7,6 +7,7 @@ ACTOR NikkiPlayer : BasicPlayer
 {
 	Speed 1
 	Health 100
+	Player.RunHealth 12
 	Player.DisplayName "Nikki"
 	Player.CrouchSprite "PLYC"
 	Player.StartItem "NikkiFist"
