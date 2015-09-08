@@ -1,0 +1,6 @@
+ACTOR RandomBasic : RandomSpawner 19004
+{
+	DropItem "Pro"
+	DropItem "Fatso"
+	DropItem "Gangster"
+}
