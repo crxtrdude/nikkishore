@@ -11,8 +11,8 @@ decal DUCT1 5
 decal DUCT2 6
 {
 	pic DUCT2DEC
-	x-scale 0.15
-  y-scale 0.15
+	x-scale 0.09
+  y-scale 0.05
 }
 decal NUMPAD 7
 {

@@ -10,6 +10,8 @@
 #library "qcommon"
 #include "zcommon.acs"
 
+#define TICUNIT         35.725
+
 function void Mechanical_Lift (int sector, int min, int max, int spd)
 {
     int floor = GetSectorFloorZ (sector, 0, 0);
@@ -35,4 +37,19 @@ function void TunnelVision (int time)
 			Print(s:"TunnelVision only works on 1 and above");	
 		}
     SetHudSize(0,0,FALSE);
+}
+function int HudMessageTime(int type, int length, int typetime, int staytime, int fadetime)
+{
+   Switch(type)
+   {
+   Case HUDMSG_PLAIN:
+      return FixedMul(staytime, TICUNIT) >> 16;
+   Case HUDMSG_FADEOUT:
+      return FixedMul(staytime + fadetime, TICUNIT) >> 16;
+   Case HUDMSG_TYPEON:
+      return FixedMul(FixedMul(typetime, length << 16) + staytime + fadetime, TICUNIT) >> 16;
+   Case HUDMSG_FADEINOUT:
+      return FixedMul(typetime + staytime + fadetime, TICUNIT) >> 16;
+   }
+   return 0;
 }

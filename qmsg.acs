@@ -10,6 +10,7 @@
 
 #library "qmsg"
 #include "zcommon.acs"
+#import "qcommon.acs"
 
 int TOGGLE = 0;
 int CLICK = 0;
@@ -206,11 +207,15 @@ script "CodeKeypad" (int codenum, int scnum)
 //DisplayableText(type,message,bgimage)
 // Displays some message
 // type:
+//  FOR ACS
 //  - 0 - Default
 //  - 1 - Console (mono font)
-//  - 2 - Newspaper
+//  - 2 - Newspaper/Images
 //  - 3 - Handwritten
-//  - 10 - Default but for inventory
+//  FOR DECORATE
+//  - 10 - Default
+//  - 11 - Handwritten
+//  - 12 - Custom paper
 // message - text defined from LANGUAGE.
 // bgimage - background image
 //
@@ -220,9 +225,11 @@ script "CodeKeypad" (int codenum, int scnum)
 
 int isDisplayed = 0;
 
-Script "DisplayableText" (int type, int message)
+Script "DisplayableText" (int type, int message, int bgimage)
 {
   int player = ActivatorTID();
+  int	dispdelay;
+  str background = bgimage;
 
 	if (!isDisplayed && !TOGGLE)
 	{
@@ -241,6 +248,7 @@ Script "DisplayableText" (int type, int message)
         SetFont("BIGFONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
         break;
+        
       case 1:
         SetHudSize(512, 384, 1);
         SetFont("TERMINAL");
@@ -249,19 +257,45 @@ Script "DisplayableText" (int type, int message)
         SetFont("TERMFONT");
         HudMessage(l:message; HUDMSG_TYPEON, 1, CR_GREEN, 326.0, 236.0, 8.0, 0.01, 0.5);
         break;
+        
+      case 3:
+        SetHudSize(640, 480, 1);
+        SetFont(background);
+        HudMessage(s:"A"; HUDMSG_PLAIN, 2, 0, 320.0, 240.0, 0, 0.5);
+        SetHudSize(640, 480, 1);
+        SetFont("HAF2FONT");
+        HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 8.0, 0);
+        Delay(10);
+				ACS_NamedExecute("StopDisplayable",0,0,0,0);	         
+        break;
+        
       case 10:
+      	SetHudSize(640, 480, 1);
+        SetFont("BIGFONT");
+        HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
+				dispdelay = hudmessagetime(HUDMSG_PLAIN, strlen(strparam(l:message)), 0, 5.0, 0);        
+        delay(dispdelay + (32*5));
+				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
+        break;
+        
+      case 11:
       	SetHudSize(640, 480, 1);
         SetFont("HAF2FONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
-        delay(30*5);
+        dispdelay = hudmessagetime(HUDMSG_PLAIN, strlen(strparam(l:message)), 0, 5.0, 0);        
+        delay(dispdelay + (32*5));
 				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
         break;
-      case 11:
-      	SetHudSize(640, 480, 1);
+        
+      case 12:
+        SetHudSize(640, 480, 1);
+        SetFont(background);
+        HudMessage(s:"A"; HUDMSG_PLAIN, 2, 0, 180.0, 80.0, 0, 0.5);
+        SetHudSize(640, 480, 1);
         SetFont("HANDFONT");
-        HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
-        delay(30*5);
-				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
+        HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 8.0, 0);
+        Delay(32*5);
+				ACS_NamedExecute("StopDisplayable",0,0,0,0);	         
         break;
     }
 	}else{

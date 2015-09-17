@@ -1,0 +1,30 @@
+[enu default]
+
+//Documents are limited to 70 lines x 5 columns.
+//Full objectives are the same thing except it only has 4 columns.
+//Summaries are 68 lines only.
+
+DOC_1 = "Applesauce.";
+DOC_2 = "Banana.";
+DOC_3 = "Bagels are bread products originating in Poland, traditionally shaped\n"
+				"by hand into the form of a ring from yeasted wheat dough, roughly hand\n"
+				"-sized, which is first boiled for a short time in water and then baked.\n"
+				"The result is a dense, chewy, doughy interior with a browned and\n"
+				"sometimes crisp exterior.";
+
+NULLDOC = "NO DOCUMENTS.";  
+NULLOBJ = "NO OBJECTIVES.";
+NULLSUMM = "NO SUMMARY.";
+
+OBJ_1 = "Find Rachel\'s apartment space.";
+OBJ_1S = "Rachel is Rebecca\'s sister. Rebecca says that her sister was\n"
+					"\'kidnapped\', which I don't highly believe much. I got to\n"
+					"be sure.";
+OBJ_2 = "Find some evidence in Rachel\'s apartment.";
+OBJ_2S = "Waddyaknow, nobody's home. I need to find more evidence to say\n"
+					"that she's kidnapped.";
+TESTSUMMARY = "The quick brown fox jumps over the lazy dog over the Marikina river.";
+TESTOBJ = "\"The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico\n"
+						"Bridge. I have a feeling that Queue will fall over the San Juanico Bridge. What \n"
+						"will happen to Queue? Will she fall into her own peril?\n"
+						"Same Bat-Time, Same Bat-Channel!\"";

@@ -1,0 +1,16 @@
+ACTOR PottedPlantA 14506
+{
+  //$Category Nikki Decor
+  //$Sprite PLNTA0
+  //$Title "Potted Plant A"
+  height 30
+  radius 20
+  scale 0.45
+  +SOLID
+  States
+  {
+  Spawn:
+    PLNT A 10
+    Loop
+  }
+}

@@ -11,7 +11,7 @@
 DEFAULTLISTMENU
 {
 	Font "BigFont", "Untranslated"
-	Selector "M_SKULL1", -32, -5
+	Selector "M_SKULL1", -24, 6
 	Linespacing 24
 	Font "BIGFONT", "Untranslated"
 }
@@ -24,33 +24,27 @@ DEFAULTLISTMENU
 
 LISTMENU "MainMenu"
 {
-	IfGame(Doom, Chex)
+	StaticPatch 160, 160, "M_DOOM"
+	Selector "M_SKULL1", 80, 0
+	Position 10, 10
+	PatchItem "M_NGAME", "n", "PlayerclassMenu"
+	ifOption(SwapMenu)
 	{
-		StaticPatch 94, 2, "M_DOOM"
-		Position 97, 72
-		IfOption(ReadThis)
-		{
-			Position 97, 64
-		}
-		PatchItem "M_NGAME", "n", "PlayerclassMenu"
-		ifOption(SwapMenu)
-		{
-			PatchItem "M_LOADG", "l", "LoadGameMenu"
-			PatchItem "M_SAVEG", "s", "SaveGameMenu"
-			PatchItem "M_OPTION","o", "OptionsMenu"
-		}
-		else
-		{
-			PatchItem "M_OPTION","o", "OptionsMenu"
-			PatchItem "M_LOADG", "l", "LoadGameMenu"
-			PatchItem "M_SAVEG", "s", "SaveGameMenu"
-		}
-		ifOption(ReadThis)
-		{
-			PatchItem "M_RDTHIS","r", "ReadThisMenu"
-		}
-		PatchItem "M_QUITG", "q", "QuitMenu"
+		PatchItem "M_LOADG", "l", "LoadGameMenu"
+		PatchItem "M_SAVEG", "s", "SaveGameMenu"
+		PatchItem "M_OPTION","o", "OptionsMenu"
 	}
+	else
+	{
+		PatchItem "M_OPTION","o", "OptionsMenu"
+		PatchItem "M_LOADG", "l", "LoadGameMenu"
+		PatchItem "M_SAVEG", "s", "SaveGameMenu"
+	}
+	ifOption(ReadThis)
+	{
+		PatchItem "M_RDTHIS","r", "ReadThisMenu"
+	}
+	PatchItem "M_QUITG", "q", "QuitMenu"
 }
 
 //-------------------------------------------------------------------------------------------
@@ -186,7 +180,7 @@ OptionMenu "OptionsMenu"
 	Submenu "Mouse options",			"MouseOptions"
 	Submenu "Joystick options",			"JoystickOptions"
 	StaticText " "
-	Submenu "Player Setup",				"PlayerMenu"
+	//Submenu "Player Setup",				"PlayerMenu"
 	Submenu "Gameplay Options",			"GameplayOptions"
 	Submenu "Automap Options",			"AutomapOptions"
 	Submenu "Miscellaneous Options",	"MiscOptions"
@@ -230,18 +224,18 @@ ListMenu "PlayerMenu"
 {
 	StaticTextCentered 160, 6, "$MNU_PLAYERSETUP"
 	Font "SmallFont"
-	Linespacing 18
+	Linespacing 12
 	Position 48, 36
 
 	PlayerNameBox "Name", 0, "Playerbox"
-	Selector "-", -16, -1
+	Selector "-", -10, 6
 	MouseWindow 0, 220
 	PlayerDisplay 220, 80, "20 00 00", "80 00 40", 1, "PlayerDisplay"
 	
 	ValueText "Team", "Team"
 	ValueText "Color", "Color"
 	
-	Linespacing 12
+	Linespacing 16
 	Slider "Red", "Red", 0, 255, 16
 	Slider "Green", "Green", 0, 255, 16
 	Slider "Blue", "Blue", 0, 255, 16
