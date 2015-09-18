@@ -1,0 +1,145 @@
+
+// CheckScene - Checks if the 'slide' is at the end.
+Function int CheckScene(void)
+{
+    if (scene != 5){
+        //LOG(s:"ON - Scene is ",d:scene);
+        //LOG(s:"ON - Use is ",d:Use);
+        Use = False;
+    }else{
+        return 0;
+    }
+    return 1;
+}
+
+// Script for the slideshow.
+script 46 (void)
+{  
+    int i;
+    int player = 0;
+    int dispdelay, usedelay;
+    ACS_Terminate(47,0);
+    if(isIntermission){
+        if (CheckScene()){
+            if (scene == 0){
+                ACS_NamedExecute("DisplayableIntermission",0,"INT01","INT01",10.0);
+                dispdelay = hudmessagetime(HUDMSG_TYPEON, strlen(strparam(l:"INT01")), 0.03, 10.0, 0.5);
+                delay(32);
+            }
+            else if (scene == 1){
+                ACS_NamedExecute("DisplayableIntermission",0,"INT01","INT02",10.0);
+                dispdelay = hudmessagetime(HUDMSG_TYPEON, strlen(strparam(l:"INT02")), 0.03, 10.0, 0.5);
+                delay(32);
+            }
+            else if (scene == 2){
+                ACS_NamedExecute("DisplayableIntermission",0,"INT01","INT03",10.0);
+                dispdelay = hudmessagetime(HUDMSG_TYPEON, strlen(strparam(l:"INT03")), 0.03, 10.0, 0.5);
+                delay(32);
+            }
+            else if (scene == 3){
+                ACS_NamedExecute("DisplayableIntermission",0,"INT01","INT04",10.0);
+                dispdelay = hudmessagetime(HUDMSG_TYPEON, strlen(strparam(l:"INT04")), 0.03, 10.0, 0.5);
+                delay(32);
+            }
+            else if (scene == 4){
+                ACS_NamedExecute("DisplayableIntermission",0,"INT01","INT05",10.0);
+                dispdelay = hudmessagetime(HUDMSG_TYPEON, strlen(strparam(l:"INT05")), 0.03, 10.0, 0.5);
+                delay(32);
+            }
+            SetHudSize(320, 240, 1);
+            SetFont("PRESS0");
+            usedelay = dispdelay + (32*4);
+            HudMessage(s:"A"; HUDMSG_PLAIN, 1, CR_YELLOW, 296.0, 216.0, usedelay);
+            
+						ACS_NamedExecute("PressUse",0,0,0,0); //Executes that script that checks for the player hitting "Use" (See below for the script)
+            Until(Use==TRUE) //Delay that waits for feedback from the "PressUse" script
+            {
+               delay(1);
+               DoneUse = False;
+            }
+            
+						SetFont("PRESS1");
+            HudMessage(s:"A"; HUDMSG_PLAIN, 1, CR_YELLOW, 296.0, 216.0, 3.0);
+            ACS_NamedTerminate("PressUse",0);
+            ACS_NamedTerminate("DisplayableIntermission",0);
+            ACS_NamedExecute("StopIntermissionDisplayable",0,0,0,0);
+            DoneUse = True;
+        }else{
+            SetPlayerProperty(player, 0, PROP_FROZEN);
+            ChangeLevel("NE1M1", 0, CHANGELEVEL_NOINTERMISSION, -1); 
+        }
+    }else{
+        scene++;
+        //LOG(s:"OFF - Scene is ",d:scene);
+        isIntermission = True;
+    }
+    SetFont("SMALLFONT");
+    ACS_Execute(47,0);
+}
+Script 47 (void){
+    if (DoneUse){
+        ACS_ExecuteAlways(46,0);
+    }
+}
+Script "PressUse" (Void)
+{
+    int buttons;
+    Use = FALSE;
+    While(TRUE)
+    {
+        buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+        If (buttons == BT_USE)
+        {
+            //log(s:"Pressed Use");
+            Use = TRUE;
+            isIntermission = False;
+            break;
+        }
+        Else
+        {
+            Use = FALSE;
+        }
+        Delay(1);
+    }
+}
+
+Script "DisplayableIntermission" (int PIC, int TXT, int HOLD)
+{
+    int dispdelay, picdelay;
+  //log(s:"IsDisplayed = ",i:isDisplayed);
+    if (!isDisplayed)
+    {
+        isDisplayed = 1;
+        //log(s:"IsDisplayed = ",i:isDisplayed);
+
+        //Set displayable
+        Delay(3);
+        //Show the text overlay
+
+        SetHudSize(640, 480, 1);
+        SetFont(PIC);
+        dispdelay = hudmessagetime(HUDMSG_TYPEON, strlen(strparam(l:TXT)), 0.03, HOLD, 0.5);
+        picdelay = dispdelay + (32*5);
+        HudMessage(s:"A"; HUDMSG_PLAIN, 3, 0, 320.0, 240.0, picdelay, 0.5);
+        SetHudSize(640, 480, 1);
+        SetFont("BIGFONT");
+        HudMessage(l:TXT; HUDMSG_TYPEON, 2, CR_UNTRANSLATED, 320.0, 240.0, HOLD, 0.03, 0.5);
+        delay(dispdelay + (32*5));
+        isDisplayed = 0;
+        ACS_NamedExecute("StopIntermissionDisplayable",0,0,0,0);
+    }    
+}
+
+Script "StopIntermissionDisplayable" (int wasNotFrozen)
+{
+    int player = ActivatorTID();
+
+    isDisplayed = 0;   	
+    SetHudSize(0, 0, 0);
+    //HudMessage(s:""; HUDMSG_PLAIN,3,0,0,0,0);
+    HudMessage(s:""; HUDMSG_PLAIN,2,0,0,0,0);
+    HudMessage(s:""; HUDMSG_PLAIN,1,0,0,0,0);
+    //log(s:"IsDisplayed = ",i:isDisplayed);
+    //Log(s:"QMSG - Done");		
+    Use = True;
+}

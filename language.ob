@@ -1,20 +1,25 @@
 [enu default]
 
-//Documents are limited to 70 lines x 5 columns.
-//Full objectives are the same thing except it only has 4 columns.
-//Summaries are 68 lines only.
+//Clues(documents) are 24 characters x 12 lines
+//Objectives are always 25 characters x 4 lines
+//Notes could be longer though (can be 70x5)
 
 DOC_1 = "Applesauce.";
 DOC_2 = "Banana.";
-DOC_3 = "Bagels are bread products originating in Poland, traditionally shaped\n"
-				"by hand into the form of a ring from yeasted wheat dough, roughly hand\n"
-				"-sized, which is first boiled for a short time in water and then baked.\n"
-				"The result is a dense, chewy, doughy interior with a browned and\n"
-				"sometimes crisp exterior.";
+DOC_3 = "Bagels are bread products "
+				"originating in Poland, "
+				"traditionally shaped "
+				"by hand into the form "
+				"of a ring from yeasted "
+				"wheat dough, roughly "
+				"hand-sized, which is "
+				"first boiled for a "
+				"short time in water and "
+				"then baked.";
 
-NULLDOC = "NO DOCUMENTS.";  
+NULLDOC = "NO EVIDENCES.";  
+NULLNTS = "NO NOTES.";
 NULLOBJ = "NO OBJECTIVES.";
-NULLSUMM = "NO SUMMARY.";
 
 OBJ_1 = "Find Rachel\'s apartment space.";
 OBJ_1S = "Rachel is Rebecca\'s sister. Rebecca says that her sister was\n"

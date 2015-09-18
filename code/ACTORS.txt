@@ -7,7 +7,7 @@
 //Enemies
 #include "code/actors/pro.txt"
 #include "code/actors/gangster.txt"
-#include "code/actors/fatso.txt"
+#include "code/actors/fatdude.txt"
 #include "code/actors/randombasic.txt"
 
 //Misc

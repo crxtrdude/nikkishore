@@ -49,3 +49,21 @@ ACTOR StunnerDummy : BulletPuff
 {
 	DamageType NStunner
 }
+
+ACTOR NoWeapon : Fist
+{
+	+CHEATNOTWEAPON
+	+NOAUTOFIRE
+	States
+	{
+		Ready:
+			TNT1 A 1
+			Loop
+		Select:
+			TNT1 A 1
+			Loop
+		Deselect:
+			TNT1 A 1
+			Loop	
+	}
+}

@@ -4,3 +4,4 @@
 #include "code/statics/CCTVMounted.txt"
 #include "code/statics/couch1.txt"
 #include "code/statics/beanbag.txt"
+#include "code/statics/pottedplanta.txt"

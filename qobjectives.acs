@@ -1,0 +1,240 @@
+//==========================================================
+// Nikki Shore
+// QObjectives - Objectives system.
+//
+// Code by CRxTRDude.
+//==========================================================
+
+#library "qobjectives"
+#include "zcommon.acs"
+
+#define NOTE_BOUNDX 57
+#define NOTE_BOUNDY	45
+#define NOTE_BOUNDW 194
+#define NOTE_BOUNDH 339
+
+#define OBJ_BOUNDX 339
+#define OBJ_BOUNDY 52
+#define OBJ_BOUNDW 248
+#define OBJ_BOUNDH 81
+
+#define CLUE_BOUNDX 384
+#define CLUE_BOUNDY 157
+#define CLUE_BOUNDW 202
+#define CLUE_BOUNDH 233
+
+#define CLUENUMX 363.0 
+#define CLUENUMY 165.0
+
+global str 1:objectives;
+global str 2:notes;
+global str 3:clue[];
+global int 4:cluetotal; 
+
+int pressed, keyc; //0-forward, 1-back
+int isObjectiveDisplayed = False;
+int disabledObjectives = False;
+int clueindex;
+int player;
+                            
+Function void InitObjectives (void){
+	//Called at a start of a 'game' map.
+	//Just initialize the icon
+	DisableObjectives (TRUE);
+	cluetotal = 0; //the total number of evidences you have.
+	clue[0] = "NULLDOC";
+	objectives = "NULLOBJ";
+	notes = "NULLNTS";
+	Log(s:"Objective system initialized.");
+}
+
+Function void DisableObjectives (int a){
+	disabledObjectives = a;
+	if (!a){
+		ACS_NamedExecute("ShowObjHud",0,1);		
+		Log(s:"Objective system enabled.");
+	}else{
+		ACS_NamedExecute("ShowObjHud",0,0);
+		Log(s:"Objective system disabled.");
+	}
+}
+
+Script "ToggleObjectives" (void){
+	player = ActivatorTID();
+	//This toggles off the screen.
+	//controlled by a CCMD using pukename
+	if (!DisabledObjectives){
+		if (!isObjectiveDisplayed){
+			clueindex = 0; //the current index of evidences
+			SetPlayerProperty(player, 1, PROP_FROZEN);
+			GiveInventory("NoWeapon",1);
+			SetWeapon("NoWeapon");
+			Delay(35);				
+			isObjectiveDisplayed = TRUE;
+			ACS_NamedExecute("UpdateObjectives",0);		
+		}else{
+			ACS_NamedExecute("StopObjectives",0);
+		}
+	}
+}
+
+Script "UpdateObjectives" (void){
+	if (isObjectiveDisplayed){
+		pressed = FALSE;
+		ACS_NamedExecute("DrawObjectives",0);
+		if (cluetotal != 0){
+			Log(s:"Waiting for key input ...");		
+			ACS_NamedExecute("ObjKeyInput",0);
+			While(!pressed){
+				delay(1);
+			}
+			ACS_NamedTerminate("ObjKeyInput",0);
+			
+			ACS_NamedExecute("ObjKeyCatcher",0);
+		}			
+	}
+}
+
+Script "DrawObjectives" (void){
+	int notecenterx = 154.0;
+	int notecentery = 215.0;
+	
+	int objcenterx = 463.0;
+	int objcentery = 88.0;
+	
+	int cluecenterx = 485.0;
+	int cluecentery = 274.0;
+	str currentclue = clue[clueindex];
+	int currentindex = clueindex + 1;
+	
+	str sample = "THE QUICK BROWN QUEUE JUMPS OVER THE LAZY TAFFIE-WAFFY OVER THE SAN JUANICO BRIDGE";
+	
+	if (isObjectiveDisplayed){
+	    SetHudSize(640, 480, 1);
+      SetFont("SCR_OBJ");
+      HudMessage(s:"A"; HUDMSG_PLAIN, 6, 0, 320.0, 240.0, 0.0);
+      //Notes
+      SetFont("HAND3FNT");
+      SetHudClipRect(NOTE_BOUNDX, NOTE_BOUNDY, NOTE_BOUNDW, NOTE_BOUNDH, NOTE_BOUNDW);
+      HudMessage(l:notes; HUDMSG_PLAIN, 2, CR_BLACK, notecenterx, notecentery, 0.0);
+      //Objective
+			SetHudClipRect(OBJ_BOUNDX, OBJ_BOUNDY, OBJ_BOUNDW, OBJ_BOUNDH, OBJ_BOUNDW);
+      HudMessage(s:sample; HUDMSG_PLAIN, 3, CR_BLACK, objcenterx, objcentery, 0.0);
+      //Clues
+			SetHudClipRect(CLUE_BOUNDX, CLUE_BOUNDY, CLUE_BOUNDW, CLUE_BOUNDH, CLUE_BOUNDW);
+      HudMessage(l:currentclue; HUDMSG_PLAIN, 4, CR_BLACK, cluecenterx, cluecentery, 0.0);
+			SetHudClipRect(0,0,0,0,0);
+			//Clue count
+      HudMessage(i:currentindex; HUDMSG_PLAIN,5,CR_BLACK,CLUENUMX,CLUENUMY,0);	
+	}
+
+}
+
+Script "ObjKeyInput" (void){
+	  int buttons;
+	  int indexcontext = cluetotal - 1;
+    pressed = FALSE;
+    log(s:"clueindex previous ",i:clueindex);
+    While(TRUE)
+    {
+        buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+        If (buttons == BT_FORWARD){
+          log(s:"Pressed Forward");
+          pressed = TRUE;
+					keyc = FALSE;
+					if(clueindex == 0){
+						clueindex = indexcontext;
+					}else{
+						clueindex = clueindex - 1;
+					}  
+          break;
+        }
+				Else If (buttons == BT_BACK){
+					log(s:"Pressed Back");
+          pressed = TRUE;
+					keyc = TRUE;
+					if (clueindex == indexcontext){
+						clueindex = 0;
+					}else{
+						clueindex = clueindex + 1;
+					}           
+          break;									
+				}
+        Else{
+            pressed = FALSE;
+        }
+        Delay(1);
+    }
+    log(s:"clueindex current ",i:clueindex);
+}
+
+Script "ObjKeyCatcher" (void){
+		//This is what's called after input is passed.
+		//Might not be called a 'catcher', but I
+		//don't know what to call it.
+		if (isObjectiveDisplayed){
+			Delay(10);
+			ACS_NamedExecute("UpdateObjectives",0);
+		}
+}
+
+Script "StopObjectives" (void){
+	player = ActivatorTID();
+	if (isObjectiveDisplayed){
+		pressed = TRUE;
+		ACS_NamedTerminate("ObjKeyInput",0);
+		HudMessage(s:""; HUDMSG_PLAIN,2,0,0,0,0);
+		HudMessage(s:""; HUDMSG_PLAIN,3,0,0,0,0);
+		HudMessage(s:""; HUDMSG_PLAIN,4,0,0,0,0);
+		HudMessage(s:""; HUDMSG_PLAIN,5,0,0,0,0);
+		HudMessage(s:""; HUDMSG_PLAIN,6,0,0,0,0);
+		TakeInventory("NoWeapon",1);
+		SetPlayerProperty(player, 0, PROP_FROZEN);	
+		isObjectiveDisplayed = FALSE;
+	}
+}
+
+Script "ShowObjHud" (int stats){
+//Stats:
+// 0 - Inactive or init
+// 1 - Active
+// 2 - Flash
+
+	int ObjIcoHudX = 60.0;
+	int ObjIcoHudY = 60.0;
+	
+	SetHudSize(640,480,1);
+	if (stats == 1){
+		SetFont("I_OBJ");
+	}else if (stats == 2){
+		SetFont("I_OBJN");
+	}else{
+		SetFont("I_OBJ0");
+	}
+	HudMessage(s:"A"; HUDMSG_PLAIN,8,0,ObjIcoHudX,ObjIcoHudY,0);	
+}
+
+Script "FlashObjHud" (void){
+	ACS_NamedExecute("ShowObjHud",0,2);
+	delay(32*2);
+	ACS_NamedExecute("ShowObjHud",0,1);
+}
+
+Script "FlashClueHud" (void){
+// Just flashes temporarily.
+}
+
+Function void AddObjectives (int s, int f){
+	objectives = s;
+	notes = f;
+	if (disabledObjectives) DisableObjectives (FALSE);
+	ACS_NamedExecute("FlashObjHud",0);
+}
+
+Function void AddClue (int c){
+	str cluestring = c;
+	clue[cluetotal] = cluestring;
+	str cluelog = clue[cluetotal];
+	log(s:"Clue ", i:cluetotal, s:"\: ", l:cluelog, s:" - Okay!");
+	cluetotal++;  
+}
