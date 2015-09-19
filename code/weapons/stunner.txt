@@ -6,7 +6,7 @@ ACTOR ItemStunner : CustomInventory 15000
 	Radius 16
 	Height 8
 	Scale 0.5
-	Inventory.PickupMessage "You got the stun gun." 
+	Inventory.PickupMessage "You got the stun gun."
 	States
 	{
 	Spawn:
@@ -14,7 +14,7 @@ ACTOR ItemStunner : CustomInventory 15000
 		Loop
 	Pickup: 
 		TAZI A 0 
-		TAZI A 0 A_PlaySound("pickups/weapon")
+		TAZI A 0 A_PlaySound("world/equip")
 		TAZI A 0 A_GiveInventory("Stunner",1)
 		Stop
 	}

@@ -35,6 +35,7 @@ door/forcebreaklock LOCKBRK
 
 world/swing SWING
 world/dust DUST
+world/equip EQUIP
 
 $playersound	player	female *death	NIKKILD
 $playersound	player	female	*xdeath	NIKKILX
@@ -57,10 +58,10 @@ $playersound	player	female	*usefail	dsfnoway
 //===========================================================================
 
 misc/secret			dssecret
-misc/w_pkup			dswpnup		// Pickup weapon
-misc/p_pkup			dsgetpow	// Pickup powerup
-misc/i_pkup			dsitemup	// Pickup item
-misc/k_pkup			dsitemup	// Pickup key
+$alias	misc/w_pkup			world/equip		// Pickup weapon
+misc/p_pkup			powerup	// Pickup powerup
+misc/i_pkup			pickup	// Pickup item
+$alias misc/k_pkup			misc/i_pkup	// Pickup key
 misc/spawn			dsitmbk		// Item respawn
 misc/chat			dsradio		// Doom 2 chat sound
 misc/chat2			dstink		// Chat sound for everything else
@@ -78,15 +79,15 @@ switches/exitbutn		dsswtchx
 
 misc/teleport			dstelept
 
-menu/activate			dsswtchn	// Activate a new menu
-menu/backup			dsswtchn	// Backup to previous menu
-menu/prompt			dsswtchn	// Activate a prompt "menu"
-menu/cursor			dspstop		// Move cursor up/down
-menu/change			dsstnmov	// Select new value for option
-menu/invalid			dsoof		// Menu not available
-menu/dismiss			dsswtchx	// Dismiss a prompt message
-menu/choose			dspistol	// Choose a menu item
-menu/clear			dsswtchx	// Close top menu
+menu/activate			menusel	// Activate a new menu
+menu/backup			menuret	// Backup to previous menu
+menu/prompt			menusel	// Activate a prompt "menu"
+menu/cursor			menurol		// Move cursor up/down
+menu/change			menurol	// Select new value for option
+menu/invalid			menubac		// Menu not available
+menu/dismiss			menubac	// Dismiss a prompt message
+menu/choose			menusel	// Choose a menu item
+menu/clear			menuret	// Close top menu
 
 $random menu/quit1 { male/death pro/pain weapons/nfistuppercut }
 $random menu/quit2 { player/female/grunt door/normalopen misc/secret }
