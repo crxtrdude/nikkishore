@@ -8,7 +8,11 @@ ACTOR NikkiFist: Fist Replaces Fist
 			TNT1 A -1
 			Loop
 		Ready:
-			NFST A 5 A_WeaponReady
+			NFST A 35 A_WeaponReady
+			NFST B 3
+			NFST C 7
+			NFST B 3
+			NFST A 1
 			Goto Ready
 		Deselect:
 			NFST A 1 A_Lower
@@ -39,6 +43,9 @@ ACTOR NikkiFist: Fist Replaces Fist
 			NFST I 4
 			NFST I 0 A_ReFire
 			Goto Ready
+			TNT1 A -1
+			Goto Uppercut
+		Uppercut:
 			NFST F 2 A_FireCustomMissile ("SledgeHammerDummy", 0, 0)
 			NFST L 2 SetPlayerProperty(0,1,0)
 			NFST M 2 A_PlaySound("weapons/nfistuppercut") 

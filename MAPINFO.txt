@@ -108,6 +108,50 @@ map NE1M1 lookup "QSTR_NE1M1"
 	music = "D_NE1M1"
 }
 
+map NE1M2 lookup "QSTR_NE1M2"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	next = "NE1M3"
+	sky1 = "SKY2"
+	cluster = 1
+	par = 30
+	music = "D_NE1M2"
+}
+
+map NE1M3 lookup "QSTR_NE1M3"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	next = "NE1M4"
+	sky1 = "SKY2"
+	cluster = 1
+	par = 30
+	music = "D_NE1M3"
+}
+
+map NE1M4 lookup "QSTR_NE1M4"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	next = "NE1M2"
+	sky1 = "SKY2"
+	cluster = 1
+	par = 30
+	music = "D_NE1M4"
+}
+
+map NE1M5 lookup "QSTR_NE1M5"
+{
+	levelnum = 1
+	titlepatch = "WILV00"
+	sky1 = "SKY2"
+	next = "EndTitle"
+	cluster = 1
+	par = 30
+	music = "D_NE1M5"
+}
+
 // Bellvue Brawl
 
 map NE2M1 lookup "QSTR_NE2M1"

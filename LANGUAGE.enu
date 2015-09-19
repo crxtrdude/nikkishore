@@ -2,8 +2,6 @@
  
 [enu default]
 
-DEVED = "Developer Edition";
-
 SECRETMESSAGE = "You stumbled upon a secret!";
 
 D_DEVSTR = "Useless mode ON.\n";
@@ -138,6 +136,10 @@ TXT_DEFAULTPICKUPMSG = "You got a pickup";
 //Nikki Shore
 QSTR_MAP01 = "Nikki's Apartment";
 QSTR_NE1M1 = "Rachel's Apartment";
+QSTR_NE1M2 = "The Entryway Superclub";
+QSTR_NE1M3 = "The Alleyway";
+QSTR_NE1M4 = "Warehouse 19";
+QSTR_NE1M5 = "The Mansion"; 
 
 //Bellvue Brawl
 QSTR_NE2M1 = "The Alleyway at Gainsborough Street";
