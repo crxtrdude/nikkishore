@@ -12,6 +12,8 @@
 
 #define TICUNIT         35.725
 
+int player;
+
 function void Mechanical_Lift (int sector, int min, int max, int spd)
 {
     int floor = GetSectorFloorZ (sector, 0, 0);
@@ -27,17 +29,6 @@ function void Mechanical_Lift (int sector, int min, int max, int spd)
         FloorAndCeiling_LowerByValue(sector,spd,value);
     }
 }
-function void TunnelVision (int time)
-{
-		SetFont("VIGNA0");
-		SetHudSize(320,240,FALSE);
-		if (time > 0){
-    	HudMessage(s:"A"; HUDMSG_FADEINOUT|HUDMSG_ALPHA|HUDMSG_NOTWITHFULLMAP|HUDMSG_NOTWITHOVERLAYMAP|HUDMSG_LAYER_UNDERHUD, 0, 0, 0.5, 0.5, time, 0.2, 0.2, 0.8);	
-    }else{
-			Print(s:"TunnelVision only works on 1 and above");	
-		}
-    SetHudSize(0,0,FALSE);
-}
 function int HudMessageTime(int type, int length, int typetime, int staytime, int fadetime)
 {
    Switch(type)
@@ -52,4 +43,22 @@ function int HudMessageTime(int type, int length, int typetime, int staytime, in
       return FixedMul(typetime + staytime + fadetime, TICUNIT) >> 16;
    }
    return 0;
+}
+
+Function void Q_Pause (int pl, bool Paused)
+{
+	if(Paused)
+	{
+		Thing_Stop(pl);
+		SetPlayerProperty(pl, TRUE, PROP_FROZEN);
+		if(CheckActorInventory(pl, "PowerTimeFreezer") == 0)
+			GiveActorInventory(pl, "PausePower", 1);
+			log(s:"Paused ...");
+	}
+	else
+	{
+		SetPlayerProperty(pl, FALSE, PROP_FROZEN);
+		TakeActorInventory(pl, "PowerTimeFreezer", 0x7fffffff);
+		log(s:"Resumed ...");
+	}
 }

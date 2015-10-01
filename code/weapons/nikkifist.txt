@@ -31,7 +31,7 @@ ACTOR NikkiFist: Fist Replaces Fist
 			NFST A 0 A_ReFire
 			Goto Ready
 		AltFire:
-			NFST A 0 A_JumpIfInventory("DoubleTapCheck",1,13)
+			NFST A 0 A_JumpIfInventory("DoubleTapCheck",1,"Uppercut")
 			NFST A 0 A_GiveInventory("DoubleTapCheck",1)
 			NFST I 8 A_WeaponReady
 			NFST A 0 A_TakeInventory("DoubleTapCheck",999)
@@ -43,8 +43,6 @@ ACTOR NikkiFist: Fist Replaces Fist
 			NFST I 4
 			NFST I 0 A_ReFire
 			Goto Ready
-			TNT1 A -1
-			Goto Uppercut
 		Uppercut:
 			NFST F 2 A_FireCustomMissile ("SledgeHammerDummy", 0, 0)
 			NFST L 2 SetPlayerProperty(0,1,0)

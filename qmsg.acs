@@ -11,6 +11,9 @@
 #library "qmsg"
 #include "zcommon.acs"
 #import "qcommon.acs"
+#import "qobjectives.acs"
+
+#define TICUNIT         35.725
 
 int TOGGLE = 0;
 int CLICK = 0;
@@ -53,14 +56,17 @@ script "SpawnWallCam" ENTER
 	spawn("wallcam", 0, 0, 0, 1);
 	thing_changetid(0, 500);
 }
+
 script "TypeInNumber" (void)
 {
 	setfont("BIGFONT");
 	hudmessage (a:cnum; 0, 3, CR_BLUE, 320.0, 152.0, 1);
+	PlaySound(0,"keypad/click");
 }
 
 script "CodeKeypad" (int codenum, int scnum)
 {
+	player = ActivatorTID();
 
 	//Code to split number into two sets using modulo.	
 	int lowcode = codenum%100;
@@ -71,8 +77,6 @@ script "CodeKeypad" (int codenum, int scnum)
 	int mx, my;
 	
 	int wallcam = 500; //See SpawnWallCam. 
-	
-	int player = ActivatorTID();
 
 	if(!TOGGLE)
 	{
@@ -86,6 +90,9 @@ script "CodeKeypad" (int codenum, int scnum)
 		setactorangle(1, getactorangle(player));
 		setactorpitch(1, getactorpitch(player));
   	SetPlayerProperty (player, 1, PROP_FROZEN);
+  	OBJ_Disable (TRUE);
+		GiveInventory("NoWeapon",1);
+		SetWeapon("NoWeapon");  	
 		changecamera(1, 0, 0);
 		thing_stop(player);
 		
@@ -128,10 +135,14 @@ script "CodeKeypad" (int codenum, int scnum)
 			x = (mx/33) + 320;
 			y = (my/33) + 240;
 
+			//Draw cursor and display
 			setfont("numbers2");
 			hudmessage (s:"A"; 0, 5, -1, 392.0, 318.0, 1);
 			setfont("doomcurs");
 			hudmessage (s:"A"; 0, 4, -1, (x<<16)+11.0, (y<<16)+15.0, 1);
+			
+			//Click logic
+			//			
 			if(CLICK)
 			{
 				CLICK = 0;
@@ -151,9 +162,10 @@ script "CodeKeypad" (int codenum, int scnum)
 					}
 				}
 				if(!(x > -8 && x < 136 && y > -8 && y < 178)) TOGGLE = 0;
-
 			}
-			else if(NUMPAD != -1) // numpad input, needs "puke"ing though
+			
+			// numpad input, needs "puke"ing though			
+			else if(NUMPAD != -1)
 			{
 				incode = (incode * 10) + NUMPAD;
 				cnum[digit*2] = NUMPAD + '0';
@@ -161,6 +173,10 @@ script "CodeKeypad" (int codenum, int scnum)
 				acs_namedexecute("TypeInNumber", 0);
 				NUMPAD = -1;
 			}
+			
+			//Logic of the keypad
+			//Either the code is true or false
+			
 			if(digit == 4)
 			{
 				delay(17);
@@ -168,6 +184,7 @@ script "CodeKeypad" (int codenum, int scnum)
 				{
 					setfont("BIGFONT");
 					hudmessage (s:"GRANTED"; 0, 3, CR_GREEN, 320.0, 152.0, 1);
+					PlaySound(0,"keypad/accepted");
 					delay(17);
 					acs_execute(scnum, 0);
 					TOGGLE = 0;
@@ -176,6 +193,7 @@ script "CodeKeypad" (int codenum, int scnum)
 				{
 					setfont("BIGFONT");
 					hudmessage (s:"DENIED"; 0, 3, CR_RED, 320.0, 152.0, 1);
+					PlaySound(0,"keypad/denied");
 					incode = 0;
 					digit = 0;
 					clcnum();
@@ -192,7 +210,9 @@ script "CodeKeypad" (int codenum, int scnum)
 		TakeInventory("KeypadMouseIn", 1);
 		setactorangle(0, getactorangle(1));
 		setactorpitch(wallcam, getactorpitch(1));
+		TakeInventory("NoWeapon",1);
 		SetPlayerProperty (player, 0, PROP_FROZEN);
+		OBJ_Disable (False);
 		changecamera(0, 0, 0);
 		hudmessage (s:" "; 0, 5, -1, 0, 0, 1);
 		hudmessage (s:" "; 0, 4, -1, 0, 0, 1);
@@ -227,9 +247,9 @@ int isDisplayed = 0;
 
 Script "DisplayableText" (int type, int message, int bgimage)
 {
-  int player = ActivatorTID();
   int	dispdelay;
   str background = bgimage;
+  player = ActivatorTID();
 
 	if (!isDisplayed && !TOGGLE)
 	{
@@ -274,7 +294,7 @@ Script "DisplayableText" (int type, int message, int bgimage)
         SetFont("BIGFONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
 				dispdelay = hudmessagetime(HUDMSG_PLAIN, strlen(strparam(l:message)), 0, 5.0, 0);        
-        delay(dispdelay + (32*5));
+        delay(dispdelay + (TICUNIT*5));
 				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
         break;
         
@@ -283,7 +303,7 @@ Script "DisplayableText" (int type, int message, int bgimage)
         SetFont("HAF2FONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
         dispdelay = hudmessagetime(HUDMSG_PLAIN, strlen(strparam(l:message)), 0, 5.0, 0);        
-        delay(dispdelay + (32*5));
+        delay(dispdelay + (TICUNIT*5));
 				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
         break;
         
@@ -294,7 +314,7 @@ Script "DisplayableText" (int type, int message, int bgimage)
         SetHudSize(640, 480, 1);
         SetFont("HANDFONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 8.0, 0);
-        Delay(32*5);
+        Delay(TICUNIT*5);
 				ACS_NamedExecute("StopDisplayable",0,0,0,0);	         
         break;
     }
@@ -304,8 +324,7 @@ Script "DisplayableText" (int type, int message, int bgimage)
 }
 Script "StopDisplayable" (void)
 {
-  	int player = ActivatorTID();
-
+		player = ActivatorTID();
 		if (isDisplayed)
 		{
 			isDisplayed = 0;   		

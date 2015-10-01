@@ -33,6 +33,10 @@ door/normalopen DOOROPEN
 door/knock DOORKNK
 door/forcebreaklock LOCKBRK
 
+keypad/click		KPCLICK
+keypad/denied		KPDENY
+keypad/accepted	KPOKAY
+
 world/swing SWING
 world/dust DUST
 world/equip EQUIP

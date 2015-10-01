@@ -1,0 +1,49 @@
+//==========================================================
+// Nikki Shore
+// QVN - Visual novel system
+//
+// Based on code by Ral22 (StoneshipMapper)
+// http://forum.zdoom.org/viewtopic.php?f=37&t=38215&p=724983 
+//
+// Code by CRxTRDude.
+//==========================================================
+
+#library "qvn"
+#include "zcommon.acs"
+#import "qcommon.acs"
+
+#define TICUNIT         35.725
+
+int player;
+
+Script "VN_Init" (int type){
+
+}
+
+Script "VN_Update" (int type, int par1, int par2){
+
+}
+
+Script "VN_Draw" (void){
+
+}
+
+Script "VN_KeyInput" (void){
+
+}
+
+Script "VN_KeyCatcher" (void){
+
+}
+
+Function void VN_Dialogue(int text, int po1, int po2, int po3, int current){
+
+}
+
+Function void VN_Choice(int choice1, int choice2, int choice3, int default){
+
+}
+
+Script "VN_Stop" (void){
+
+}

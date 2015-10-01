@@ -1,0 +1,32 @@
+ACTOR NoWeapon : Fist
+{
+	+CHEATNOTWEAPON
+	+NOAUTOFIRE
+	States
+	{
+		Ready:
+			TNT1 A 1
+			Loop
+		Select:
+			TNT1 A 1
+			Loop
+		Deselect:
+			TNT1 A 1
+			Loop	
+	}
+}
+
+Actor PausePower : PowerupGiver
+{
+  Inventory.Pickupmessage "Ditto."
+  Inventory.MaxAmount 0
+  Powerup.Type "TimeFreezer"
+  Translation "128:143=48:63"
+  +AUTOACTIVATE
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    Loop
+  }
+}

@@ -6,4 +6,6 @@
 #include "code/statics.txt"
 #include "code/items.txt"
 
+#include "code/actorcommon.txt"
+
 #include "code/effects.txt"

@@ -11,5 +11,5 @@ bind kp0 "pukename \"CodeKeyInput\" 0"
 
 addkeysection "Nikki Shore Controls" NikKeysection
 addmenukey "Toggle Notebook" nikkiobj
-alias nikkiobj "pukename \"ToggleObjectives\""
+alias nikkiobj "pukename \"OBJ_Toggle\""
 defaultbind Q nikkiobj
