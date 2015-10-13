@@ -13,8 +13,6 @@
 #import "qcommon.acs"
 #import "qobjectives.acs"
 
-#define TICUNIT         35.725
-
 int TOGGLE = 0;
 int CLICK = 0;
 int NUMPAD = -1;
@@ -294,7 +292,7 @@ Script "DisplayableText" (int type, int message, int bgimage)
         SetFont("BIGFONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
 				dispdelay = hudmessagetime(HUDMSG_PLAIN, strlen(strparam(l:message)), 0, 5.0, 0);        
-        delay(dispdelay + (TICUNIT*5));
+        delay(dispdelay + (GetTicUnit()*5));
 				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
         break;
         
@@ -303,7 +301,7 @@ Script "DisplayableText" (int type, int message, int bgimage)
         SetFont("HAF2FONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 5.0);
         dispdelay = hudmessagetime(HUDMSG_PLAIN, strlen(strparam(l:message)), 0, 5.0, 0);        
-        delay(dispdelay + (TICUNIT*5));
+        delay(dispdelay + (GetTicUnit()*5));
 				ACS_NamedExecute("StopDisplayable",0,0,0,0);	        
         break;
         
@@ -314,7 +312,7 @@ Script "DisplayableText" (int type, int message, int bgimage)
         SetHudSize(640, 480, 1);
         SetFont("HANDFONT");
         HudMessage(l:message; HUDMSG_PLAIN, 1, CR_UNTRANSLATED, 326.0, 236.0, 8.0, 0);
-        Delay(TICUNIT*5);
+        Delay(GetTicUnit()*5);
 				ACS_NamedExecute("StopDisplayable",0,0,0,0);	         
         break;
     }

@@ -32,7 +32,6 @@ global str 2:notes;
 global str 3:clue[];
 global int 4:cluetotal; 
 
-int pressed, keyc; //0-forward, 1-back
 int isObjectiveDisplayed = False;
 int disabledObjectives = False;
 int clueindex;
@@ -69,8 +68,9 @@ Script "OBJ_Toggle" (void){
 			Q_Pause(player, True);			
 			GiveInventory("NoWeapon",1);
 			SetWeapon("NoWeapon");
-			Delay(35);				
+			Delay(GetTicUnit()/2);				
 			isObjectiveDisplayed = TRUE;
+			log(s:"Toggled");
 			ACS_NamedExecute("OBJ_Update",0);		
 		}else{
 			ACS_NamedExecute("OBJ_Stop",0);
@@ -216,7 +216,7 @@ Script "OBJ_HudShow" (int stats){
 
 Script "OBJ_HudFlash" (void){
 	ACS_NamedExecute("OBJ_HudShow",0,2);
-	delay(32*2);
+	delay(GetTicUnit()*2);
 	ACS_NamedExecute("OBJ_HudShow",0,1);
 }
 

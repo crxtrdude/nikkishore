@@ -12,37 +12,126 @@
 #include "zcommon.acs"
 #import "qcommon.acs"
 
-#define TICUNIT         35.725
+// Everything here is defined in 640x480
+// If you need recalc, just check template.
 
-int player;
+#define NAME_BOUNDX 7
+#define NAME_BOUNDY 312
+#define NAME_BOUNDW 149
+#define NAME_BOUNDH 17
 
-Script "VN_Init" (int type){
+#define DIAL_BOUNDX 61
+#define DIAL_BOUNDY 345
+#define DIAL_BOUNDW	489
+#define DIAL_BOUNDH 119
 
+#define CTC_X		453.0
+#define CTC_Y		358.0
+
+#define TXTSPD 0.2 //Text Speed
+
+global str 5:VN_name;
+global str 6:VN_dialogue;
+global str 7:VN_choice[];
+global int 8:VN_CurrentChoice;
+global int 9:VN_CurrentState; //0-defaultdialog, 1-radiodialog, 2-choice
+
+int isVNActive, isVNDisplayed;
+
+Function void VN_Initialize (void){
+	//Set all variables that the system uses
+	VN_CurrentState = 0;
+	isVNDisplayed = False;
 }
 
-Script "VN_Update" (int type, int par1, int par2){
-
+Script "VN_Update" (void){
+	If(isVNActive){
+		pressed = False;
+		ACS_NamedExecute("VN_Draw",0);
+		Log(s:"Waiting for key input ...");		
+		ACS_NamedExecute("VN_KeyInput",0);
+		While(!pressed){
+			delay(1);
+		}
+		ACS_NamedTerminate("VN_KeyInput",0);
+		
+		ACS_NamedExecute("VN_KeyCatcher",0);	
+	}
 }
 
 Script "VN_Draw" (void){
+   str Dialog = "This is sample text. It should wrap around the text box with no problems. The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico Bridge. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 ";
+   str Name = "Nikki";
+   int namex = 82.0;
+   int namey = 320.0;
+   //int dialogx = 30.0;
+   //int dialogy = 405.0;
+   int dialogx = 63.1;
+   int dialogy = 344.1;
+   
+   //10-22
+   If(VN_CurrentState != 2){
+   		SetHudSize(640, 480, 1);
+			If(VN_CurrentState == 1){
+				//Radio, mini portraits, using font QPORTR
+				//This also displays the 'Now Receiving' sign too
+				log(s:"Displaying radio");
+				SetFont("vn_rec");
+				HudMessage(s:"A"; HUDMSG_PLAIN, 20, 0, 320.0, 240.0, 0.0);				
+			}Else{
+				//Dialog, full portraits, using font QPORTD
+				log(s:"Displaying default");
+			}
+			
+			//Text box
+			SetHudClipRect(0, 0, 0, 0, 0);
+			SetHudSize(512,384,1);
+			//ClickToContinue Icon
+			SetFont("m_skull1");
+			HudMessage(s:"A"; HUDMSG_PLAIN, 19, 0, CTC_X, CTC_Y, 0.0);
+						
+			//BG			
+			SetHudSize(640, 480, 1);
+			SetFont("vn_intfc");
+			HudMessage(s:"A"; HUDMSG_PLAIN, 21, 0, 320.0, 240.0, 0.0);
 
+			//Text Elements
+			SetFont("Smallfont");			
+			//'Speaking'
+			HudMessage(s:"S P E A K I N G  ..."; HUDMSG_PLAIN, 17, CR_WHITE, 550.0, 320.0, 0.0);
+			SetFont("Bigfont");
+			//Name
+			SetHudClipRect(NAME_BOUNDX, NAME_BOUNDY, NAME_BOUNDW, NAME_BOUNDH, NAME_BOUNDW);
+			HudMessage(s:Name; HUDMSG_PLAIN, 14, CR_WHITE, namex, namey, 0.0);
+			//Dialog
+			SetHudClipRect(DIAL_BOUNDX, DIAL_BOUNDY, DIAL_BOUNDW, DIAL_BOUNDH, DIAL_BOUNDW);
+			HudMessage(s:Dialog; HUDMSG_PLAIN, 18, CR_WHITE, dialogx, dialogy, 0.0);
+			
+	 }Else{
+		//Choices	 
+	 }
 }
 
 Script "VN_KeyInput" (void){
-
+  	int buttons;
+    pressed = FALSE;
+    //See qobjectives for details
 }
 
 Script "VN_KeyCatcher" (void){
-
+	if (isVNActive){
+		Delay(10);
+		ACS_NamedExecute("VN_Update",0);
+	}
 }
 
-Function void VN_Dialogue(int text, int po1, int po2, int po3, int current){
+//Function void VN_Dialogue(int text, int po1, int po2, int po3, int current){
+//	
+//}
 
-}
-
-Function void VN_Choice(int choice1, int choice2, int choice3, int default){
-
-}
+//Function void VN_Choice(int choice1, int choice2, int choice3, int default){
+//
+//}
 
 Script "VN_Stop" (void){
 

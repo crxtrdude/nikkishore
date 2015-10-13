@@ -21,6 +21,7 @@ startup
 notch
 althudcf.txt
 animdefs.txt
+cvarinfo.txt
 decaldef.txt
 decorate.txt
 defbinds.txt
@@ -36,5 +37,6 @@ textures.txt
 voxeldef.txt
 language.enu
 language.vn
+language.ob
 *.acs
 *.lmp

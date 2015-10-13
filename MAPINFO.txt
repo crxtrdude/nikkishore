@@ -102,7 +102,7 @@ map NE1M1 lookup "QSTR_NE1M1"
 	levelnum = 1
 	titlepatch = "WILV00"
 	next = "NE1M2"
-	sky1 = "SKY2"
+	sky1 = "SKY4"
 	cluster = 1
 	par = 30
 	music = "D_NE1M1"

@@ -13,6 +13,7 @@
 #define TICUNIT         35.725
 
 int player;
+int pressed, keyc; //0-forward, 1-back
 
 function void Mechanical_Lift (int sector, int min, int max, int spd)
 {
@@ -61,4 +62,9 @@ Function void Q_Pause (int pl, bool Paused)
 		TakeActorInventory(pl, "PowerTimeFreezer", 0x7fffffff);
 		log(s:"Resumed ...");
 	}
+}
+
+Function int GetTicUnit (void)
+{
+	return TICUNIT >> 16;
 }

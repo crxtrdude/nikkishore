@@ -17,6 +17,7 @@ acc.exe -i ".." ..\..\qcommon.acs ..\..\acs\qcommon.o
 acc.exe -i ".." ..\..\qmsg.acs ..\..\acs\qmsg.o
 acc.exe -i ".." ..\..\qdialog.acs ..\..\acs\qdialog.o
 acc.exe -i ".." ..\..\qobjectives.acs ..\..\acs\qobjectives.o
+acc.exe -i ".." ..\..\qvn.acs ..\..\acs\qvn.o
 @ECHO.
 @ECHO Scripts Finished.
 pause
