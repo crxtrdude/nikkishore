@@ -101,19 +101,7 @@ VNG_4_1 = "P_SHEL1";
 // MISC
 VNG_21_1 = "P_DOMWHT";
 
-// Dialogue
-// Mr. Nobody
-VND_1_1 = "Hi! Welcome to the ZKVN demo! I'm Mr. Nobody "
-		"and I will be your guide. What would you like to "
-		"know?";
-
-VND_1_2 = "If you examine the LANGUAGE and DECORATE lumps "
-		"inside the pk3, you'll notice how easy ZKVN "
-		"is to use!";
-
-VND_1_3 = "ZKVN is surprisingly close to completion, all "
-		"that's really left to do is add some additional "
-		"transition effects.";
+//Dialogue
 
 //----Shelley 1-4; Nikki 1-3
 		
@@ -167,3 +155,15 @@ VND_20_3 = "Whatever.";
 
 VND_21_1 = "You looking for a kinky escapade, bitch?"
          "Why don't you kiss my whip?";
+         
+//---- NEW VN FORMAT
+
+VNCH_PLYR = "Nikki";
+VNCH_SHEL = "Shelley";
+
+//String length could be 190+
+//_PLY - player. Uses VNCH_PLYR as name.
+
+VND_1_1 = "_PLY This is sample text. It should wrap around the text box with no problems. The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico Bridge. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 ";
+
+VNR_1_1 = "_PLY This is sample text. It should wrap around the text box with no problems. The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico Bridge. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 ";

@@ -28,6 +28,16 @@
 #define CTC_X		453.0
 #define CTC_Y		358.0
 
+#define PORT_Y 240.0
+//Centered portrait
+#define PORT_C_X 240.0
+//Two portrait mode
+#define PORTA_L_X 200.0
+#define PORTA_R_X 420.0
+//Three portrait mode (the center portrait mode included)
+#define PORTB_L_X 140.0
+#define PORTB_R_X 490.0
+
 #define TXTSPD 0.2 //Text Speed
 
 global str 5:VN_name;
@@ -59,10 +69,32 @@ Script "VN_Update" (void){
 	}
 }
 
+Script "VN_Parser" (int D){
+	int lng = StrParam(l:D);
+	str nm;
+	str dialg;       
+	int dialglen;
+	if (!nm){
+		nm = StrLeft(lng, 4);
+    dialglen = StrLen(lng)-5;
+		dialg = StrRight(lng, dialglen);		
+	}
+	if (nm == "_PLY") nm = "VNCH_PLYR";
+	else nm = StrParam(s:"VNCH_",s:nm);
+	
+	log(s:"nm is ", s:nm);
+	log(s:"dlalglen is ", i:dialglen);
+	log(s:"dialg is", s:dialg);
+	
+	//VN_name - a language string grabbed from Language.vn
+	VN_name = nm;
+	//VN_dialogue - a plain string grabbed from a language string
+	//with the format VND_[Level]_[Dialog] found in Language.vn
+	VN_dialogue = dialg; 
+}
+
 Script "VN_Draw" (void){
-   str Dialog = "This is sample text. It should wrap around the text box with no problems. The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico Bridge. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 ";
-   str Name = "Nikki";
-   int namex = 82.0;
+	 int namex = 82.0;
    int namey = 320.0;
    //int dialogx = 30.0;
    //int dialogy = 405.0;
@@ -74,13 +106,19 @@ Script "VN_Draw" (void){
    		SetHudSize(640, 480, 1);
 			If(VN_CurrentState == 1){
 				//Radio, mini portraits, using font QPORTR
+				//Reason using font is it could be
+				//translated in HudMessage
+				//See monalisa example
 				//This also displays the 'Now Receiving' sign too
 				log(s:"Displaying radio");
 				SetFont("vn_rec");
-				HudMessage(s:"A"; HUDMSG_PLAIN, 20, 0, 320.0, 240.0, 0.0);				
+				HudMessage(s:"A"; HUDMSG_PLAIN, 20, 0, 320.0, 240.0, 0.0);
+				ACS_NamedExecuteWait("VN_Parser",0,"VNR_1_1"); 				
 			}Else{
-				//Dialog, full portraits, using font QPORTD
+				//Dialog, full portraits. This could be just graphics
+				//from the graphics folder.
 				log(s:"Displaying default");
+				ACS_NamedExecuteWait("VN_Parser",0,"VND_1_1"); 
 			}
 			
 			//Text box
@@ -93,7 +131,7 @@ Script "VN_Draw" (void){
 			//BG			
 			SetHudSize(640, 480, 1);
 			SetFont("vn_intfc");
-			HudMessage(s:"A"; HUDMSG_PLAIN, 21, 0, 320.0, 240.0, 0.0);
+			HudMessage(s:"A"; HUDMSG_PLAIN|HUDMSG_ALPHA, 21, 0, 320.0, 240.0, 0.0, 0.8);
 
 			//Text Elements
 			SetFont("Smallfont");			
@@ -102,10 +140,10 @@ Script "VN_Draw" (void){
 			SetFont("Bigfont");
 			//Name
 			SetHudClipRect(NAME_BOUNDX, NAME_BOUNDY, NAME_BOUNDW, NAME_BOUNDH, NAME_BOUNDW);
-			HudMessage(s:Name; HUDMSG_PLAIN, 14, CR_WHITE, namex, namey, 0.0);
+			HudMessage(l:VN_name; HUDMSG_PLAIN, 14, CR_WHITE, namex, namey, 0.0);
 			//Dialog
 			SetHudClipRect(DIAL_BOUNDX, DIAL_BOUNDY, DIAL_BOUNDW, DIAL_BOUNDH, DIAL_BOUNDW);
-			HudMessage(s:Dialog; HUDMSG_PLAIN, 18, CR_WHITE, dialogx, dialogy, 0.0);
+			HudMessage(s:VN_dialogue; HUDMSG_PLAIN, 18, CR_WHITE, dialogx, dialogy, 0.0);
 			
 	 }Else{
 		//Choices	 
