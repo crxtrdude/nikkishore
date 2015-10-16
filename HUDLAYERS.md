@@ -22,6 +22,8 @@ HUD NUMBER | Assignment
 12         | Choice 2
 13         | Choice 3
 14         | Name
+15				 | Used
+16         | Used
 17         | 'Speaking ...'
 18         | Dialog 
 19         | Click-to-continue icon 

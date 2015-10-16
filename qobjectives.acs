@@ -225,8 +225,8 @@ Script "OBJ_ClueFlash" (void){
 }
 
 Function void OBJ_Add (int s, int f){
-	objectives = s;
-	notes = f;
+	objectives = StrParam(s:s);
+	notes = StrParam(s:f);
 	if (disabledObjectives) OBJ_Disable (FALSE);
 	ACS_NamedExecute("OBJ_HudFlash",0);
 }
