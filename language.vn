@@ -73,4 +73,18 @@ VNPO_1_3 = "BTCH1 NONE0 NONE0";
 
 VND_1_1 = "_PLY This is sample text. It should wrap around the text box with no problems. The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico Bridge. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 ";
 
-VNR_1_1 = "_PLY This is sample text. It should wrap around the text box with no problems. The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico Bridge. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 ";
+VND_1_2 = "_PLY You picked 1.";
+
+VND_1_3 = "_PLY You picked 2.";
+
+VND_1_4 = "_PLY You picked 3.";
+
+//Choices
+//If you don't want a third choice, add 'NA' in the last
+//Example "1A 1B NA"
+
+VNC_1_1 = "1A 1B 1C";
+
+VNC_1_1A = "Choice 1";
+VNC_1_1B = "Choice 2";
+VNC_1_1C = "Choice 3";
