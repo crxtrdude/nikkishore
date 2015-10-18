@@ -29,7 +29,8 @@
 #define CTC_X		453.0
 #define CTC_Y		358.0
 
-#define TXTSPD 0.2 //Text Speed
+#define VN_TYPETIME 0.008 //Text Speed
+#define VN_FADETIME 0.5 //Portrait fade speed
 
 global str 5:VN_name;
 global str 6:VN_dialogue;
@@ -68,18 +69,18 @@ Script "VN_KeyInput" (void){
   
 	if (VN_CurrentState == 0){		
 		While(TRUE){
-	      buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
-	      If (buttons == BT_USE)
-	      {
-	          log(s:"Pressed Use");
-	          keypress = TRUE;
-	          break;
-	      }
-	      Else
-	      {
-	          keypress = FALSE;
-	      }
-	      Delay(1);
+      buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+      If (buttons == BT_USE)
+      {
+        log(s:"Pressed Use");
+        keypress = TRUE;
+        break;
+      }
+      Else
+      {
+        keypress = FALSE;
+      }
+      Delay(1);
 	  }
 	}
 }
@@ -164,6 +165,7 @@ Script "VN_DrawText" (int text){
 		SetHudSize(640, 480, 1);
 		HudMessage(s:""; HUDMSG_PLAIN,14,0,0.0,0.0,0.0);
 		HudMessage(s:""; HUDMSG_PLAIN,18,0,0.0,0.0,0.0);
+		HudMessage(s:""; HUDMSG_PLAIN,19,0,0.0,0.0,0.0);		
 		
 		//log(s:"VN_name = ", s:VN_name);
 		//log(s:"VN_dialogue = ", s:VN_dialogue);
@@ -174,6 +176,10 @@ Script "VN_DrawText" (int text){
 		HudMessage(l:VN_name; HUDMSG_PLAIN, 14, CR_WHITE, namex, namey, 0.0);
 		//Dialog
 		SetHudClipRect(DIAL_BOUNDX, DIAL_BOUNDY, DIAL_BOUNDW, DIAL_BOUNDH, DIAL_BOUNDW);
+		
+		HudMessage(s:VN_dialogue; HUDMSG_TYPEON, 18, CR_WHITE, dialogx, dialogy, 0.0, VN_TYPETIME, 0.0);
+		Delay(HudMessageTime(HUDMSG_TYPEON, StrLen(StrParam(s:VN_dialogue)), VN_TYPETIME, 0.0, 0.0));
+		
 		HudMessage(s:VN_dialogue; HUDMSG_PLAIN, 18, CR_WHITE, dialogx, dialogy, 0.0);
     terminate;
 }
@@ -206,6 +212,13 @@ Script "VN_DrawPortrait" (int typ, int Po){
     if (po3 != "P_NONE0"){
       log(s:"There are 3 portraits.");
       SetFont(po1);
+      HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 140.0, 240.0, 0.0, VN_FADETIME, 0.0);
+      SetFont(po2);
+      HudMessage(s:"A";  HUDMSG_FADEINOUT, 23, CR_WHITE, 310.0, 240.0, 0.0, VN_FADETIME, 0.0);
+      SetFont(po3);
+      HudMessage(s:"A";  HUDMSG_FADEINOUT, 24, CR_WHITE, 510.0, 240.0, 0.0, VN_FADETIME, 0.0);
+			Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0)); 
+      SetFont(po1);
       HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 140.0, 240.0, 0.0);
       SetFont(po2);
       HudMessage(s:"A";  HUDMSG_PLAIN, 23, CR_WHITE, 310.0, 240.0, 0.0);
@@ -214,13 +227,21 @@ Script "VN_DrawPortrait" (int typ, int Po){
     }else if (po2 != "P_NONE0" && po3 == "P_NONE0"){
       log(s:"There are 2 portraits.");
       SetFont(po1);
+      HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 200.0, 240.0, 0.0, VN_FADETIME, 0.0);
+      SetFont(po2);
+      HudMessage(s:"A";  HUDMSG_FADEINOUT, 23, CR_WHITE, 420.0, 240.0, 0.0, VN_FADETIME, 0.0);
+      Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0));
+			SetFont(po1);
       HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 200.0, 240.0, 0.0);
       SetFont(po2);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 23, CR_WHITE, 420.0, 240.0, 0.0);
+      HudMessage(s:"A";  HUDMSG_PLAIN, 23, CR_WHITE, 420.0, 240.0, 0.0); 
     }else{
       log(s:"There is a single portrait.");
       SetFont(po1);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 320.0, 240.0, 0.0);
+      HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 320.0, 240.0, 0.0, VN_FADETIME, 0.0);
+      Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0));
+			SetFont(po1);
+      HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 320.0, 240.0, 0.0); 
     }     
   }
   terminate;
@@ -235,15 +256,15 @@ Function void VN_Show (int stat){
 	ACS_NamedExecute("VN_DrawInit",0);                
 }
 
-Function void VN_TypeDialogue (int dtx){
-	str t = StrParam(s:dtx);
-	ACS_NamedExecute("VN_DrawText",0,t);	
-}
+//Function void VN_TypeDialogue (int dtx){
+//	str t = StrParam(s:dtx);
+//	ACS_NamedExecute("VN_DrawText",0,t);	
+//}
 
-Function void VN_ShowPortrait (int p){
-	str t = StrParam(s:p);
-	ACS_NamedExecute("VN_DrawPortrait",0,VN_CurrentState,t);
-}
+//Function void VN_ShowPortrait (int p){
+//	str t = StrParam(s:p);
+//	ACS_NamedExecute("VN_DrawPortrait",0,VN_CurrentState,t);
+//}
 
 //Function void VN_Choice(int choice1, int choice2, int choice3, int default){
 //
