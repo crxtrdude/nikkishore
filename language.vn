@@ -64,27 +64,76 @@ VND_21_1 = "You looking for a kinky escapade, bitch?"
 VNCH_PLYR = "Nikki";
 VNCH_SHEL = "Shelley";
 
-VNPO_1_1 = "BTCH1 LABG1 OFFG1";
-VNPO_1_2 = "BTCH1 LABG1 NONE0";
-VNPO_1_3 = "BTCH1 NONE0 NONE0";
+VNPO_SHEL = "SHEL1 NONE0 NONE0";
+
+VNPO_1_0001 = "BTCH1 LABG1 OFFG1";
+VNPO_1_0002 = "BTCH1 LABG1 NONE0";
+VNPO_1_0003 = "BTCH1 NONE0 NONE0";
+
+//Commands
+
+//NE1M1
+//Intro 1-7
+
+VN_1_0001 = "PORT 0 VNPO_SHEL 0002";
+
+VN_1_0002 = "DIAL VND_1_1 0003";
+    
+VN_1_0003 = "DIAL VND_1_2 0004";
+    
+VN_1_0004 = "DIAL VND_1_3 0005";
+
+VN_1_0005 = "DIAL VND_1_4 0006";
+
+VN_1_0006 = "DIAL VND_1_5 0007";
+
+VN_1_0007 = "DIAL VND_1_6 0008";
+
+VN_1_0008 = "DIAL VND_1_7 0END";
 
 //String length could be 190+
 //_PLY - player. Uses VNCH_PLYR as name.
 
-VND_1_1 = "_PLY This is sample text. It should wrap around the text box with no problems. The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico Bridge. ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 ";
+VND_1_1 = "SHEL So, let me get this straight, someone just hacked "
+    "my impenetrable system from a phone, eh?";
 
-VND_1_2 = "_PLY You picked 1.";
+VND_1_2 = "_PLY Yeah.";
 
-VND_1_3 = "_PLY You picked 2.";
+VND_1_3 = "SHEL And wants you to do a job for her so that she won't "
+    "leak your dirty work back at the warehouse huh?";
 
-VND_1_4 = "_PLY You picked 3.";
+VND_1_4 = "_PLY Yeah, Shelley. Don't remind me again.";
+
+VND_1_5 = "SHEL Well, what pisses me off though is someone compromising "
+    "my virtually impenetrable system. Just breaks the heart. 0006";
+
+VND_1_6 = "_PLY Save your moping to yourself Shel, we got "
+		"work to do.";
+
+VND_1_7 = "SHEL Fine. Okay then. Do what you must.";
 
 //Choices
-//If you don't want a third choice, add 'NA' in the last
+//If you don't want a third choice, add 'NA' in the last two chars
 //Example "1A 1B NA"
 
-VNC_1_1 = "1A 1B 1C";
+VNC_T_1 = "1A 1B 1C";
 
-VNC_1_1A = "Choice 1";
-VNC_1_1B = "Choice 2";
-VNC_1_1C = "Choice 3";
+VNC_T_1A = "Choice 1 0001";
+VNC_T_1B = "Choice 2 0002";
+VNC_T_1C = "Choice 3 0003";
+
+VN_T_0000 = "CHOI VNC_T_1";
+
+VN_T_0001 = "DIAL VND_T_1 0END";
+
+VN_T_0002 = "DIAL VND_T_2 0END";
+
+VN_T_0003 = "DIAL VND_T_3 0END";
+
+VND_T_1 = "_PLY You chose 1";
+
+VND_T_2 = "_PLY You chose 2";
+
+VND_T_3 = "_PLY You chose 3";
+
+//TEST

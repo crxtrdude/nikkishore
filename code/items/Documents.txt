@@ -17,7 +17,24 @@ ACTOR Paper1 : BasicDocument 17500
 	    Loop
 		Pickup:
 	    PAPR A 0
-			PAPR A 0 ACS_Execute(99,0,1)
+			PAPR A 0 ACS_NamedExecute("Paper1",0)
+			Stop
+  }
+}
+ACTOR Paper2 : BasicDocument 17501
+{
+  //$Category Nikki Documents
+  //$Sprite PAPRA0
+  //$Title "Paper 2"
+  scale 0.5
+  States
+  {
+	  Spawn:
+	    PAPR A 1
+	    Loop
+		Pickup:
+	    PAPR A 0
+			PAPR A 0 ACS_NamedExecute("Paper2",0)
 			Stop
   }
 }

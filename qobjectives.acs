@@ -65,7 +65,7 @@ Script "OBJ_Toggle" (void){
 	if (!DisabledObjectives){
 		if (!isObjectiveDisplayed){
 			clueindex = 0; //the current index of evidences
-			Q_Pause(player, True);			
+			Q_Pause(player, True, True);			
 			GiveInventory("NoWeapon",1);
 			SetWeapon("NoWeapon");
 			Delay(GetTicUnit()/2);				
@@ -189,7 +189,7 @@ Script "OBJ_Stop" (void){
 		HudMessage(s:""; HUDMSG_PLAIN,5,0,0,0,0);
 		HudMessage(s:""; HUDMSG_PLAIN,6,0,0,0,0);
 		TakeInventory("NoWeapon",0x7fffffff);
-		Q_Pause(player, False);
+		Q_Pause(player, False, True);
 		isObjectiveDisplayed = FALSE;
 	}
 }

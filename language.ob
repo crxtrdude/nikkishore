@@ -25,9 +25,14 @@ OBJ_1 = "Find Rachel\'s apartment space.";
 OBJ_1S = "Rachel is Rebecca\'s sister. Rebecca says that her sister was\n"
 					"\'kidnapped\', which I don't highly believe much. I got to\n"
 					"be sure.";
+					
+DOC_1_1 = "Paper1 (About the club)";
+DOC_1_2 = "Paper2 (About sister)";
+					
 OBJ_2 = "Find some evidence in Rachel\'s apartment.";
 OBJ_2S = "Waddyaknow, nobody's home. I need to find more evidence to say\n"
 					"that she's kidnapped.";
+					
 TESTSUMMARY = "The quick brown fox jumps over the lazy dog over the Marikina river.";
 TESTOBJ = "\"The quick brown Queue jumps over the lazy Taffie-Waffy over the San Juanico\n"
 						"Bridge. I have a feeling that Queue will fall over the San Juanico Bridge. What \n"

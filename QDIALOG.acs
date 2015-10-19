@@ -1,52 +1,110 @@
 //==========================================================
 // Nikki Shore
-// QDialog - Immediary for ZKVN
+// QDialog - Immediary for QVN
 //
 // Code by CRxTRDude.
 //==========================================================
 
 #library "qdialog"
 #include "zcommon.acs"
+#import "qvn.acs"
 
-Script "DoDialog" (int game, int level, int dianum)
-{
-	ACS_NamedExecuteWithResult("SetHoldTime", -1);
-	if (game == 0){
-		if (level == 1){
-			switch(dianum)
-			{
-				case 1:
-			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 1);
-			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 1);
-			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 2);
-			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 2);
-			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 3);
-			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 3);
-			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 4);
-			    break;
-				case 2:
-			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 5);
-			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 4);
-			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 6);
-			    ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 5);
-			    ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 7);
-			    break;
-				case 3:
-					ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 8);
-					ACS_NamedExecuteWithResult("AddDialogue", 2, 4, 6);
-					ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 9);
-					break;
-			}
-		}
-	}else{
-	 	if (level == 1){
-			switch(dianum)
-			{
-				case 2:
-					ACS_NamedExecuteWithResult("AddDialogue", 4, 1, 5);
-					break; 								
-			}		 
-		}
+str setstate;
+str dialnext;
+str chresult;
+int fromchoice = 0;
+
+Script "DoDialog" (int Text){
+	int i, dtotal;
+	//Checks if the language string contains the following:
+	//<COMMAND> <ATTRIBUTES>
+	//Valid commands are DIAL, CHOI and PORT
+	//
+	//DIAL <SPEAKER> <TEXT> <NEXT>
+	//CHOI <FIRST> <SECOND> <THIRD> <NEXT>
+	//PORT <FIRST> <SECOND> <THIRD>
+	str findialog;
+	str inittext,suftext;
+	str com, first, second, third;
+	int strl;
+	
+	If(dialnext == "0END"){
+		ACS_NamedExecute("VN_Stop",0);
+    VN_CurrentChoice = 0;
+		SetResultValue (2);
+		terminate;
 	}
-	Log(s:"Success!");	
+	
+	If (VN_DisplayState == 1){
+		findialog = StrParam(l:Text);
+		suftext = StrMid(Text, 0, 5);
+		com = StrMid(findialog,0,4);
+		log(s:com);
+		
+		if (com == "DIAL"){
+			strl = StrLen(findialog)-10;
+			first = StrMid(findialog,5,strl);
+			Delay(3);
+			ACS_NamedExecuteWait("VN_DrawText",0,first);
+		}else if (com == "PORT"){
+			first = StrMid(findialog,5,1);
+			strl = StrLen(findialog)-12;
+			second = StrMid(findialog,7,strl);
+			Delay(3);
+			ACS_NamedExecuteWait("VN_DrawPortrait",0,StrParam(i:first),second);
+		}else if (com == "CHOI"){
+			strl = StrLen(findialog)-5;
+			first = StrMid(findialog,5,strl);
+			second = "NULL";
+			dialnext = Text;
+			Delay(3);
+			chresult = ACS_NamedExecuteWithResult("VN_DrawChoices",first);
+		}
+		
+		if (com != "CHOI"){
+			if (StrRight(findialog,4) != "0END") dialnext = StrParam(s:suftext,s:StrRight(findialog,4));
+			else dialnext = StrRight(findialog,4);
+		}
+		log(s:"findialog = ",s:findialog);
+		log(s:"first = ",s:first);
+		log(s:"second = ",s:second);
+		log(s:"dialnext = ",s:dialnext);
+	}Else Log(s:"QDIALOG - QVN is not initialized! Check script if VN_Show function is called!");
+	
+	if (com == "PORT") ACS_NamedExecute("DoDialogCatch",0);
+	  
+  Delay(10);
+  If(VN_CurrentState != 2){
+      ACS_NamedExecuteWait("VN_Update",0);
+      i++;
+      Log(s:"Break");
+  }Else{
+      if(chstate != 3){
+          ACS_NamedExecuteWait("VN_Update",0);
+          Log(s:"Break - Moving pointer");
+      }else{
+          i++;
+          chstate = 0;
+          fromchoice = 1;
+          Log(s:"Break - Pressed enter");
+      }
+  }ACS_NamedExecute("DoDialogCatch",0);
+}
+
+Script "DoDialogCatch" (void){
+    Delay(1);
+    if (!fromchoice){
+    	Log(s:"dialnext = ",s:dialnext);
+    	ACS_NamedExecute("DoDialog",0,dialnext);
+    }else{
+		 	fromchoice = 0;
+		 	VN_Show(setstate);
+		 	ACS_NamedExecute("DoDialog",0,chresult);
+		}
+}
+
+Function void QD_Init (int type){
+    setstate = type;
+    dialnext = "";
+    VN_Show(setstate);
 }

@@ -46,20 +46,24 @@ function int HudMessageTime(int type, int length, int typetime, int staytime, in
    return 0;
 }
 
-Function void Q_Pause (int pl, bool Paused)
+Function void Q_Pause (int pl, bool Paused, bool NoFreeze)
 {
 	if(Paused)
 	{
 		Thing_Stop(pl);
 		SetPlayerProperty(pl, TRUE, PROP_FROZEN);
-		if(CheckActorInventory(pl, "PowerTimeFreezer") == 0)
-			GiveActorInventory(pl, "PausePower", 1);
-			log(s:"Paused ...");
+		If(!NoFreeze){
+			if(CheckActorInventory(pl, "PowerTimeFreezer") == 0)
+				GiveActorInventory(pl, "PausePower", 1);
+		}
+		log(s:"Paused ...");
 	}
 	else
 	{
 		SetPlayerProperty(pl, FALSE, PROP_FROZEN);
-		TakeActorInventory(pl, "PowerTimeFreezer", 0x7fffffff);
+		If(!NoFreeze){
+			TakeActorInventory(pl, "PowerTimeFreezer", 0x7fffffff);
+		}
 		log(s:"Resumed ...");
 	}
 }

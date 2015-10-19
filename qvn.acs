@@ -2,7 +2,7 @@
 // Nikki Shore
 // QVN - Visual novel system
 //
-// Based on code by Ral22 (StoneshipMapper)
+// Some code based from Ral22 (StoneshipMapper)
 // http://forum.zdoom.org/viewtopic.php?f=37&t=38215&p=724983 
 //
 // Code by CRxTRDude.
@@ -37,8 +37,9 @@ global str 6:VN_dialogue;
 global str 7:VN_choice[];
 global int 8:VN_CurrentChoice;
 global int 9:VN_CurrentState; //0-defaultdialog, 1-radiodialog, 2-choice
-global int 10:chstate;
-//0-off, 1-on and initialize, 2-waiting for input
+global int 10:chstate; //0-init, 1-forward, 2-back, 3-use
+global int 11:VN_DisplayState; //0-notinitialized, 1-interfacedone
+global int 12:VN_ChoiceNext;
 
 int isVNActive, isVNDisplayed;
 
@@ -48,6 +49,7 @@ Function void VN_Initialize (void){
 	//Set all variables that the system uses
 	VN_CurrentState = 0;
 	VN_CurrentChoice = 0;
+	VN_DisplayState = 0;
 	chstate = 0;
 }
 
@@ -217,6 +219,7 @@ Script "VN_DrawInit" (void){
 		SetFont("Smallfont");			
 		//'Speaking'
 		HudMessage(s:"S P E A K I N G  ..."; HUDMSG_PLAIN, 17, CR_WHITE, 550.0, 320.0, 0.0);
+		VN_DisplayState = 1;
 		terminate;
 }
 
@@ -257,6 +260,9 @@ Script "VN_DrawChoices" (int choice){
 	str ch = StrParam(l:choice);
 	str chname = StrParam(s:choice);
 	str ch1,ch2,ch3;
+	str len1,len2,len3;
+	str text1,text2,text3;
+	str resl;
 	int chruby;
 	int chcolor;
 	
@@ -270,6 +276,14 @@ Script "VN_DrawChoices" (int choice){
 	VN_choice[0] = StrParam(s:StrMid(chname,0,6),s:ch1);
 	VN_choice[1] = StrParam(s:StrMid(chname,0,6),s:ch2);
 	VN_choice[2] = StrParam(s:StrMid(chname,0,6),s:ch3);
+	
+	len1 = StrLen(StrParam(l:VN_choice[0]))-5;
+	len2 = StrLen(StrParam(l:VN_choice[1]))-5;
+	len3 = StrLen(StrParam(l:VN_choice[2]))-5;
+	
+	text1 = StrLeft(StrParam(l:VN_choice[0]),len1);
+	text2 = StrLeft(StrParam(l:VN_choice[1]),len2);
+	text3 = StrLeft(StrParam(l:VN_choice[2]),len3);	 
 
 	//Choice interface
 	SetHudSize(640,480,1);
@@ -283,20 +297,20 @@ Script "VN_DrawChoices" (int choice){
 	if (ch3 != "NA"){
 		If (VN_CurrentChoice == 0)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(l:VN_choice[0]; HUDMSG_PLAIN, 12, chcolor, 338.0, 140.0, 0.0);
+		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 338.0, 140.0, 0.0);
 		If (VN_CurrentChoice == 1)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(l:VN_choice[1]; HUDMSG_PLAIN, 13, chcolor, 338.0, 240.0, 0.0);
+		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 338.0, 240.0, 0.0);
 		If (VN_CurrentChoice == 2)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(l:VN_choice[2]; HUDMSG_PLAIN, 14, chcolor, 338.0, 340.0, 0.0);
+		HudMessage(s:text3; HUDMSG_PLAIN, 14, chcolor, 338.0, 340.0, 0.0);
 	}else{
 		If (VN_CurrentChoice == 0)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(l:VN_choice[0]; HUDMSG_PLAIN, 12, chcolor, 338.0, 180.0, 0.0);
+		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 338.0, 180.0, 0.0);
 		If (VN_CurrentChoice == 1)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(l:VN_choice[1]; HUDMSG_PLAIN, 13, chcolor, 338.0, 288.0, 0.0);
+		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 338.0, 288.0, 0.0);
 	}
 	
 	//Pointer
@@ -304,21 +318,26 @@ Script "VN_DrawChoices" (int choice){
 		Switch (VN_CurrentChoice){
 			case 0:
 				chruby = 111.0;
+				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[0]),4));
 				break;
 			case 1:
 				chruby = 184.0;
+				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[1]),4));
 				break;
 			case 2:
 				chruby = 260.0;
+				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[2]),4));
 				break;
 		}
 	}Else{
 		Switch (VN_CurrentChoice){
 			case 0:
 				chruby = 143.0;
+				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[0]),4));
 				break;
 			case 1:
 				chruby = 229.0;
+				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[1]),4));
 				break;
 			}		
 	}
@@ -327,7 +346,10 @@ Script "VN_DrawChoices" (int choice){
 	SetHudSize(512,384,0);						
 	SetFont("m_skull1");
 	HudMessage(s:"A"; HUDMSG_PLAIN, 11, CR_WHITE, 23.0, chruby, 0.0);
+
+	log(s:"resl = ",s:resl);
 		
+	SetResultValue(resl);	
 }
 
 Script "VN_DrawPortrait" (int typ, int Po){
@@ -395,29 +417,20 @@ Script "VN_DrawPortrait" (int typ, int Po){
 
 Function void VN_Show (int stat){
 	VN_CurrentState = stat;
-	Q_Pause(player, True);			
+	Q_Pause(player, True, True);			
 	GiveInventory("NoWeapon",1);
 	SetWeapon("NoWeapon");
 	OBJ_Disable(true);
 	ACS_NamedExecute("VN_DrawInit",0);                
 }
 
-//Function void VN_TypeDialogue (int dtx){
-//	str t = StrParam(s:dtx);
-//	ACS_NamedExecute("VN_DrawText",0,t);	
-//}
-
-//Function void VN_ShowPortrait (int p){
-//	str t = StrParam(s:p);
-//	ACS_NamedExecute("VN_DrawPortrait",0,VN_CurrentState,t);
-//}
-
 Script "VN_Stop" (void){
 	ACS_NamedTerminate("VN_KeyInput",0);
 	ACS_NamedTerminate("VN_DrawInit",0);	
 	VN_Clear();
+	VN_DisplayState = 0;
 	TakeInventory("NoWeapon",0x7fffffff);
-	Q_Pause(player, False);
+	Q_Pause(player, False, True);
 	OBJ_Disable(false);
 }
 
