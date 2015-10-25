@@ -5,3 +5,4 @@ maps/*.backup2
 maps/*.backup3
 [Bb]in
 *.db
+*.danproj

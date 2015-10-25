@@ -170,11 +170,11 @@ VND_R_4 = "_PLY Nikki is speaking";
 //If you don't want a third choice, add 'NA' in the last two chars
 //Example "1A 1B NA"
 
-VNC_T_1 = "1A 1B 1C";
+VNC_T_1 = "1A 1B NA";
 
-VNC_T_1A = "Choice 1 0001";
-VNC_T_1B = "Choice 2 0002";
-VNC_T_1C = "Choice 3 0003";
+VNC_T_1A = "This is Choice 1 0001";
+VNC_T_1B = "This is Choice 2 0002";
+VNC_T_1C = "This is Choice 3 0003";
 
 VN_T_0000 = "CHOI VNC_T_1";
 
@@ -184,8 +184,8 @@ VN_T_0002 = "DIAL VND_T_2 0END";
 
 VN_T_0003 = "DIAL VND_T_3 0END";
 
-VND_T_1 = "_PLY You chose 1";
+VND_T_1 = "_PLY You chose Choice 1!";
 
-VND_T_2 = "_PLY You chose 2";
+VND_T_2 = "_PLY You chose Choice 2!";
 
-VND_T_3 = "_PLY You chose 3";
+VND_T_3 = "_PLY You chose Choice 3!";

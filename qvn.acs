@@ -1,8 +1,9 @@
 //==========================================================
 // Nikki Shore
 // QVN - Visual novel system
+// Version 1.2
 //
-// Some code based from Ral22 (StoneshipMapper)
+// Some code inspired from Ral22 (StoneshipMapper)
 // http://forum.zdoom.org/viewtopic.php?f=37&t=38215&p=724983 
 //
 // Code by CRxTRDude.
@@ -16,60 +17,121 @@
 // Everything here is defined in 640x480
 // If you need recalc, just check template.
 
-#define NAME_BOUNDX 7
-#define NAME_BOUNDY 312
-#define NAME_BOUNDW 149
-#define NAME_BOUNDH 17
+#define NAME_BOUNDX	7
+#define NAME_BOUNDY	312
+#define NAME_BOUNDW	149
+#define NAME_BOUNDH	17
 
-#define DIAL_BOUNDX 61
-#define DIAL_BOUNDY 345
+#define DIAL_BOUNDX	61
+#define DIAL_BOUNDY	345
 #define DIAL_BOUNDW	489
-#define DIAL_BOUNDH 119
+#define DIAL_BOUNDH	119
 
 #define CTC_X		453.0
 #define CTC_Y		358.0
 
-#define VN_TYPETIME 0.008 //Text Speed
-#define VN_FADETIME 0.5 //Portrait fade speed
+#define VN_TYPETIME	0.008 //Text Speed
+#define VN_FADETIME	0.5 //Portrait fade speed
 
 global str 5:VN_name;
 global str 6:VN_dialogue;
 global str 7:VN_choice[];
-global int 8:VN_CurrentChoice;
-global int 9:VN_CurrentState; //0-defaultdialog, 1-radiodialog, 2-choice
-global int 10:chstate; //0-init, 1-forward, 2-back, 3-use
-global int 11:VN_DisplayState; //0-notinitialized, 1-interfacedone
-global str 12:VN_ChoiceNext;
+global int 8:VN_currentChoice;
+global int 9:VN_currentState;	//0-defaultdialog, 1-radiodialog, 2-choice
+global int 10:VN_choiceState;	//0-init, 1-forward, 2-back, 3-use
+global str 12:VN_choiceNext;
+global int 11:VN_displayState;	//0-notinitialized, 1-interfacedone
 
 int isVNActive, isVNDisplayed;
 
-int keypress = true;
-
-Function void VN_Initialize (void){
-	//Set all variables that the system uses
-	VN_CurrentState = 0;
-	VN_CurrentChoice = 0;
-	VN_DisplayState = 0;
-	chstate = 0;
-}
+int VN_keypress = true;
 
 Script "VN_Update" (void){
-	Log(s:"Waiting for key input ...");
-	keypress = false;		
-	ACS_NamedExecute("VN_KeyInput",0);	
-	Until(keypress==true){
-		delay(1);
+	Log(s:"VN_Update");
+	Delay(1);
+
+	Log(s:"> Waiting for key input ...");
+	VN_keypress = false;
+	ACS_NamedExecute("VN_KeyInput",0);
+	Until(VN_keypress==true){
+		Delay(1);
 	}
 	ACS_NamedTerminate("VN_KeyInput",0);
 	ACS_NamedTerminate("VN_CTCIcon",0);
-	keypress = false;
-	if (VN_CurrentState == 0){
+	VN_keypress = false;
+	
+	if (VN_currentState == 0){
 		terminate;
-	}if (VN_CurrentState == 2){
-		If (chstate == 3) {
+	}if (VN_currentState == 2){
+		If (VN_choiceState == 3) {
 			terminate;		
 		}Else{
 			ACS_NamedExecute("VN_KeyBreak",0);		
+		}
+	}
+}
+
+Script "VN_KeyInput" (void){
+	log (s:"VN_KeyInput");
+	Delay(1);
+	
+	int buttons, chfinal;
+	str chtag = StrRight(VN_choice[2],2);
+	
+	log (s:"VN_currentState = ",i:VN_currentState);
+  
+	if(VN_currentState == 2){
+		log(s:"> Checking keys for choices ...");
+		VN_keypress = FALSE;
+		if (chtag != "NA"){
+			chfinal = 2;
+		}else chfinal = 1; 
+		While(TRUE){
+			buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+			If (buttons == BT_FORWARD){
+				log(s:">> Pressed Forward");
+				VN_keypress = TRUE;
+				VN_choiceState = 1;
+					if(VN_CurrentChoice == 0){
+						VN_CurrentChoice = chfinal;
+					}else{
+						VN_CurrentChoice = VN_CurrentChoice - 1;
+					}  
+				break;
+			}Else If (buttons == BT_BACK){
+				log(s:">> Pressed Back");
+				VN_keypress = TRUE;
+				VN_choiceState = 2;
+				if (VN_CurrentChoice == chfinal){
+					VN_CurrentChoice = 0;
+				}else{
+					VN_CurrentChoice = VN_CurrentChoice + 1;
+				}           
+				break;									
+			}Else If (buttons == BT_USE){
+				log(s:">> Pressed Use");
+				VN_keypress = TRUE;
+				VN_choiceState = 3;					
+				break;
+			}Else VN_keypress = FALSE;
+			Delay(1);
+		}
+		log(s:"> Choice = ", i:VN_CurrentChoice);
+		log(s:"> State = ", i:VN_choiceState);
+	}else{
+		log(s:"> Checking keys for choices ...");
+		VN_keypress = FALSE;
+		ACS_NamedExecute("VN_CTCIcon",0);		
+		While(TRUE){
+			buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+			If (buttons == BT_USE)
+			{
+				log(s:">> Pressed Use");
+				VN_keypress = TRUE;
+				break;
+			}
+			Else VN_keypress = FALSE;
+			Delay(1);
 		}
 	}
 }
@@ -79,83 +141,17 @@ Script "VN_KeyBreak" (void){
 	ACS_NamedExecute("VN_Update",0);
 }
 
-Script "VN_KeyInput" (void){
-	log (s:"VN_KeyInput");
-	int buttons, chfinal;
-	str chtag = StrRight(VN_choice[2],2);
-  
-	if(VN_CurrentState == 2){
-		keypress = FALSE;
-		if (chtag != "NA"){
-			chfinal = 2;
-		}else chfinal = 1; 
-		While(TRUE)
-    {
-        buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
-        If (buttons == BT_FORWARD){
-          log(s:"Pressed Forward");
-          keypress = TRUE;
-          chstate = 1;
-					if(VN_CurrentChoice == 0){
-						VN_CurrentChoice = chfinal;
-					}else{
-						VN_CurrentChoice = VN_CurrentChoice - 1;
-					}  
-          break;
-        }
-				Else If (buttons == BT_BACK){
-					log(s:"Pressed Back");
-          keypress = TRUE;
-          chstate = 2;
-					if (VN_CurrentChoice == chfinal){
-						VN_CurrentChoice = 0;
-					}else{
-						VN_CurrentChoice = VN_CurrentChoice + 1;
-					}           
-          break;									
-				}
-				Else If (buttons == BT_USE){
-					log(s:"Pressed Use");
-					keypress = TRUE;
-					chstate = 3;					
-					break;
-				}
-        Else{
-            keypress = FALSE;
-        }
-        Delay(1);
-    }
-    log(s:"Choice is", i:VN_CurrentChoice);
-    log(s:"State is", i:chstate);
-	}else{
-		keypress = FALSE;
-		ACS_NamedExecute("VN_CTCIcon",0);		
-		While(TRUE){
-      buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
-      If (buttons == BT_USE)
-      {
-        log(s:"Pressed Use");
-        keypress = TRUE;
-        break;
-      }
-      Else
-      {
-        keypress = FALSE;
-      }
-      Delay(1);
-	  }
-	}
-}
-
 Script "VN_CTCIcon" (void){
-		//ClickToContinue Icon
-		SetHudSize(512,386,1);
-		SetFont("m_skull1");
-		HudMessage(s:"A"; HUDMSG_PLAIN, 19, 0, CTC_X, CTC_Y, 0.0);
+	//ClickToContinue Icon
+	SetHudSize(512,386,1);
+	SetFont("m_skull1");
+	HudMessage(s:"A"; HUDMSG_PLAIN, 19, 0, CTC_X, CTC_Y, 0.0);
 }
 
 Script "VN_Parser" (int D){
 	log (s:"VN_Parser");
+	delay(1);
+	
 	int lng = StrParam(l:D);
 	str nm;
 	str dialg;       
@@ -168,9 +164,9 @@ Script "VN_Parser" (int D){
 	if (nm == "_PLY") nm = "VNCH_PLYR";
 	else nm = StrParam(s:"VNCH_",s:nm);
 	
-	log(s:"nm is ", s:nm);
-	log(s:"dlalglen is ", i:dialglen);
-	log(s:"dialg is", s:dialg);
+	log(s:"> nm is ", s:nm);
+	log(s:"> dlalglen is ", i:dialglen);
+	log(s:"> dialg is", s:dialg);
 	
 	//VN_name - a language string grabbed from Language.vn
 	VN_name = StrParam(s:nm);
@@ -178,78 +174,82 @@ Script "VN_Parser" (int D){
 	//with the format VND_[Level]_[Dialog] found in Language.vn
 	VN_dialogue = StrParam(s:dialg);
 	//log(s:"VN_name = ", s:VN_name);
-  //log(s:"VN_dialogue = ", s:VN_dialogue); 
+	//log(s:"VN_dialogue = ", s:VN_dialogue); 
 }
 
 //Beginning of Drawing code.
 
 Script "VN_DrawInit" (void){
-		log (s:"VN_DrawInit");
-		HudMessage(s:""; HUDMSG_PLAIN,11,0,0.0,0.0,0.0);
-		HudMessage(s:""; HUDMSG_PLAIN,12,0,0.0,0.0,0.0);	
-		HudMessage(s:""; HUDMSG_PLAIN,13,0,0.0,0.0,0.0);			
-		HudMessage(s:""; HUDMSG_PLAIN,14,0,0.0,0.0,0.0);
-		
-		SetHudSize(640, 480, 1);
-		If(VN_CurrentState == 1){
-			//Radio
-			//displays the 'Now Receiving' sign			
-			log(s:"Displaying radio");
-			SetFont("vn_rec");
-			HudMessage(s:"A"; HUDMSG_PLAIN, 20, 0, 320.0, 240.0, 0.0);		
-		}Else{
-			//Dialog, full portraits. This could be just graphics
-			//from the graphics folder.
-			log(s:"Displaying default");
-		}
-		
-		//Text box
-		SetHudClipRect(0, 0, 0, 0, 0);
-		SetHudSize(512,384,1);
-					
-		//BG			
-		SetHudSize(640, 480, 1);
-		SetFont("vn_intfc");
-		HudMessage(s:"A"; HUDMSG_PLAIN|HUDMSG_ALPHA, 21, 0, 320.0, 240.0, 0.0, 0.8);
+	log (s:"VN_DrawInit");
+	Delay(1);
 
-		//Text Elements
-		SetFont("Smallfont");			
-		//'Speaking'
-		HudMessage(s:"S P E A K I N G  ..."; HUDMSG_PLAIN, 17, CR_WHITE, 550.0, 320.0, 0.0);
-		VN_DisplayState = 1;
-		terminate;
+	HudMessage(s:""; HUDMSG_PLAIN,11,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,12,0,0.0,0.0,0.0);	
+	HudMessage(s:""; HUDMSG_PLAIN,13,0,0.0,0.0,0.0);			
+	HudMessage(s:""; HUDMSG_PLAIN,14,0,0.0,0.0,0.0);
+	
+	SetHudSize(640, 480, 1);
+	
+	If(VN_currentState == 1){
+		//Radio
+		//displays the 'Now Receiving' sign			
+		log(s:"> Displaying radio");
+		SetFont("vn_rec");
+		HudMessage(s:"A"; HUDMSG_PLAIN, 20, 0, 320.0, 240.0, 0.0);		
+	}Else{
+		//Dialog, full portraits. This could be just graphics
+		//from the graphics folder.
+		log(s:"> Displaying default");
+	}
+	
+	//Text box
+	SetHudClipRect(0, 0, 0, 0, 0);
+	SetHudSize(512,384,1);
+
+	//BG			
+	SetHudSize(640, 480, 1);
+	SetFont("vn_intfc");
+	HudMessage(s:"A"; HUDMSG_PLAIN|HUDMSG_ALPHA, 21, 0, 320.0, 240.0, 0.0, 0.8);
+
+	//'Speaking'
+	SetFont("Smallfont");
+	HudMessage(s:"S P E A K I N G  ..."; HUDMSG_PLAIN, 17, CR_WHITE, 550.0, 320.0, 0.0);
+	
+	VN_displayState = 1;
+	terminate;
 }
 
 Script "VN_DrawText" (int text){
-		//Parse the text first before drawing.
-		Delay(1);
-		ACS_NamedExecuteWait("VN_Parser",0,text);
-		
-		log (s:"VN_DrawText");
-		int namex = 82.0;
-		int namey = 320.0;
-		int dialogx = 63.1;
-		int dialogy = 344.1;
-		SetHudSize(640, 480, 1);
-					
-		HudMessage(s:""; HUDMSG_PLAIN,14,0,0.0,0.0,0.0);
-		HudMessage(s:""; HUDMSG_PLAIN,18,0,0.0,0.0,0.0);
-		HudMessage(s:""; HUDMSG_PLAIN,19,0,0.0,0.0,0.0);		
-		
-		//log(s:"VN_name = ", s:VN_name);
-		//log(s:"VN_dialogue = ", s:VN_dialogue);
-		 
-		SetFont("Bigfont");
-		//Name
-		SetHudClipRect(NAME_BOUNDX, NAME_BOUNDY, NAME_BOUNDW, NAME_BOUNDH, NAME_BOUNDW);
-		HudMessage(l:VN_name; HUDMSG_PLAIN, 14, CR_WHITE, namex, namey, 0.0);
-		//Dialog
-		SetHudClipRect(DIAL_BOUNDX, DIAL_BOUNDY, DIAL_BOUNDW, DIAL_BOUNDH, DIAL_BOUNDW);
-		
-		HudMessage(s:VN_dialogue; HUDMSG_TYPEON, 18, CR_WHITE, dialogx, dialogy, 0.0, VN_TYPETIME, 0.0);
-		Delay(HudMessageTime(HUDMSG_TYPEON, StrLen(StrParam(s:VN_dialogue)), VN_TYPETIME, 0.0, 0.0));
-		
-		HudMessage(s:VN_dialogue; HUDMSG_PLAIN, 18, CR_WHITE, dialogx, dialogy, 0.0);
+	//Parse the text first before drawing.
+	Log(s:"VN_DrawText");
+	Delay(1);
+	ACS_NamedExecuteWait("VN_Parser",0,text);
+	
+	int namex = 82.0;
+	int namey = 320.0;
+	int dialogx = 63.1;
+	int dialogy = 344.1;
+	SetHudSize(640, 480, 1);
+				
+	HudMessage(s:""; HUDMSG_PLAIN,14,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,18,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,19,0,0.0,0.0,0.0);		
+	
+	//log(s:"VN_name = ", s:VN_name);
+	//log(s:"VN_dialogue = ", s:VN_dialogue);
+	 
+	SetFont("Bigfont");
+	//Name
+	SetHudClipRect(NAME_BOUNDX, NAME_BOUNDY, NAME_BOUNDW, NAME_BOUNDH, NAME_BOUNDW);
+	HudMessage(l:VN_name; HUDMSG_PLAIN, 14, CR_WHITE, namex, namey, 0.0);
+	//Dialog
+	SetHudClipRect(DIAL_BOUNDX, DIAL_BOUNDY, DIAL_BOUNDW, DIAL_BOUNDH, DIAL_BOUNDW);
+	
+	HudMessage(s:VN_dialogue; HUDMSG_TYPEON, 18, CR_WHITE, dialogx, dialogy, 0.0, VN_TYPETIME, 0.0);
+	
+	Delay(HudMessageTime(HUDMSG_TYPEON, StrLen(StrParam(s:VN_dialogue)), VN_TYPETIME, 0.0, 0.0));
+	
+	HudMessage(s:VN_dialogue; HUDMSG_PLAIN, 18, CR_WHITE, dialogx, dialogy, 0.0);
     terminate;
 }
 
@@ -264,22 +264,23 @@ Script "VN_DrawChoices" (int choice){
 	str resl;
 	int chruby;
 	int chcolor;
-	
+
 	VN_Clear();
-	VN_CurrentState = 2;
-	
+	//Set the VN state to the choice state
+	VN_currentState = 2;
+
 	ch1 = StrMid(ch,0,2);
 	ch2 = StrMid(ch,3,2);
 	ch3 = StrMid(ch,6,2);
-	
+
 	VN_choice[0] = StrParam(s:StrMid(chname,0,6),s:ch1);
 	VN_choice[1] = StrParam(s:StrMid(chname,0,6),s:ch2);
 	VN_choice[2] = StrParam(s:StrMid(chname,0,6),s:ch3);
-	
+
 	len1 = StrLen(StrParam(l:VN_choice[0]))-5;
 	len2 = StrLen(StrParam(l:VN_choice[1]))-5;
 	len3 = StrLen(StrParam(l:VN_choice[2]))-5;
-	
+
 	text1 = StrLeft(StrParam(l:VN_choice[0]),len1);
 	text2 = StrLeft(StrParam(l:VN_choice[1]),len2);
 	text3 = StrLeft(StrParam(l:VN_choice[2]),len3);	 
@@ -289,42 +290,42 @@ Script "VN_DrawChoices" (int choice){
 	SetHudClipRect(0,0,640,480,640);
 	SetFont("vn_chint");			
 	HudMessage(s:"A"; HUDMSG_PLAIN, 21, CR_WHITE, 320.0, 240.0, 0.0, 0.8);
-	
+
 	//Choice text	
 	SetHudClipRect(58,111,561,251,561);
 	SetFont("BIGFONT");
 	if (ch3 != "NA"){
 		If (VN_CurrentChoice == 0)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 338.0, 140.0, 0.0);
+		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 64.1, 150.0, 0.0);
 		If (VN_CurrentChoice == 1)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 338.0, 240.0, 0.0);
+		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 64.1, 235.0, 0.0);
 		If (VN_CurrentChoice == 2)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(s:text3; HUDMSG_PLAIN, 14, chcolor, 338.0, 340.0, 0.0);
+		HudMessage(s:text3; HUDMSG_PLAIN, 14, chcolor, 64.1, 320.0, 0.0);
 	}else{
 		If (VN_CurrentChoice == 0)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 338.0, 180.0, 0.0);
+		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 64.1, 180.0, 0.0);
 		If (VN_CurrentChoice == 1)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
-		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 338.0, 288.0, 0.0);
+		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 64.1, 288.0, 0.0);
 	}
-	
+
 	//Pointer
 	If (ch3 != "NA"){
 		Switch (VN_CurrentChoice){
 			case 0:
-				chruby = 111.0;
+				chruby = 118.0;
 				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[0]),4));
 				break;
 			case 1:
-				chruby = 184.0;
+				chruby = 187.0;
 				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[1]),4));
 				break;
 			case 2:
-				chruby = 260.0;
+				chruby = 256.0;
 				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[2]),4));
 				break;
 		}
@@ -340,137 +341,180 @@ Script "VN_DrawChoices" (int choice){
 				break;
 			}		
 	}
-		
+	
+	VN_choiceNext = resl;
+	
+	log(s:"> VN_choiceNext = ",s:VN_choiceNext);
+	
 	SetHudClipRect(0,0,0,0,0);
 	SetHudSize(512,384,0);						
 	SetFont("m_skull1");
 	HudMessage(s:"A"; HUDMSG_PLAIN, 11, CR_WHITE, 23.0, chruby, 0.0);
-
-	log(s:"resl = ",s:resl);
-  
-  Delay(1);
-			
-	VN_ChoiceNext = resl;	
+	
 }
 
 Script "VN_DrawPortrait" (int Po){
 	log (s:"VN_DrawPortrait");
-	Delay(3);
-  //NOTE: CALL ONLY if you need to overdraw a portrait!
-  str inittext = StrParam(s:Po);
-  log(s:inittext);
-  str po1, po2, po3;
-  int po1c, po2c, po3c;
-  str synt = StrParam(l:inittext);
-  str poname = StrMid(StrParam(s:VN_name),5,4);
-  log(s:poname);
-  SetHudSize(640,480,1);
-  HudMessage(s:""; HUDMSG_PLAIN,22,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,23,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,24,0,0.0,0.0,0.0);  
-  if (VN_CurrentState == 1){
-    //Radio
-    //A radio portrait font is written as A_XXXX.lmp
-    //Template indicates the XXXX four letter part.
-    //
-    //Beginning:
-    //	Fade in with all speakers on gray
-    //	since VN_name is not existent yet.
-    //
-		//Called again:
-		//	Check for the name matches any portrait
-		//	if they do, you will enable them (Change color)
-		//	else they stay gray.
+	Delay(1);
+	
+	//NOTE: CALL ONLY if you need to overdraw a portrait!
+	str inittext = StrParam(s:Po);
+	log(s:"> inittext = ",s:inittext);
+	
+	str po1, po2, po3;
+	int po1c, po2c, po3c;
+	str synt = StrParam(l:inittext);
+	str poname = StrMid(StrParam(s:VN_name),5,4);
+	
+	log(s:"> poname = ",s:poname);
+	
+	SetHudSize(640,480,1);
+	
+	HudMessage(s:""; HUDMSG_PLAIN,22,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,23,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,24,0,0.0,0.0,0.0);
+	
+	if (VN_currentState == 1){
+		//Radio
+		//A radio portrait font is written as A_XXXX.lmp
+		//Template indicates the XXXX four letter part.
 		//
-		//Radio portraits are the only instance where you
-		//need to call again.	
-    
-    if(!po1){
-	    po1 = StrParam(s:StrMid(synt,0,4));
-	    po2 = StrParam(s:StrMid(synt,5,4));
-	    po3 = StrParam(s:StrMid(synt,10,4));
-	  }
-	  log(s:"po1 ",s:po1);
-	  log(s:"po2 ",s:po2);
-	  log(s:"po3 ",s:po3);
-	  //check if portraits exist starting with 3rd portrait.
-	  if (po3 != "NONE"){
-	    log(s:"There are 3 portraits.");
-	    If (poname == po1) po1c = CR_GREEN; else po1c = CR_DARKGRAY;
-	    If (poname == po2) po2c = CR_GREEN; else po2c = CR_DARKGRAY;
-	    If (poname == po3) po3c = CR_GREEN; else po3c = CR_DARKGRAY;
-	    SetFont(StrParam(s:"A_",s:po1));
+		//Beginning:
+		//	Fade in with all speakers on gray
+		//	since VN_name is not existent yet.
+		//
+			//Called again:
+			//	Check for the name matches any portrait
+			//	if they do, you will enable them (Change color)
+			//	else they stay gray.
+			//
+			//Radio portraits are the only instance where you
+			//need to call again.	
+
+		if(!po1){
+			po1 = StrParam(s:StrMid(synt,0,4));
+			po2 = StrParam(s:StrMid(synt,5,4));
+			po3 = StrParam(s:StrMid(synt,10,4));
+		}
+		
+		log(s:">> po1 = ",s:po1);
+		log(s:">> po2 = ",s:po2);
+		log(s:">> po3 = ",s:po3);
+		
+		//check if portraits exist starting with 3rd portrait.
+		if (po3 != "NONE"){
+			log(s:">> There are 3 portraits.");
+			If (poname == po1) po1c = CR_GREEN; else po1c = CR_DARKGRAY;
+			If (poname == po2) po2c = CR_GREEN; else po2c = CR_DARKGRAY;
+			If (poname == po3) po3c = CR_GREEN; else po3c = CR_DARKGRAY;
+			
+			SetFont(StrParam(s:"A_",s:po1));
 			HudMessage(s:"A";  HUDMSG_PLAIN, 22, po1c, 140.0, 195.0, 0.0);	    
-	    SetFont(StrParam(s:"A_",s:po2));
-	    HudMessage(s:"A";  HUDMSG_PLAIN, 23, po2c, 310.0, 195.0, 0.0);
-	    SetFont(StrParam(s:"A_",s:po3));
-	    HudMessage(s:"A";  HUDMSG_PLAIN, 24, po3c, 510.0, 195.0, 0.0);	   
-	  }else if (po2 != "NONE" && po3 == "NONE"){
-	    log(s:"There are 2 portraits.");
-	    If (poname == po1) po1c = CR_GREEN; else po1c = CR_DARKGRAY;
-	    If (poname == po2) po2c = CR_GREEN; else po2c = CR_DARKGRAY;
-	    SetFont(StrParam(s:"A_",s:po1));
+			SetFont(StrParam(s:"A_",s:po2));
+			HudMessage(s:"A";  HUDMSG_PLAIN, 23, po2c, 320.0, 195.0, 0.0);
+			SetFont(StrParam(s:"A_",s:po3));
+			HudMessage(s:"A";  HUDMSG_PLAIN, 24, po3c, 501.0, 195.0, 0.0);	   
+		}else if (po2 != "NONE" && po3 == "NONE"){
+			log(s:">> There are 2 portraits.");
+			If (poname == po1) po1c = CR_GREEN; else po1c = CR_DARKGRAY;
+			If (poname == po2) po2c = CR_GREEN; else po2c = CR_DARKGRAY;
+			
+			SetFont(StrParam(s:"A_",s:po1));
 			HudMessage(s:"A";  HUDMSG_PLAIN, 22, po1c, 200.0, 195.0, 0.0);	    
-	    SetFont(StrParam(s:"A_",s:po2));
-	    HudMessage(s:"A";  HUDMSG_PLAIN, 23, po2c, 420.0, 195.0, 0.0);
-	  }else{
-	    log(s:"There is a single portrait.");
-	    If (poname == po1) po1c = CR_GREEN; else po1c = CR_DARKGRAY;
-	    SetFont(StrParam(s:"A_",s:po1));
+			SetFont(StrParam(s:"A_",s:po2));
+			HudMessage(s:"A";  HUDMSG_PLAIN, 23, po2c, 440.0, 195.0, 0.0);
+		}else{
+			log(s:">> There is a single portrait.");
+			If (poname == po1) po1c = CR_GREEN; else po1c = CR_DARKGRAY;
+			
+			SetFont(StrParam(s:"A_",s:po1));
 			HudMessage(s:"A";  HUDMSG_PLAIN, 22, po1c, 320.0, 195.0, 0.0);
-	  }
-  }else{
-    //default
-    //parse what portraits to flash
-    if(!po1){
-      po1 = StrParam(s:"P_",s:StrMid(synt,0,5));
-      po2 = StrParam(s:"P_",s:StrMid(synt,6,5));
-      po3 = StrParam(s:"P_",s:StrMid(synt,12,5));
-    }
-    log(s:"po1 ",s:po1);
-    log(s:"po2 ",s:po2);
-    log(s:"po3 ",s:po3);
-    //check if portraits exist starting with 3rd portrait.
-    if (po3 != "P_NONE0"){
-      log(s:"There are 3 portraits.");
-      SetFont(po1);
-      HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 140.0, 240.0, 0.0, VN_FADETIME, 0.0);
-      SetFont(po2);
-      HudMessage(s:"A";  HUDMSG_FADEINOUT, 23, CR_WHITE, 310.0, 240.0, 0.0, VN_FADETIME, 0.0);
-      SetFont(po3);
-      HudMessage(s:"A";  HUDMSG_FADEINOUT, 24, CR_WHITE, 510.0, 240.0, 0.0, VN_FADETIME, 0.0);
-			Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0)); 
-      SetFont(po1);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 140.0, 240.0, 0.0);
-      SetFont(po2);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 23, CR_WHITE, 310.0, 240.0, 0.0);
-      SetFont(po3);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 24, CR_WHITE, 510.0, 240.0, 0.0);      
-    }else if (po2 != "P_NONE0" && po3 == "P_NONE0"){
-      log(s:"There are 2 portraits.");
-      SetFont(po1);
-      HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 200.0, 240.0, 0.0, VN_FADETIME, 0.0);
-      SetFont(po2);
-      HudMessage(s:"A";  HUDMSG_FADEINOUT, 23, CR_WHITE, 420.0, 240.0, 0.0, VN_FADETIME, 0.0);
-      Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0));
+		}
+	}else{
+		//default
+		//parse what portraits to flash
+		if(!po1){
+			po1 = StrParam(s:"P_",s:StrMid(synt,0,5));
+			po2 = StrParam(s:"P_",s:StrMid(synt,6,5));
+			po3 = StrParam(s:"P_",s:StrMid(synt,12,5));
+		}
+		log(s:">> po1 = ",s:po1);
+		log(s:">> po2 = ",s:po2);
+		log(s:">> po3 = ",s:po3);
+
+		//check if portraits exist starting with 3rd portrait.
+		if (po3 != "P_NONE0"){
+			log(s:">> There are 3 portraits.");
 			SetFont(po1);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 200.0, 240.0, 0.0);
-      SetFont(po2);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 23, CR_WHITE, 420.0, 240.0, 0.0); 
-    }else{
-      log(s:"There is a single portrait.");
-      SetFont(po1);
-      HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 320.0, 240.0, 0.0, VN_FADETIME, 0.0);
-      Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0));
+			HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 140.0, 240.0, 0.0, VN_FADETIME, 0.0);
+			SetFont(po2);
+			HudMessage(s:"A";  HUDMSG_FADEINOUT, 23, CR_WHITE, 310.0, 240.0, 0.0, VN_FADETIME, 0.0);
+			SetFont(po3);
+			HudMessage(s:"A";  HUDMSG_FADEINOUT, 24, CR_WHITE, 510.0, 240.0, 0.0, VN_FADETIME, 0.0);
+
+			Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0));
+
 			SetFont(po1);
-      HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 320.0, 240.0, 0.0); 
-    }     
-  }
-  terminate;
+			HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 140.0, 240.0, 0.0);
+			SetFont(po2);
+			HudMessage(s:"A";  HUDMSG_PLAIN, 23, CR_WHITE, 310.0, 240.0, 0.0);
+			SetFont(po3);
+			HudMessage(s:"A";  HUDMSG_PLAIN, 24, CR_WHITE, 510.0, 240.0, 0.0);      
+		}else if (po2 != "P_NONE0" && po3 == "P_NONE0"){
+			log(s:">> There are 2 portraits.");
+			SetFont(po1);
+			HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 200.0, 240.0, 0.0, VN_FADETIME, 0.0);
+			SetFont(po2);
+			HudMessage(s:"A";  HUDMSG_FADEINOUT, 23, CR_WHITE, 420.0, 240.0, 0.0, VN_FADETIME, 0.0);
+			
+			Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0));
+			
+			SetFont(po1);
+			HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 200.0, 240.0, 0.0);
+			SetFont(po2);
+			HudMessage(s:"A";  HUDMSG_PLAIN, 23, CR_WHITE, 420.0, 240.0, 0.0); 
+		}else{
+			log(s:">> There is a single portrait.");
+			SetFont(po1);
+			HudMessage(s:"A";  HUDMSG_FADEINOUT, 22, CR_WHITE, 320.0, 240.0, 0.0, VN_FADETIME, 0.0);
+			
+			Delay(HudMessageTime(HUDMSG_FADEINOUT, StrLen(StrParam(s:"A")), VN_FADETIME, 0.0, 0.0));
+			
+			SetFont(po1);
+			HudMessage(s:"A";  HUDMSG_PLAIN, 22, CR_WHITE, 320.0, 240.0, 0.0); 
+		}     
+	}
+	terminate;
+}
+
+Script "VN_Stop" (void){
+	Log(s:"VN_Stop");
+	Delay(1);
+	Log(s:"> Stopping ...");
+	ACS_NamedTerminate("VN_KeyInput",0);
+	ACS_NamedTerminate("VN_DrawInit",0);
+	Log(s:"> Clearing HudMessages");
+	VN_Clear();
+	VN_displayState = 0;
+	Log(s:"> Returning weapons ...");
+	TakeInventory("NoWeapon",0x7fffffff);
+	Q_Pause(player, False, True);
+	OBJ_Disable(false);
+	Log(s:"> Finished.");
+}
+
+//Functions
+
+Function void VN_Initialize (void){
+	//Set all variables that the system uses
+	VN_currentState = 0;
+	VN_CurrentChoice = 0;
+	VN_displayState = 0;
+	VN_choiceState = 0;
 }
 
 Function void VN_Show (int stat){
-	VN_CurrentState = stat;
+	VN_currentState = stat;
 	Q_Pause(player, True, True);			
 	GiveInventory("NoWeapon",1);
 	SetWeapon("NoWeapon");
@@ -478,32 +522,18 @@ Function void VN_Show (int stat){
 	ACS_NamedExecute("VN_DrawInit",0);                
 }
 
-Script "VN_Stop" (void){
-	ACS_NamedTerminate("VN_KeyInput",0);
-	ACS_NamedTerminate("VN_DrawInit",0);	
-	VN_Clear();
-	VN_DisplayState = 0;
-	TakeInventory("NoWeapon",0x7fffffff);
-	Q_Pause(player, False, True);
-	OBJ_Disable(false);
-}
-
 Function void VN_Clear (void){
 	HudMessage(s:""; HUDMSG_PLAIN,11,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,12,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,13,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,12,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,13,0,0.0,0.0,0.0);
 	HudMessage(s:""; HUDMSG_PLAIN,14,0,0.0,0.0,0.0);
-	
-	HudMessage(s:""; HUDMSG_PLAIN,17,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,18,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,19,0,0.0,0.0,0.0);
-	HudMessage(s:""; HUDMSG_PLAIN,20,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,21,0,0.0,0.0,0.0);
-	HudMessage(s:""; HUDMSG_PLAIN,22,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,23,0,0.0,0.0,0.0);
-  HudMessage(s:""; HUDMSG_PLAIN,24,0,0.0,0.0,0.0);
-}
 
-Function void VN_GetName (void){
-	
+	HudMessage(s:""; HUDMSG_PLAIN,17,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,18,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,19,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,20,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,21,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,22,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,23,0,0.0,0.0,0.0);
+	HudMessage(s:""; HUDMSG_PLAIN,24,0,0.0,0.0,0.0);
 }
