@@ -3,6 +3,54 @@ include "mapinfo/common.txt"
 
 gameinfo
 {
+	titlepage = "TITLEPIC"
+	creditpage = "CREDIT"
+	titlemusic = "$MUSIC_DM2TTL"
+	titletime = 11
+	advisorytime = 0
+	pagetime = 5
+	chatsound = "misc/chat"
+	finalemusic = "$MUSIC_READ_M"
+	finaleflat = "SLIME16"
+	finalepage = "CREDIT"
+	infopage = "HELP", "CREDIT"
+	telefogheight = 0
+	defkickback = 100
+	skyflatname = "F_SKY1"
+	translator = "xlat/doom.txt"
+	defaultbloodcolor = "68 00 00"
+	defaultbloodparticlecolor = "ff 00 00"
+	backpacktype = "Backpack"
+	armoricons = "ARM1A0", 0.5, "ARM2A0"
+	statusbar = "sbarinfo.txt"
+	intermissionmusic = "$MUSIC_DM2INT"
+	intermissioncounter = true
+	dimcolor = "ff d7 00"
+	dimamount = 0.2
+	definventorymaxamount = 25
+	defaultrespawntime = 12
+	defaultdropstyle = 1
+	endoom = "ENDOOM"
+	player5start = 4001
+	pickupcolor = "d7 ba 45"
+	menufontcolor_title = "RED"
+	menufontcolor_label = "UNTRANSLATED"
+	menufontcolor_value = "GRAY"
+	menufontcolor_action = "GRAY"
+	menufontcolor_header = "GOLD"
+	menufontcolor_highlight = "YELLOW"
+	menufontcolor_selection = "BRICK"
+	menubackbutton = "M_BACK_D"
+	pausesign = "M_PAUSE"
+	gibfactor = 0
+	cursorpic = "qcurs"
+	textscreenx = 10
+	textscreeny = 10
+	defaultendsequence = "Inter_Cast"
+	maparrow = "maparrows/arrow.txt", "maparrows/ddtarrow.txt"
+	statscreen_mapnamefont = "BigFont"
+	statscreen_finishedpatch = "WIF"
+	statscreen_enteringpatch = "WIENTER"
 	creditpage = "CREDIT", "CREDIT2", "FREEDOOM"
 	titlemusic = "$MUSIC_INTRO"
 	titletime = 5
@@ -59,6 +107,7 @@ skill nightmare
 	DisableCheats
 	SpawnFilter = Nightmare
 	Name = "$MNU_QNIGHTMARE"
+	MustConfirm
 }
 
 clearepisodes

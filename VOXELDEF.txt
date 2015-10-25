@@ -1,20 +1,28 @@
-BIKBA = "BIKBA"
+BIKBA0 = "BIKBA"
 {
    Scale = 0.8
 }
-LBLBA = "LBLBA"
+LBLBA0 = "LBLBA"
 {
    Scale = 0.8
 }
-CCMOA = "CCMOA"
+CCMOA0 = "CCMOA"
 {
    Scale = 1.0
 }
-COUAA = "COUAA"
+COUAA0 = "COUAA"
 {
    Scale = 1.2
 }
-BBAGA = "BBAGA"
+BBAGA0 = "BBAGA"
 {
    Scale = 1.0
+}
+NEWSA0 = "NEWSA"
+{
+	Scale = 1.0
+}
+GBAGA0 = "GBAGA"
+{
+	Scale = 1.0
 }

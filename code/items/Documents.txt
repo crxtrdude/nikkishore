@@ -38,3 +38,20 @@ ACTOR Paper2 : BasicDocument 17501
 			Stop
   }
 }
+ACTOR Newspaper1 : BasicDocument 17502
+{
+  //$Category Nikki Documents
+  //$Sprite NEWSA0
+  //$Title "Newspaper 1"
+  scale 0.8
+  States
+  {
+	  Spawn:
+	    NEWS A 1
+	    Loop
+		Pickup:
+	    NEWS A 0
+			NEWS A 0 ACS_NamedExecute("Newspaper1",0)
+			Stop
+  }
+}

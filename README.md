@@ -1,27 +1,33 @@
 # NIKKI SHORE
 
-ZDoom based game
+ZDoom based first person action adventure.
 
 ## Notes
 
-This game is designed for ZDoom primarily. GZDoom can also be used, but ZDoom compatibility is still retained for low spec computers who can only run ZDoom.
+This game is designed with ZDoom in mind. GZDoom/GLOOME can also be used, but ZDoom compatibility is still retained for low spec computers who can only run ZDoom.
+
+When finished, this game will be shipped alongside GLOOME, a commercial-friendly GZDoom port. See the [GLOOME Github](https://github.com/marrub--/GLOOME) page for details.
 
 This game is still in its early planning stages.
 
 ## Building
 
+By default, you can just open the Oven.bat batch file to bake yourself a new PK3 file in the '\bin' folder. This could be played without any dependencies to IWADS, but you need to modify the 'IWADINFO.txt' in the engine pk3 file to use them.
+
+The included GLOOME engine has a modified IWADINFO already out of the box.
+
 The game requires Freedoom: Phase 2 to play. Get the most recent commit at [the Freedoom Git Builds site](http://freedoom.soulsphere.org).
 
-This is laid out in the PK3 manner, see [the article] (http://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement) on ZDoom Wiki for details.
+This is laid out in the PK3 manner, see [the article](http://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement) on ZDoom Wiki for details.
 
 Recommended editor used is GZDoom Builder. There is a GZDoom builder config file included that you can add to the editor and set up.
 See included readme file in 'builder_files' folder for details. 
 
 ## Copyright / Permissions
 
-Nikki Shore characters and concept are copyright (c) 2013-2015 Clinton Cañalita & Audryk Vasquez, All rights reserved.
+Nikki Shore characters and concept are copyright (c) 2013-2015 Clinton CaÃ±alita & Audryk Vasquez, All rights reserved.
 
-Other trademarks are registered to their responsible owners and is not associated with Clinton Cañalita or Audryk Vasquez in any way or form.
+Other trademarks are registered to their responsible owners and is not associated with Clinton CaÃ±alita or Audryk Vasquez in any way or form.
 
 Nikki Shore game code:
 

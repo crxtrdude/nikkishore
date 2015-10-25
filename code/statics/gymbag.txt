@@ -1,0 +1,13 @@
+Actor GymBag 14507
+{ 
+  //$Category Nikki Decor
+  //$Title "Gym Bag"
+  height 20
+  radius 25
+  States
+  {
+  Spawn:
+    GBAG A 10
+    Loop
+  }
+}

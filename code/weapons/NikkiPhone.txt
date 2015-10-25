@@ -27,7 +27,7 @@ ACTOR NikkiPhone : Weapon
 			PHNE A 2 A_WeaponReady
 			PHNE B 35
 			PHNE C 11
-			PHNE C 1 ACS_ExecuteWithResult(808)
+			PHNE C 1 ACS_NamedExecuteWithResult("NikkiPhone")
 			PHNE C 2
 			Goto Deselect
 	}

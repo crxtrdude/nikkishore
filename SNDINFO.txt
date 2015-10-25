@@ -83,6 +83,8 @@ switches/exitbutn		dsswtchx
 
 misc/teleport			dstelept
 
+objective/new OBJNEW
+
 menu/activate			menusel	// Activate a new menu
 menu/backup			menuret	// Backup to previous menu
 menu/prompt			menusel	// Activate a prompt "menu"

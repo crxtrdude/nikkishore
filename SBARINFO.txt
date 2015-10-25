@@ -14,7 +14,6 @@ statusbar fullscreen, fullscreenoffsets // ZDoom HUD
     alpha 0.6 
     drawswitchableimage armortype KevlarVest && DragonSkinVest, "", "SB_PANEL", "SB_PANEL", "SB_PANEL", 147, -18, centerbottom;
     drawimage armoricon, 123, -19, centerbottom;
-    drawnumber 3, HUDFONT_DOOM, untranslated, armor, drawshadow, whennotzero, 185, -36;
 
     //ammo
     usesammo{

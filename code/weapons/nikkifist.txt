@@ -11,9 +11,11 @@ ACTOR NikkiFist: Fist Replaces Fist
 			NFST A 1 A_WeaponReady
 			Goto Ready
 		Deselect:
+			NFST A 0 A_Lower
 			NFST A 1 A_Lower
 			Loop
 		Select:
+			NFST A 0 A_Raise
 			NFST A 1 A_Raise
 			Loop
 		Fire:

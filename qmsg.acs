@@ -136,7 +136,7 @@ script "CodeKeypad" (int codenum, int scnum)
 			//Draw cursor and display
 			setfont("numbers2");
 			hudmessage (s:"A"; 0, 5, -1, 392.0, 318.0, 1);
-			setfont("doomcurs");
+			setfont("qcurs");
 			hudmessage (s:"A"; 0, 4, -1, (x<<16)+11.0, (y<<16)+15.0, 1);
 			
 			//Click logic

@@ -5,47 +5,6 @@
 // Visual Novel Settings
 
 //Dialogue
-
-//----Shelley 1-4; Nikki 1-3
-		
-VND_4_1 = "So, let me get this straight, someone just hacked "
-    "my impenetrable system from a phone, eh?";
-    
-VND_2_1 = "Yeah.";
-    
-VND_4_2 = "And wants you to do a job for her so that she won't "
-    "leak your dirty work back at the warehouse huh?";
-
-VND_2_2 = "Yeah, Shelley. Don't remind me again.";
-
-VND_4_3 = "Well, what pisses me off though is someone compromising "
-    "my virtually impenetrable system. Just breaks the heart.";
-
-VND_2_3 = "Save your moping to yourself Shel, we got work to do.";
-
-VND_4_4 = "Fine. Okay then. Do what you must.";
-
-//----Shelley 5-7; Nikki 4-5;
-
-VND_4_5 = "Shelley here.";
-
-VND_2_4 = "Shell, got you a computer to hack over.";
-
-VND_4_6 = "Oh really? Lemme see what I could do. Is it connected to the net?";
-
-VND_2_5 = "I think so.";
-
-VND_4_7 = "I'll go ahead and check it out now. Make sure you stay put.";
-
-//----Shelley 8-9; Nikki 6
-
-VND_4_8 = "It's ready. Go ahead and check it out.";
-
-VND_2_6 = "What will I do without you?";
-
-VND_4_9 = "You'll be dead pressed by now.";
-
-//----
 		
 VND_20_1 = "Say, what's a dorky bitch like you doing "
 		"in a place like this?";
@@ -63,19 +22,16 @@ VND_21_1 = "You looking for a kinky escapade, bitch?"
 
 VNCH_PLYR = "Nikki";
 VNCH_SHEL = "Shelley";
+VNCH_FITA = "FITA";
 
 VNPO_SHEL = "SHEL1 NONE0 NONE0";
-
-VNPO_1_0001 = "BTCH1 LABG1 OFFG1";
-VNPO_1_0002 = "BTCH1 LABG1 NONE0";
-VNPO_1_0003 = "BTCH1 NONE0 NONE0";
 
 //Commands
 
 //NE1M1
 //Intro 1-7
 
-VN_1_0001 = "PORT 0 VNPO_SHEL 0002";
+VN_1_0001 = "PORT VNPO_SHEL 0002";
 
 VN_1_0002 = "DIAL VND_1_1 0003";
     
@@ -91,8 +47,38 @@ VN_1_0007 = "DIAL VND_1_6 0008";
 
 VN_1_0008 = "DIAL VND_1_7 0END";
 
+//----
+
+VN_1_0009 = "PORT VNPO_SHEL 0010";
+
+VN_1_0010 = "DIAL VND_1_8 0011";
+
+VN_1_0011 = "DIAL VND_1_9 0012";
+
+VN_1_0012 = "DIAL VND_1_10 0013";
+
+VN_1_0013 = "DIAL VND_1_11 0014";
+
+VN_1_0014 = "DIAL VND_1_12 0015";
+
+VN_1_0015 = "DIAL VND_1_13 0END";
+
+//----
+
+VN_1_0016 = "PORT VNPO_SHEL 0017";
+
+VN_1_0017 = "DIAL VND_1_14 0018";
+
+VN_1_0018 = "DIAL VND_1_15 0019";
+
+VN_1_0019 = "DIAL VND_1_16 0END";
+
 //String length could be 190+
 //_PLY - player. Uses VNCH_PLYR as name.
+
+//NE1M1
+
+//Intro - Shelley and Nikki talk
 
 VND_1_1 = "SHEL So, let me get this straight, someone just hacked "
     "my impenetrable system from a phone, eh?";
@@ -105,12 +91,80 @@ VND_1_3 = "SHEL And wants you to do a job for her so that she won't "
 VND_1_4 = "_PLY Yeah, Shelley. Don't remind me again.";
 
 VND_1_5 = "SHEL Well, what pisses me off though is someone compromising "
-    "my virtually impenetrable system. Just breaks the heart. 0006";
+    "my virtually impenetrable system. Just breaks the heart.";
 
 VND_1_6 = "_PLY Save your moping to yourself Shel, we got "
 		"work to do.";
 
 VND_1_7 = "SHEL Fine. Okay then. Do what you must.";
+
+//Phone talk - Before
+
+VND_1_8 = "SHEL Shelley here.";
+
+VND_1_9 = "_PLY Shell, got you a computer to hack over.";
+
+VND_1_10 = "SHEL Oh really? Lemme see what I could do. Is it connected to the net?";
+
+VND_1_11 = "_PLY I think so. The wires are still there.";
+
+VND_1_12 = "SHEL I'll go ahead and check it out now. Make sure you stay put.";
+
+VND_1_13 = "SHEL Fita, check out the comp would you ...";
+
+//Phone talk - After
+
+VND_1_14 = "SHEL It's ready. Go ahead and check it out.";
+
+VND_1_15 = "_PLY What will I do without you?";
+
+VND_1_16 = "SHEL You'll be dead pressed by now.";
+
+//TESTS
+
+VNCH_SHE2 = "Shelley 2";
+
+VNPO_SAR1 = "SHEL FITA SHE2";
+VNPO_SAR2 = "SHEL FITA NONE";
+VNPO_SAR3 = "SHEL NONE NONE";
+
+//Radio test.
+//
+//Begin with portraits set to radio
+//Then each character mentioned in the portrait should speak
+//The last speaker is the player. 
+
+VN_R_0001 = "PORT VNPO_SAR1 0002";
+
+VN_R_0002 = "DIAL VND_R_1 0003";
+
+VN_R_0003 = "DIAL VND_R_2 0004";
+
+VN_R_0004 = "DIAL VND_R_3 0005";
+
+VN_R_0005 = "DIAL VND_R_4 0006";
+
+VN_R_0006 = "PORT VNPO_SAR2 0007";
+
+VN_R_0007 = "DIAL VND_R_1 0008";
+
+VN_R_0008 = "DIAL VND_R_2 0009";
+
+VN_R_0009 = "DIAL VND_R_4 0010";
+
+VN_R_0010 = "PORT VNPO_SAR3 0011";
+
+VN_R_0011 = "DIAL VND_R_1 0012";
+
+VN_R_0012 = "DIAL VND_R_4 0END";
+
+VND_R_1 = "SHEL Shelley speaking.";
+
+VND_R_2 = "FITA FITA speaking.";
+
+VND_R_3 = "SHE2 Shelley 2 speaking.";
+
+VND_R_4 = "_PLY Nikki is speaking";
 
 //Choices
 //If you don't want a third choice, add 'NA' in the last two chars
@@ -135,5 +189,3 @@ VND_T_1 = "_PLY You chose 1";
 VND_T_2 = "_PLY You chose 2";
 
 VND_T_3 = "_PLY You chose 3";
-
-//TEST

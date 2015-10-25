@@ -1,0 +1,85 @@
+//==========================================================
+// Nikki Shore
+// QDisplayable - Displayable stuff (slideshow and static)
+//
+// Code by CRxTRDude.
+//==========================================================
+
+#library "qdisplayable"
+#include "zcommon.acs"
+#import "qcommon.acs"
+
+str displaynext;
+
+Script "DoDisplay" (int Text){
+	int q;
+	//Syntax SLD <TEXT> <PIC>
+	//       IMG <PIC>
+	
+	If(displaynext == "0END"){
+		ACS_NamedExecute("VN_Stop",0);
+    VN_CurrentChoice = 0;
+		SetResultValue (2);
+		terminate;
+	}
+	
+	
+	  
+  Delay(3);
+  ACS_NamedExecuteWait("VN_Update",0);
+  i++;
+  Log(s:"Break");
+	ACS_NamedExecute("DoDialogCatch",0);
+}
+
+Script "DoDisplayCatch" (void){
+    Delay(1);
+    if (!fromchoice){
+    	Log(s:"dialnext = ",s:dialnext);
+    	ACS_NamedExecute("DoDialog",0,dialnext);
+    }else{
+		 	fromchoice = 0;
+		 	VN_Show(setstate);
+		 	ACS_NamedExecute("DoDialog",0,chresult);
+		}
+}
+
+Script "DisplayableIntermission" (int PIC, int TXT, int HOLD)
+{
+  int dispdelay, picdelay;
+  
+  if (!isDisplayed)
+  {
+      isDisplayed = 1;
+      //log(s:"IsDisplayed = ",i:isDisplayed);
+
+      //Set displayable
+      Delay(3);
+      //Show the text overlay
+
+      SetHudSize(640, 480, 1);
+      SetFont(PIC);
+      dispdelay = hudmessagetime(HUDMSG_TYPEON, strlen(strparam(l:TXT)), 0.03, HOLD, 0.5);
+      picdelay = dispdelay + (32*5);
+      HudMessage(s:"A"; HUDMSG_PLAIN, 3, 0, 320.0, 240.0, picdelay, 0.5);
+      SetHudSize(640, 480, 1);
+      SetFont("BIGFONT");
+      HudMessage(l:TXT; HUDMSG_TYPEON, 2, CR_UNTRANSLATED, 320.0, 240.0, HOLD, 0.03, 0.5);
+      delay(dispdelay + (32*5));
+      isDisplayed = 0;
+  }    
+}
+
+Script "StopIntermissionDisplayable" (int wasNotFrozen)
+{
+    int player = ActivatorTID();
+
+    isDisplayed = 0;   	
+    SetHudSize(0, 0, 0);
+    //HudMessage(s:""; HUDMSG_PLAIN,3,0,0,0,0);
+    HudMessage(s:""; HUDMSG_PLAIN,2,0,0,0,0);
+    HudMessage(s:""; HUDMSG_PLAIN,1,0,0,0,0);
+    //log(s:"IsDisplayed = ",i:isDisplayed);
+    //Log(s:"QMSG - Done");		
+    Use = True;
+}

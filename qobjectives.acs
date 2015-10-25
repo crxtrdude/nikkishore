@@ -37,6 +37,7 @@ int disabledObjectives = False;
 int clueindex;
                             
 Function void OBJ_Initialize (void){
+	Log(s:"OBJ_Initialize");
 	//Called at a start of a 'game' map.
 	//Just initialize the icon
 	OBJ_Disable (TRUE);
@@ -79,6 +80,8 @@ Script "OBJ_Toggle" (void){
 }
 
 Script "OBJ_Update" (void){
+	Log(s:"OBJ_Update");
+	Delay(1);
 	if (isObjectiveDisplayed){
 		pressed = FALSE;
 		ACS_NamedExecute("OBJ_Draw",0);
@@ -96,8 +99,10 @@ Script "OBJ_Update" (void){
 }
 
 Script "OBJ_Draw" (void){
+	Log(s:"OBJ_Draw");
+	Delay(1);
 	int notecenterx = 154.0;
-	int notecentery = 215.0;
+	int notecentery = 215.2;
 	
 	int objcenterx = 463.0;
 	int objcentery = 88.0;
@@ -106,8 +111,6 @@ Script "OBJ_Draw" (void){
 	int cluecentery = 274.0;
 	str currentclue = clue[clueindex];
 	int currentindex = clueindex + 1;
-	
-	//str sample = "THE QUICK BROWN QUEUE JUMPS OVER THE LAZY TAFFIE-WAFFY OVER THE SAN JUANICO BRIDGE";
 	
 	if (isObjectiveDisplayed){
 	    SetHudSize(640, 480, 1);
@@ -131,41 +134,43 @@ Script "OBJ_Draw" (void){
 }
 
 Script "OBJ_KeyInput" (void){
-	  int buttons;
-	  int indexcontext = cluetotal - 1;
-    pressed = FALSE;
-    log(s:"clueindex previous ",i:clueindex);
-    While(TRUE)
-    {
-        buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
-        If (buttons == BT_FORWARD){
-          log(s:"Pressed Forward");
-          pressed = TRUE;
-					keyc = FALSE;
-					if(clueindex == 0){
-						clueindex = indexcontext;
-					}else{
-						clueindex = clueindex - 1;
-					}  
-          break;
-        }
-				Else If (buttons == BT_BACK){
-					log(s:"Pressed Back");
-          pressed = TRUE;
-					keyc = TRUE;
-					if (clueindex == indexcontext){
-						clueindex = 0;
-					}else{
-						clueindex = clueindex + 1;
-					}           
-          break;									
-				}
-        Else{
-            pressed = FALSE;
-        }
-        Delay(1);
-    }
-    log(s:"clueindex current ",i:clueindex);
+	Log(s:"OBJ_KeyInput");
+	Delay(1);
+  int buttons;
+  int indexcontext = cluetotal - 1;
+  pressed = FALSE;
+  log(s:"clueindex previous ",i:clueindex);
+  While(TRUE)
+  {
+      buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+      If (buttons == BT_FORWARD){
+        log(s:"Pressed Forward");
+        pressed = TRUE;
+				keyc = FALSE;
+				if(clueindex == 0){
+					clueindex = indexcontext;
+				}else{
+					clueindex = clueindex - 1;
+				}  
+        break;
+      }
+			Else If (buttons == BT_BACK){
+				log(s:"Pressed Back");
+        pressed = TRUE;
+				keyc = TRUE;
+				if (clueindex == indexcontext){
+					clueindex = 0;
+				}else{
+					clueindex = clueindex + 1;
+				}           
+        break;									
+			}
+      Else{
+          pressed = FALSE;
+      }
+      Delay(1);
+  }
+  log(s:"clueindex current ",i:clueindex);
 }
 
 Script "OBJ_KeyCatcher" (void){
@@ -179,6 +184,8 @@ Script "OBJ_KeyCatcher" (void){
 }
 
 Script "OBJ_Stop" (void){
+	Log(s:"OBJ_Stop");
+	Delay(1);
 	player = ActivatorTID();
 	if (isObjectiveDisplayed){
 		pressed = TRUE;
@@ -216,6 +223,7 @@ Script "OBJ_HudShow" (int stats){
 
 Script "OBJ_HudFlash" (void){
 	ACS_NamedExecute("OBJ_HudShow",0,2);
+	PlaySound(0,"objective/new");
 	delay(GetTicUnit()*2);
 	ACS_NamedExecute("OBJ_HudShow",0,1);
 }
@@ -225,13 +233,15 @@ Script "OBJ_ClueFlash" (void){
 }
 
 Function void OBJ_Add (int s, int f){
+	Log(s:"OBJ_Add");
 	objectives = StrParam(s:s);
 	notes = StrParam(s:f);
-	if (disabledObjectives) OBJ_Disable (FALSE);
+	if (disabledObjectives) OBJ_Disable(FALSE);
 	ACS_NamedExecute("OBJ_HudFlash",0);
 }
 
 Function void OBJ_AddClue (int c){
+	Log(s:"OBJ_AddClue");
 	str cluestring = c;
 	clue[cluetotal] = cluestring;
 	str cluelog = clue[cluetotal];
