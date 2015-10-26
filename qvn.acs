@@ -1,7 +1,7 @@
 //==========================================================
 // Nikki Shore
 // QVN - Visual novel system
-// Version 1.2
+// Version 1.3
 //
 // Some code inspired from Ral22 (StoneshipMapper)
 // http://forum.zdoom.org/viewtopic.php?f=37&t=38215&p=724983 
@@ -44,6 +44,8 @@ global int 11:VN_displayState;	//0-notinitialized, 1-interfacedone
 
 int isVNActive, isVNDisplayed;
 
+int vnPrevState;
+
 int VN_keypress = true;
 
 Script "VN_Update" (void){
@@ -63,9 +65,7 @@ Script "VN_Update" (void){
 	if (VN_currentState == 0){
 		terminate;
 	}if (VN_currentState == 2){
-		If (VN_choiceState == 3) {
-			terminate;		
-		}Else{
+		If (VN_choiceState != 3) {
 			ACS_NamedExecute("VN_KeyBreak",0);		
 		}
 	}
@@ -78,7 +78,7 @@ Script "VN_KeyInput" (void){
 	int buttons, chfinal;
 	str chtag = StrRight(VN_choice[2],2);
 	
-	log (s:"VN_currentState = ",i:VN_currentState);
+	log (s:"> VN_currentState = ",i:VN_currentState);
   
 	if(VN_currentState == 2){
 		log(s:"> Checking keys for choices ...");
@@ -88,42 +88,45 @@ Script "VN_KeyInput" (void){
 		}else chfinal = 1; 
 		While(TRUE){
 			buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+			
 			If (buttons == BT_FORWARD){
 				log(s:">> Pressed Forward");
 				VN_keypress = TRUE;
 				VN_choiceState = 1;
-					if(VN_CurrentChoice == 0){
-						VN_CurrentChoice = chfinal;
+					if(VN_currentChoice == 0){
+						VN_currentChoice = chfinal;
 					}else{
-						VN_CurrentChoice = VN_CurrentChoice - 1;
+						VN_currentChoice = VN_currentChoice - 1;
 					}  
 				break;
 			}Else If (buttons == BT_BACK){
 				log(s:">> Pressed Back");
 				VN_keypress = TRUE;
 				VN_choiceState = 2;
-				if (VN_CurrentChoice == chfinal){
-					VN_CurrentChoice = 0;
+				if (VN_currentChoice == chfinal){
+					VN_currentChoice = 0;
 				}else{
-					VN_CurrentChoice = VN_CurrentChoice + 1;
+					VN_currentChoice = VN_currentChoice + 1;
 				}           
 				break;									
 			}Else If (buttons == BT_USE){
 				log(s:">> Pressed Use");
 				VN_keypress = TRUE;
-				VN_choiceState = 3;					
+				VN_choiceState = 3;
 				break;
 			}Else VN_keypress = FALSE;
 			Delay(1);
 		}
-		log(s:"> Choice = ", i:VN_CurrentChoice);
-		log(s:"> State = ", i:VN_choiceState);
+		log(s:"> VN_currentChoice = ", i:VN_currentChoice);
+		log(s:"> VN_choiceState = ", i:VN_choiceState);
 	}else{
-		log(s:"> Checking keys for choices ...");
+		log(s:"> Checking keys for dialog ...");
 		VN_keypress = FALSE;
-		ACS_NamedExecute("VN_CTCIcon",0);		
+		ACS_NamedExecute("VN_CTCIcon",0);
+		
 		While(TRUE){
 			buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+			
 			If (buttons == BT_USE)
 			{
 				log(s:">> Pressed Use");
@@ -134,6 +137,8 @@ Script "VN_KeyInput" (void){
 			Delay(1);
 		}
 	}
+	Log(s:"VN_KeyInput - FINISHED!");
+	delay(1);
 }
 
 Script "VN_KeyBreak" (void){
@@ -148,33 +153,38 @@ Script "VN_CTCIcon" (void){
 	HudMessage(s:"A"; HUDMSG_PLAIN, 19, 0, CTC_X, CTC_Y, 0.0);
 }
 
-Script "VN_Parser" (int D){
+Script "VN_Parser" (int D, int GiveNameOnly){
 	log (s:"VN_Parser");
 	delay(1);
 	
 	int lng = StrParam(l:D);
-	str nm;
+	str nm = StrLeft(lng, 4);
 	str dialg;       
 	int dialglen;
-	if (!nm){
-		nm = StrLeft(lng, 4);
-    dialglen = StrLen(lng)-5;
-		dialg = StrRight(lng, dialglen);		
-	}
+	
 	if (nm == "_PLY") nm = "VNCH_PLYR";
 	else nm = StrParam(s:"VNCH_",s:nm);
 	
-	log(s:"> nm is ", s:nm);
-	log(s:"> dlalglen is ", i:dialglen);
-	log(s:"> dialg is", s:dialg);
+	log(s:"> nm = ", s:nm);
 	
 	//VN_name - a language string grabbed from Language.vn
 	VN_name = StrParam(s:nm);
-	//VN_dialogue - a plain string grabbed from a language string
-	//with the format VND_[Level]_[Dialog] found in Language.vn
-	VN_dialogue = StrParam(s:dialg);
-	//log(s:"VN_name = ", s:VN_name);
-	//log(s:"VN_dialogue = ", s:VN_dialogue); 
+	
+	if (!GiveNameOnly){
+		dialglen = StrLen(lng)-5;
+		dialg = StrRight(lng, dialglen);		
+
+		log(s:"> dlalglen = ", i:dialglen);
+		log(s:"> dialg = ", s:dialg);
+
+		//VN_dialogue - a plain string grabbed from a language string
+		//with the format VND_[Level]_[Dialog] found in Language.vn
+		VN_dialogue = StrParam(s:dialg);
+		//log(s:"VN_name = ", s:VN_name);
+		//log(s:"VN_dialogue = ", s:VN_dialogue);
+	}
+	log(s:"VN_Parser - FINISHED!");
+	delay(1);
 }
 
 //Beginning of Drawing code.
@@ -223,7 +233,7 @@ Script "VN_DrawText" (int text){
 	//Parse the text first before drawing.
 	Log(s:"VN_DrawText");
 	Delay(1);
-	ACS_NamedExecuteWait("VN_Parser",0,text);
+	ACS_NamedExecuteWait("VN_Parser",0,text,False);
 	
 	int namex = 82.0;
 	int namey = 320.0;
@@ -255,7 +265,7 @@ Script "VN_DrawText" (int text){
 
 Script "VN_DrawChoices" (int choice){
 	log (s:"VN_DrawChoices");
-	Delay(3);
+	Delay(1);
 	str ch = StrParam(l:choice);
 	str chname = StrParam(s:choice);
 	str ch1,ch2,ch3;
@@ -266,6 +276,11 @@ Script "VN_DrawChoices" (int choice){
 	int chcolor;
 
 	VN_Clear();
+	
+	if (!vnPrevState){
+		vnPrevState = VN_currentState;
+	}
+	
 	//Set the VN state to the choice state
 	VN_currentState = 2;
 
@@ -295,27 +310,27 @@ Script "VN_DrawChoices" (int choice){
 	SetHudClipRect(58,111,561,251,561);
 	SetFont("BIGFONT");
 	if (ch3 != "NA"){
-		If (VN_CurrentChoice == 0)chcolor = CR_GOLD;
+		If (VN_currentChoice == 0)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
 		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 64.1, 150.0, 0.0);
-		If (VN_CurrentChoice == 1)chcolor = CR_GOLD;
+		If (VN_currentChoice == 1)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
 		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 64.1, 235.0, 0.0);
-		If (VN_CurrentChoice == 2)chcolor = CR_GOLD;
+		If (VN_currentChoice == 2)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
 		HudMessage(s:text3; HUDMSG_PLAIN, 14, chcolor, 64.1, 320.0, 0.0);
 	}else{
-		If (VN_CurrentChoice == 0)chcolor = CR_GOLD;
+		If (VN_currentChoice == 0)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
 		HudMessage(s:text1; HUDMSG_PLAIN, 12, chcolor, 64.1, 180.0, 0.0);
-		If (VN_CurrentChoice == 1)chcolor = CR_GOLD;
+		If (VN_currentChoice == 1)chcolor = CR_GOLD;
 		Else chcolor = CR_WHITE;
 		HudMessage(s:text2; HUDMSG_PLAIN, 13, chcolor, 64.1, 288.0, 0.0);
 	}
 
 	//Pointer
 	If (ch3 != "NA"){
-		Switch (VN_CurrentChoice){
+		Switch (VN_currentChoice){
 			case 0:
 				chruby = 118.0;
 				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[0]),4));
@@ -330,7 +345,7 @@ Script "VN_DrawChoices" (int choice){
 				break;
 		}
 	}Else{
-		Switch (VN_CurrentChoice){
+		Switch (VN_currentChoice){
 			case 0:
 				chruby = 143.0;
 				resl = StrParam(s:"VN_",s:StrMid(chname,4,1),s:"_",s:StrRight(StrParam(l:VN_choice[0]),4));
@@ -345,6 +360,7 @@ Script "VN_DrawChoices" (int choice){
 	VN_choiceNext = resl;
 	
 	log(s:"> VN_choiceNext = ",s:VN_choiceNext);
+	Delay(1);
 	
 	SetHudClipRect(0,0,0,0,0);
 	SetHudSize(512,384,0);						
@@ -364,8 +380,13 @@ Script "VN_DrawPortrait" (int Po){
 	str po1, po2, po3;
 	int po1c, po2c, po3c;
 	str synt = StrParam(l:inittext);
+	if (synt == inittext){
+		log(s:"QVN - Syntax error. Check your language.vn file.");
+		terminate;
+	}
 	str poname = StrMid(StrParam(s:VN_name),5,4);
 	
+	log(s:"> synt = ", s:synt);
 	log(s:"> poname = ",s:poname);
 	
 	SetHudSize(640,480,1);
@@ -508,7 +529,7 @@ Script "VN_Stop" (void){
 Function void VN_Initialize (void){
 	//Set all variables that the system uses
 	VN_currentState = 0;
-	VN_CurrentChoice = 0;
+	VN_currentChoice = 0;
 	VN_displayState = 0;
 	VN_choiceState = 0;
 }
