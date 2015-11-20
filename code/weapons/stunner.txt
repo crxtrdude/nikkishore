@@ -56,26 +56,34 @@ ACTOR Stunner : Weapon
 			TNT1 A 1 A_Lower
 			TNT1 A 0 A_Lower
 			Loop
+		
 		Fire: //Stun
 			TAZR D 2 Offset(35, 33)
 			TAZR D 2 Offset(81, 59)
 			TAZR G 1 Offset(120, 105)
-			TNT1 A 5 Offset(120, 105)A_WeaponReady
+			Goto StartFire
+			
+		StartFire:
+			TNT1 A 5 Offset(-13, 151) A_WeaponReady(WRF_NOBOB)
 		
 			TAZR E 1 Offset(56, 87)
 			TAZR E 1 Offset(35, 57)
 			TNT1 A 0 A_PlaySound("weapons/nikkiattack")
 			TAZR F 8 Offset(-11, 2) A_Saw("weapons/stunnerhit","weapons/stunnerhit", 4, "StunnerDummy")
-			TAZR F 2 Offset(1, 12)
+			TAZR F 4 Offset(1, 12)
 			TAZR F 2 Offset(34, 49)
 			TAZR E 1 Offset(48, 61)
 			TAZR E 1 Offset(112, 97)
 		
-			TNT1 A 5 Offset(-13, 151) A_Refire
+			TNT1 A 5 Offset(-13, 151) A_Refire("StartFire")
+			Goto FinishFire	
+			
+		FinishFire:
 			TAZR D 1 Offset(0, 99)
 			TAZR D 2 Offset(0, 64)
-			TAZR D 2 Offset(0, 20) 
-			Goto Bobbing
+			TAZR D 2 Offset(0, 20)
+			Goto Bobbing 
+			
 		AltFire: //Melee
 			TAZR D 2 Offset(35, 33)
 			TAZR D 2 Offset(81, 59)
