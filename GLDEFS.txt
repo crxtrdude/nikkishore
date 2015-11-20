@@ -1,1 +1,2 @@
 #include "gldefs/staticlite.txt"
+#include "gldefs/skybox.txt"
