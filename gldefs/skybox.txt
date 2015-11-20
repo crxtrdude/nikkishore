@@ -1,0 +1,9 @@
+Skybox VPCLS fliptop
+{
+  VPCLS_N
+  VPCLS_E
+  VPCLS_S
+  VPCLS_W
+  VPCLS_T
+  VPCLS_B
+}
